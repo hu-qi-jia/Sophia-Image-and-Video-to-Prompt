@@ -1,7 +1,5 @@
 import { useState } from "react";
-import styled from "styled-components";
 import type { FrameSamplingMode } from "../lib/types";
-// import { IMAGE_CATEGORIES } from "../lib/types";
 import {
   SpinnerIcon,
   SparklePlaceholder,
@@ -17,325 +15,6 @@ import {
   ALLOWED_VIDEO_TYPES,
 } from "./types";
 
-const UploadFormCard = styled.section`
-  border-radius: var(--radius-xl);
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  position: relative;
-  transition: all var(--duration-lift) var(--ease-out);
-  min-height: 160px;
-  max-height: 280px;
-  background: var(--glass-bg);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
-  border: 0.5px solid var(--glass-border);
-  box-shadow:
-    var(--glass-shadow),
-    var(--glass-inner-shadow),
-    var(--glass-edge-light);
-  animation: hero-rise 0.55s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background: var(--glass-shine);
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  &.is-drag-over {
-    transform: translateY(-1px);
-    border-color: var(--glass-border-hover);
-    box-shadow:
-      var(--glass-shadow-hover),
-      var(--glass-inner-shadow),
-      var(--glass-edge-light);
-  }
-
-  /* ── Upload Label (empty state container) ── */
-  .upload-label {
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding: 20px 24px;
-    box-sizing: border-box;
-    flex: 1;
-    min-height: 0;
-    position: relative;
-    z-index: 1;
-  }
-
-  /* ── Empty State Layout ── */
-  .upload-empty {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-  }
-
-  .upload-icon-ring {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    transition: all 0.35s var(--ease-out);
-
-    img {
-      width: 96px;
-      height: 96px;
-      object-fit: contain;
-      opacity: 0.8;
-      filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.15));
-      transition: all 0.35s var(--ease-out);
-    }
-  }
-
-  &:hover .upload-icon-ring,
-  &.is-drag-over .upload-icon-ring {
-    img { opacity: 1; transform: scale(1.05); }
-  }
-
-  .upload-title {
-    font-size: var(--text-sm);
-    font-weight: var(--font-semibold);
-    color: var(--text-primary);
-    margin: 0;
-    letter-spacing: -0.015em;
-    line-height: 1.3;
-  }
-
-  /* ── Action Row: button + hint inline ── */
-  .upload-action-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    width: 100%;
-    justify-content: center;
-  }
-
-  .upload-action-divider {
-    width: 1px;
-    height: 14px;
-    background: var(--glass-border);
-    flex-shrink: 0;
-  }
-
-  .upload-hint-inline {
-    font-size: var(--text-xxs);
-    color: var(--text-placeholder);
-    margin: 0;
-    font-weight: var(--font-medium);
-    letter-spacing: 0.01em;
-    white-space: nowrap;
-  }
-
-  .upload-btn-premium {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    padding: var(--btn-padding-sm);
-    min-height: var(--btn-height-sm);
-    border: none;
-    border-radius: var(--btn-radius-pill);
-    background: var(--accent);
-    color: #fff;
-    cursor: pointer;
-    font-size: var(--text-xs);
-    font-weight: var(--font-semibold);
-    line-height: 1;
-    white-space: nowrap;
-    letter-spacing: 0.02em;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.06);
-  }
-
-  .upload-btn-premium:hover {
-    transform: translateY(-1px) scale(1.02);
-    background: var(--accent-hover);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.16), 0 2px 4px rgba(0, 0, 0, 0.06);
-  }
-
-  .upload-btn-premium:active {
-    transform: scale(0.97) translateY(0);
-  }
-
-  .upload-btn-icon {
-    width: 13px;
-    height: 13px;
-    flex-shrink: 0;
-    opacity: 0.9;
-  }
-
-  .upload-error {
-    color: var(--danger);
-    font-size: var(--text-xxs);
-    margin: 0;
-    text-align: center;
-    font-weight: var(--font-semibold);
-    letter-spacing: 0.01em;
-    position: relative;
-    z-index: 1;
-    padding: 0 24px 10px;
-  }
-
-  /* ── Loaded State: Preview ── */
-  .upload-preview {
-    width: 100%;
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    padding: 14px 14px 0;
-    box-sizing: border-box;
-    min-height: 0;
-    position: relative;
-    z-index: 1;
-
-    img, video {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-      display: block;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      border-radius: var(--radius-md);
-    }
-  }
-
-  /* ── Expanded (compact) State ── */
-  &.is-expanded {
-    max-height: 88px;
-    min-height: 72px;
-    border-radius: var(--radius-lg);
-
-    .upload-preview {
-      padding: 6px 6px 0;
-      img, video {
-        max-height: 48px;
-        min-height: 48px;
-        max-width: 64px;
-        border-radius: var(--radius-sm);
-      }
-    }
-
-    .upload-actions {
-      padding: 6px 12px;
-      gap: 6px;
-
-      .btn-primary, .btn-secondary {
-        font-size: var(--text-xxs);
-        padding: 3px 10px;
-        min-height: 26px;
-        height: auto;
-      }
-    }
-  }
-
-  /* ── Loaded State: Actions ── */
-  .upload-actions {
-    display: flex;
-    gap: 8px;
-    padding: 10px 16px;
-    width: 100%;
-    box-sizing: border-box;
-    justify-content: center;
-    flex-shrink: 0;
-    position: relative;
-    z-index: 1;
-  }
-
-  .upload-actions--text-only {
-    gap: 14px;
-  }
-
-  .btn-text-link {
-    background: none;
-    border: none;
-    padding: 0;
-    font-size: var(--text-xs);
-    font-weight: var(--font-medium);
-    color: var(--accent);
-    cursor: pointer;
-    line-height: 1;
-    transition: opacity 0.15s ease;
-  }
-  .btn-text-link:hover { opacity: 0.75; }
-  .btn-text-link:active { opacity: 0.55; }
-  .btn-text-link:disabled { opacity: 0.35; cursor: not-allowed; }
-  .btn-text-link--muted { color: var(--text-tertiary); }
-  .btn-text-link--muted:hover { color: var(--text-secondary); }
-
-  .upload-hint-warn {
-    font-size: var(--text-xxs);
-    color: var(--danger);
-    text-align: center;
-    padding: 0 16px 10px;
-    margin: 0;
-    font-weight: var(--font-semibold);
-    letter-spacing: 0.01em;
-    position: relative;
-    z-index: 1;
-  }
-`;
-
-/*
-const CategorySelector = styled.div`
-  display: flex;
-  gap: 6px;
-  padding: 4px 0;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  &::-webkit-scrollbar { display: none; }
-
-  .category-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    padding: 6px 12px;
-    border-radius: 100px;
-    border: 1px solid var(--glass-border);
-    background: var(--glass-bg);
-    color: var(--text-secondary);
-    font-size: 12px;
-    font-weight: 500;
-    white-space: nowrap;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    user-select: none;
-    flex-shrink: 0;
-
-    &:hover {
-      background: var(--surface-hover);
-      color: var(--text-primary);
-    }
-
-    &.is-selected {
-      background: var(--accent);
-      color: #fff;
-      border-color: var(--accent);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    }
-
-    .category-icon {
-      font-size: 14px;
-      line-height: 1;
-    }
-  }
-`;
-*/
-
 export function ImageVideoPage({
   mode,
   tabData,
@@ -346,7 +25,6 @@ export function ImageVideoPage({
   showCopy,
   currentMediaPreview,
   currentMediaAspectRatio,
-  // selectedCategory,
   frameSamplingMode,
   onUploadClick,
   onAnalyze,
@@ -355,7 +33,6 @@ export function ImageVideoPage({
   onCopy,
   onEditResult,
   onToggleExpanded,
-  // onCategoryChange,
   onFrameSamplingModeChange,
   onFileDrop,
   displayStyleText,
@@ -377,7 +54,6 @@ export function ImageVideoPage({
   showCopy: boolean;
   currentMediaPreview: React.ReactNode;
   currentMediaAspectRatio: string | undefined;
-  // selectedCategory?: ImageCategory;
   frameSamplingMode?: FrameSamplingMode;
   onUploadClick: () => void;
   onAnalyze: () => void;
@@ -386,7 +62,6 @@ export function ImageVideoPage({
   onCopy: () => void;
   onEditResult: (val: string) => void;
   onToggleExpanded: () => void;
-  // onCategoryChange?: (category: ImageCategory) => void;
   onFrameSamplingModeChange?: (mode: FrameSamplingMode) => void;
   onFileDrop?: (file: File) => void;
   displayStyleText: string;
@@ -428,17 +103,13 @@ export function ImageVideoPage({
     setIsDragOver(false);
     const file = e.dataTransfer.files?.[0];
     if (!file) return;
-    if (!allowedTypes.has(file.type)) {
-      return;
-    }
-    if (onFileDrop) {
-      onFileDrop(file);
-    }
+    if (!allowedTypes.has(file.type)) return;
+    if (onFileDrop) onFileDrop(file);
   };
 
   return (
     <>
-      <UploadFormCard className={`${isDragOver ? "is-drag-over" : ""} ${isExpanded || tabData.resultMode === "text" ? "is-expanded" : ""}`}>
+      <section className={`upload-form-card${isDragOver ? " is-drag-over" : ""}${isExpanded || tabData.resultMode === "text" ? " is-expanded" : ""}`}>
         {tabData.mediaSource.kind === "none" ? (
           <label
             className="upload-label"
@@ -480,26 +151,7 @@ export function ImageVideoPage({
             {!hasApiKey ? <p className="upload-hint-warn">请先在设置中配置模型信息</p> : null}
           </>
         )}
-      </UploadFormCard>
-
-      {/* 图片分类选择器 — 暂时隐藏，默认使用通用提示词 (auto)
-      {isImage && tabData.mediaSource.kind !== "none" ? (
-        <CategorySelector>
-          {IMAGE_CATEGORIES.map((cat) => (
-            <button
-              key={cat.id}
-              type="button"
-              className={`category-chip${selectedCategory === cat.id ? " is-selected" : ""}`}
-              onClick={() => onCategoryChange?.(cat.id)}
-              title={cat.description}
-            >
-              <span className="category-icon">{cat.icon}</span>
-              {cat.label}
-            </button>
-          ))}
-        </CategorySelector>
-      ) : null}
-      */}
+      </section>
 
       {!isImage && frameSamplingMode && onFrameSamplingModeChange ? (
         <div className="frame-sampling-row">

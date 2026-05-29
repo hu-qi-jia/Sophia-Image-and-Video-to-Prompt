@@ -1,5 +1,4 @@
 import { useState } from "react";
-import styled from "styled-components";
 import { useAppState } from "./useAppState";
 import { useClickOutside } from "./useClickOutside";
 import { ImageVideoPage } from "./ImageVideoPage";
@@ -20,7 +19,7 @@ export function App() {
 
       {state.subView === "main" ? (
         <>
-          <StyledHeader>
+          <header className="app-header">
             <div className="header-brand">
               <img src="icons/logo_new1.png" alt="Sophia" className="brand-icon" />
             </div>
@@ -102,7 +101,7 @@ export function App() {
                 </div>
               )}
             </div>
-          </StyledHeader>
+          </header>
 
           <div className="page-content">
             {state.activeTab === "image" ? (
@@ -223,225 +222,3 @@ export function App() {
     </main>
   );
 }
-
-const StyledHeader = styled.header`
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  padding: var(--space-3) var(--space-4);
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  background: transparent;
-  border-bottom: none;
-
-  .header-brand {
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
-  }
-
-  .header-brand .brand-icon {
-    width: 28px;
-    height: 28px;
-    object-fit: contain;
-  }
-
-  .header-nav-wrap {
-    flex: 1;
-    min-width: 0;
-    display: flex;
-    justify-content: center;
-  }
-
-  .tab-nav {
-    display: flex;
-    gap: 12px;
-    background: rgba(0, 0, 0, 0.04);
-    -webkit-backdrop-filter: var(--glass-blur-sm);
-    backdrop-filter: var(--glass-blur-sm);
-    border-radius: var(--radius-pill);
-    padding: 5px 8px;
-    border: 1px solid var(--glass-border);
-  }
-
-  .tab-nav-btn {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 38px;
-    height: 32px;
-    border: 1px solid transparent;
-    border-radius: var(--radius-pill);
-    background: transparent;
-    color: var(--text-tertiary);
-    cursor: pointer;
-    transition: all 0.3s var(--ease-out);
-
-    svg {
-      width: 17px;
-      height: 17px;
-    }
-
-    .tab-icon-img {
-      width: 17px;
-      height: 17px;
-      object-fit: contain;
-      filter: invert(60%) sepia(8%) saturate(200%) hue-rotate(180deg) brightness(85%) contrast(85%);
-      transition: filter 0.3s var(--ease-out);
-    }
-
-    &:hover .tab-icon-img {
-      filter: invert(30%) sepia(8%) saturate(200%) hue-rotate(180deg) brightness(90%) contrast(90%);
-    }
-
-    &:hover {
-      color: var(--text-secondary);
-      background: rgba(0, 0, 0, 0.03);
-    }
-  }
-
-  .tab-nav-btn--active .tab-icon-img {
-    filter: invert(0%) brightness(0%) contrast(100%);
-  }
-
-  .tab-tooltip {
-    position: absolute;
-    top: calc(100% + 10px);
-    left: 50%;
-    transform: translateX(-50%) translateY(-6px);
-    background: var(--bg-card-solid);
-    color: var(--text-primary);
-    font-size: var(--text-xxs);
-    font-weight: var(--font-medium);
-    padding: 5px 12px;
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--glass-border);
-    box-shadow: var(--glass-shadow-elevated);
-    white-space: nowrap;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.25s var(--ease-out), transform 0.25s var(--ease-out);
-  }
-
-  .tab-tooltip::after {
-    content: '';
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    border: 4px solid transparent;
-    border-bottom-color: var(--glass-border);
-  }
-
-  .tab-nav-btn:hover .tab-tooltip {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
-
-  .tab-nav-btn--active {
-    color: var(--text-primary);
-    background: var(--glass-bg-hover);
-    -webkit-backdrop-filter: var(--glass-blur-sm);
-    backdrop-filter: var(--glass-blur-sm);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), var(--glass-inner-shadow);
-    border: 1px solid var(--glass-border-hover);
-    transform: translateY(-1px);
-  }
-
-  .tab-nav-btn--active:hover {
-    color: var(--text-primary);
-    background: var(--glass-bg-hover);
-  }
-
-  .header-actions {
-    display: flex;
-    align-items: center;
-    gap: 2px;
-    flex-shrink: 0;
-  }
-
-  .header-action-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 34px;
-    height: 34px;
-    border-radius: var(--radius-md);
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    color: var(--text-secondary);
-    transition: all var(--duration-fast) var(--ease-out);
-
-    svg {
-      width: 17px;
-      height: 17px;
-    }
-
-    &:hover {
-      background: var(--bg-hover);
-      color: var(--text-primary);
-    }
-  }
-
-  .action-menu-dropdown {
-    position: absolute;
-    top: calc(100% + 2px);
-    right: 0;
-    min-width: 160px;
-    background: var(--bg-card-solid);
-    border: 1px solid var(--glass-border);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--glass-shadow-elevated);
-    padding: var(--space-1);
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    z-index: 100;
-    animation: menu-dropdown-in 0.2s var(--ease-out);
-  }
-
-  @keyframes menu-dropdown-in {
-    from {
-      opacity: 0;
-      transform: translateY(-4px) scale(0.97);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-  }
-
-  .menu-item {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
-    padding: 10px var(--space-3);
-    border: none;
-    background: transparent;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    color: var(--text-primary);
-    font-size: var(--text-sm);
-    font-weight: var(--font-medium);
-    transition: all var(--duration-fast) var(--ease-out);
-    text-align: left;
-
-    svg {
-      width: 16px;
-      height: 16px;
-      flex-shrink: 0;
-    }
-
-    &:hover {
-      background: var(--bg-hover);
-      color: var(--text-primary);
-    }
-
-    &:active {
-      transform: scale(0.98);
-    }
-  }
-`;
