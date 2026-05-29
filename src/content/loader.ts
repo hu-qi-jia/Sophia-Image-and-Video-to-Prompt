@@ -14,7 +14,7 @@ const ICON_URL = chrome.runtime.getURL("icons/icon48.png");
 const STYLES = `
 :host{all:initial;display:block;position:fixed;top:0;right:0;width:420px;max-width:100vw;height:100vh;z-index:2147483646;pointer-events:none;font-family:"PingFang SC","Inter",-apple-system,"Microsoft YaHei",sans-serif}
 :host *{all:revert}
-._drawer{position:fixed;top:0;right:0;width:420px;max-width:100vw;height:100vh;background:#0a0a0f;color:#e0e0e0;box-shadow:-8px 0 32px rgba(0,0,0,.5);pointer-events:auto;overflow-y:auto;overflow-x:hidden;animation:_slide .3s cubic-bezier(.16,1,.3,1)}
+._drawer{position:fixed;top:0;right:0;width:420px;max-width:100vw;height:100vh;background:transparent;color:#e0e0e0;pointer-events:auto;overflow-y:auto;overflow-x:hidden;animation:_slide .3s cubic-bezier(.16,1,.3,1)}
 @keyframes _slide{from{transform:translateX(100%)}to{transform:translateX(0)}}
 ._header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.06)}
 ._header h3{margin:0;font-size:14px;color:#fff;font-weight:600}
