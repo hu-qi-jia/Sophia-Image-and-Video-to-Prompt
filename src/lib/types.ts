@@ -46,6 +46,7 @@ export const DEFAULT_FRAME_SAMPLING_MODE = "standard";
 export type FrameSamplingMode = (typeof FRAME_SAMPLING_MODES)[number];
 export type PromptFormat = "json";
 export const DEFAULT_PROMPT_FORMAT: PromptFormat = "json";
+export type PanelMode = "global" | "manual";
 export type PromptEnhancerMode = "video" | "image";
 export type FrameExtractionOptions = {
   mode?: FrameSamplingMode;
@@ -116,6 +117,7 @@ export type StoredSettings = {
   targetModel: TargetModelId;
   frameSamplingMode: FrameSamplingMode;
   promptFormat: PromptFormat;
+  panelMode: PanelMode;
 };
 
 export type PromptHistoryItem = {
@@ -330,4 +332,20 @@ export type RuntimeMessage =
   | {
       type: "VIDEO2PROMPT_CLEAR_ACTIVE_ANALYSIS";
       tabId?: number;
+    }
+  | {
+      type: "VIDEO2PROMPT_TOGGLE_DRAWER";
+      tabId: number;
+    }
+  | {
+      type: "VIDEO2PROMPT_SET_GLOBAL_DRAWER";
+      open: boolean;
+    }
+  | {
+      type: "VIDEO2PROMPT_GET_DRAWER_STATE";
+    }
+  | {
+      type: "VIDEO2PROMPT_DRAWER_STATE_RESPONSE";
+      mode: PanelMode;
+      drawerOpen: boolean;
     };

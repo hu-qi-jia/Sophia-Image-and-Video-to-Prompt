@@ -7,6 +7,7 @@ import {
   type AnalysisState,
   type FrameSamplingMode,
   type ModelProvider,
+  type PanelMode,
   type PromptFormat,
   type PromptHistoryItem,
   type ProviderType,
@@ -17,13 +18,18 @@ import {
 const SETTINGS_KEY = "video2prompt:settings";
 const ANALYSIS_KEY_PREFIX = "video2prompt:analysis:";
 const HISTORY_KEY = "video2prompt:history";
+const PANEL_MODE_KEY = "video2prompt:panelMode";
+const GLOBAL_DRAWER_KEY = "video2prompt:globalDrawerOpen";
+const MANUAL_DRAWER_TABS_KEY = "video2prompt:manualDrawerTabs";
+const GLOBAL_TAB_ID = "__global__";
 
 export const defaultSettings: StoredSettings = {
   models: [],
   activeModelId: "",
   targetModel: DEFAULT_TARGET_MODEL,
   frameSamplingMode: DEFAULT_FRAME_SAMPLING_MODE,
-  promptFormat: DEFAULT_PROMPT_FORMAT
+  promptFormat: DEFAULT_PROMPT_FORMAT,
+  panelMode: "global",
 };
 
 function normalizeTargetModel(value: unknown): TargetModelId {
@@ -256,4 +262,68 @@ export async function deletePromptHistoryItem(
 ): Promise<PromptHistoryItem[]> {
   const current = await getPromptHistory();
   return savePromptHistory(current.filter((item) => item.id !== id));
+}
+
+// ── Panel mode ────────────────────────────────────────────────────
+
+export async function getPanelMode(): Promise<PanelMode> {
+  const stored = await chrome.storage.local.get(PANEL_MODE_KEY);
+  return (stored[PANEL_MODE_KEY] as PanelMode) ?? "global";
+}
+
+export async function setPanelMode(mode: PanelMode): Promise<void> {
+  await chrome.storage.local.set({ [PANEL_MODE_KEY]: mode });
+}
+
+// ── Global drawer state ───────────────────────────────────────────
+
+export async function getGlobalDrawerOpen(): Promise<boolean> {
+  const stored = await chrome.storage.local.get(GLOBAL_DRAWER_KEY);
+  return !!stored[GLOBAL_DRAWER_KEY];
+}
+
+export async function setGlobalDrawerOpen(open: boolean): Promise<void> {
+  await chrome.storage.local.set({ [GLOBAL_DRAWER_KEY]: open });
+}
+
+// ── Manual drawer tabs ────────────────────────────────────────────
+
+export async function getManualDrawerTabs(): Promise<number[]> {
+  const stored = await chrome.storage.local.get(MANUAL_DRAWER_TABS_KEY);
+  return Array.isArray(stored[MANUAL_DRAWER_TABS_KEY]) ? stored[MANUAL_DRAWER_TABS_KEY] : [];
+}
+
+export async function addManualDrawerTab(tabId: number): Promise<void> {
+  const tabs = await getManualDrawerTabs();
+  if (!tabs.includes(tabId)) {
+    tabs.push(tabId);
+    await chrome.storage.local.set({ [MANUAL_DRAWER_TABS_KEY]: tabs });
+  }
+}
+
+export async function removeManualDrawerTab(tabId: number): Promise<void> {
+  const tabs = await getManualDrawerTabs();
+  await chrome.storage.local.set({
+    [MANUAL_DRAWER_TABS_KEY]: tabs.filter((id) => id !== tabId),
+  });
+}
+
+// ── Global analysis key ───────────────────────────────────────────
+
+export function globalAnalysisStorageKey(): string {
+  return `${ANALYSIS_KEY_PREFIX}${GLOBAL_TAB_ID}`;
+}
+
+export async function getGlobalAnalysisState(): Promise<AnalysisState | null> {
+  const key = globalAnalysisStorageKey();
+  const stored = await chrome.storage.local.get(key);
+  return (stored[key] as AnalysisState | undefined) ?? null;
+}
+
+export async function saveGlobalAnalysisState(state: AnalysisState): Promise<void> {
+  await chrome.storage.local.set({ [globalAnalysisStorageKey()]: state });
+}
+
+export async function clearGlobalAnalysisState(): Promise<void> {
+  await chrome.storage.local.remove(globalAnalysisStorageKey());
 }
