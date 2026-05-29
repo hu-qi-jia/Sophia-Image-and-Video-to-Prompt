@@ -215,6 +215,7 @@ export function App() {
           onAddModel={(model) => void actions.handleAddModel(model)}
           onUpdateModel={(model) => void actions.handleUpdateModel(model)}
           onDeleteModel={(modelId) => void actions.handleDeleteModel(modelId)}
+          onPanelModeChange={(mode) => void actions.handlePanelModeChange(mode)}
         />
       ) : null}
 

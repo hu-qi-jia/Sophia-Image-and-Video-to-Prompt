@@ -1556,6 +1556,31 @@
 .hidden-file-input { display: none; }
 .tiny-icon { width: 14px; height: 14px; }
 
+/* ── Panel mode settings ──────────────────────────────────────────── */
+.settings-panel-mode-card { padding: var(--space-4); margin-bottom: var(--space-3); }
+.panel-mode-options { display: flex; flex-direction: column; gap: var(--space-2); }
+.panel-mode-option {
+  display: flex; align-items: flex-start; gap: var(--space-3);
+  padding: var(--space-3); border-radius: var(--radius-md);
+  border: 0.5px solid var(--glass-border); background: var(--glass-bg);
+  cursor: pointer; transition: all 0.2s ease;
+}
+.panel-mode-option:hover { background: var(--glass-bg-hover); }
+.panel-mode-option.is-active { border-color: var(--accent); background: rgba(99,102,241,0.08); }
+.panel-mode-radio {
+  display: flex; align-items: center; justify-content: center;
+  width: 20px; height: 20px; border-radius: 50%;
+  border: 1.5px solid var(--glass-border); flex-shrink: 0; margin-top: 1px;
+}
+.panel-mode-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: transparent; transition: background 0.2s ease;
+}
+.panel-mode-dot.is-selected { background: var(--accent); }
+.panel-mode-body { display: flex; flex-direction: column; gap: 2px; }
+.panel-mode-label { font-size: var(--text-sm); font-weight: var(--font-medium); color: var(--text-primary); }
+.panel-mode-desc { font-size: var(--text-xs); color: var(--text-secondary); }
+
 @media (max-width: 420px) {
   .hero-card, .result-card, .enhancer-hero-card, .settings-hero-card { padding: var(--space-4); }
   .hero-upload-zone { padding: var(--space-6) var(--space-4); }

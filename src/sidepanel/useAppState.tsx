@@ -14,10 +14,12 @@ import {
   saveModels,
   savePromptHistoryItem,
   setActiveModel,
+  setPanelMode,
 } from "../lib/storage";
 import type {
   // ImageCategory,
   ModelProvider,
+  PanelMode,
   PromptHistoryItem,
   StoredSettings,
   RuntimeMessage,
@@ -688,6 +690,12 @@ export function useAppState() {
     showToast("模型已删除");
   }
 
+  async function handlePanelModeChange(mode: PanelMode) {
+    await setPanelMode(mode);
+    setSettings((prev) => ({ ...prev, panelMode: mode }));
+    showToast(mode === "global" ? "已切换为全局模式" : "已切换为手动模式");
+  }
+
   async function handleFrameSamplingModeChange(mode: import("../lib/types").FrameSamplingMode) {
     if (settings.frameSamplingMode === mode) return;
     const nextSettings = await saveFrameSamplingMode(mode);
@@ -864,6 +872,7 @@ export function useAppState() {
       handleAddModel,
       handleUpdateModel,
       handleDeleteModel,
+      handlePanelModeChange,
       handleFrameSamplingModeChange,
       resetEnhancerResult,
       handleEnhancePrompt,

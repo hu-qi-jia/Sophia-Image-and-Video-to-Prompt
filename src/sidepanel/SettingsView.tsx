@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback, useEffect } from "react";
-import { type ModelProvider, type ProviderType, type StoredSettings, PROVIDER_TYPES } from "../lib/types";
+import { type ModelProvider, type ProviderType, type StoredSettings, type PanelMode, PROVIDER_TYPES } from "../lib/types";
 import { getActiveModel } from "../lib/storage";
 import { BackIcon } from "./icons";
 import { useClickOutside } from "./useClickOutside";
@@ -11,6 +11,7 @@ interface SettingsViewProps {
   onAddModel: (model: ModelProvider) => void;
   onUpdateModel: (model: ModelProvider) => void;
   onDeleteModel: (modelId: string) => void;
+  onPanelModeChange: (mode: PanelMode) => void;
 }
 
 export function SettingsView({
@@ -20,6 +21,7 @@ export function SettingsView({
   onAddModel,
   onUpdateModel,
   onDeleteModel,
+  onPanelModeChange,
 }: SettingsViewProps) {
   const activeModel = getActiveModel(settings);
 
@@ -292,6 +294,38 @@ export function SettingsView({
           ) : showAddForm ? null : (
             <div className="model-empty">尚未配置模型，点击 + 添加开始配置</div>
           )}
+        </article>
+        <article className="sophia-card settings-panel-mode-card">
+          <div className="settings-hero-top">
+            <h3 className="settings-hero-title">面板模式</h3>
+          </div>
+          <div className="settings-hero-divider" />
+          <div className="panel-mode-options">
+            <label
+              className={`panel-mode-option${settings.panelMode === "global" ? " is-active" : ""}`}
+              onClick={() => onPanelModeChange("global")}
+            >
+              <div className="panel-mode-radio">
+                <div className={`panel-mode-dot${settings.panelMode === "global" ? " is-selected" : ""}`} />
+              </div>
+              <div className="panel-mode-body">
+                <span className="panel-mode-label">全局模式</span>
+                <span className="panel-mode-desc">所有标签页同步显示，切换标签页时面板保持打开</span>
+              </div>
+            </label>
+            <label
+              className={`panel-mode-option${settings.panelMode === "manual" ? " is-active" : ""}`}
+              onClick={() => onPanelModeChange("manual")}
+            >
+              <div className="panel-mode-radio">
+                <div className={`panel-mode-dot${settings.panelMode === "manual" ? " is-selected" : ""}`} />
+              </div>
+              <div className="panel-mode-body">
+                <span className="panel-mode-label">手动模式</span>
+                <span className="panel-mode-desc">仅在当前标签页显示，每个标签页独立控制</span>
+              </div>
+            </label>
+          </div>
         </article>
         <article className="sophia-card settings-privacy-card">
           <div className="settings-privacy-row">
