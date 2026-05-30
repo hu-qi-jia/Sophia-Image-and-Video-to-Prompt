@@ -13,6 +13,14 @@ function safeTrim(value: unknown): string {
   return String(value ?? "").trim();
 }
 
+function asStructuredResponse(obj: unknown): StructuredImagePromptResponse {
+  return obj as StructuredImagePromptResponse;
+}
+
+function asGeminiResponse(obj: unknown): GeminiImagePromptResponse {
+  return obj as GeminiImagePromptResponse;
+}
+
 function stripPromptLabel(value: string): string {
   return value
     .replace(
@@ -360,7 +368,7 @@ export function parseGeminiImageResponse(rawText: string): {
 
   if (parsed && typeof parsed === "object" && "image_archetype" in parsed) {
     const promptResult = normalizeStructuredImageResponse(
-      parsed as unknown as StructuredImagePromptResponse
+      asStructuredResponse(parsed)
     );
     return {
       imageSummary: promptResult.shortPrompt,
@@ -372,7 +380,7 @@ export function parseGeminiImageResponse(rawText: string): {
 
   if (parsed && typeof parsed === "object" && "global_overview" in parsed) {
     const old = parsed as Record<string, unknown>;
-    const promptResult = normalizeStructuredImageResponse({
+    const promptResult = normalizeStructuredImageResponse(asStructuredResponse({
       image_archetype:
         (old.global_overview as Record<string, string>) ?? {},
       recreation_anchors: {},
@@ -390,7 +398,7 @@ export function parseGeminiImageResponse(rawText: string): {
       shortPrompt: String(old.shortPrompt ?? ""),
       detailedPrompt: String(old.detailedPrompt ?? ""),
       negativePrompt: String(old.negativePrompt ?? ""),
-    } as unknown as StructuredImagePromptResponse);
+    }));
     return {
       imageSummary: promptResult.shortPrompt,
       generatedPrompt: JSON.stringify(promptResult, null, 2),
@@ -401,7 +409,7 @@ export function parseGeminiImageResponse(rawText: string): {
 
   if (parsed && typeof parsed === "object" && "negativePrompt" in parsed) {
     const legacy = parsed as Record<string, unknown>;
-    const promptResult = normalizeStructuredImageResponse({
+    const promptResult = normalizeStructuredImageResponse(asStructuredResponse({
       image_archetype: (legacy.analysis as Record<string, string>) ?? {},
       recreation_anchors: {},
       subjects: [],
@@ -413,7 +421,7 @@ export function parseGeminiImageResponse(rawText: string): {
       shortPrompt: String(legacy.shortPrompt ?? ""),
       detailedPrompt: String(legacy.detailedPrompt ?? ""),
       negativePrompt: String(legacy.negativePrompt ?? ""),
-    } as unknown as StructuredImagePromptResponse);
+    }));
     return {
       imageSummary: promptResult.shortPrompt,
       generatedPrompt: JSON.stringify(promptResult, null, 2),
@@ -423,7 +431,7 @@ export function parseGeminiImageResponse(rawText: string): {
   }
 
   const promptResult = normalizeLegacyImageResponse(
-    parsed as unknown as GeminiImagePromptResponse
+    asGeminiResponse(parsed)
   );
   return {
     imageSummary: promptResult.shortPrompt,

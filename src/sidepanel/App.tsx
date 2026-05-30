@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useAppState } from "./useAppState";
 import { useClickOutside } from "./useClickOutside";
 import { ImageVideoPage } from "./ImageVideoPage";
@@ -6,103 +6,112 @@ import { EnhancerPage } from "./EnhancerPage";
 import { HistoryView } from "./HistoryView";
 import { SettingsView } from "./SettingsView";
 import { type TabId, IMAGE_ACCEPT, VIDEO_ACCEPT } from "./types";
+import type { PanelSizeMode } from "../lib/types";
+import { getShadowRoot, getMountPoint, getPanel } from "../lib/shadow-dom";
+import { logError, safeRuntimeSendMessage } from "../lib/error-utils";
 
 export function App() {
   const { state, refs, actions } = useAppState();
-  const [menuOpen, setMenuOpen] = useState(false);
-  const menuRef = useClickOutside(menuOpen, () => setMenuOpen(false));
+
+  const panelSizeMode: PanelSizeMode = state.panelSizeMode;
+  const isCompact = panelSizeMode === "compact";
+  const isStandard = panelSizeMode === "standard";
+
+  const applyPanelSizeToDOM = (mode: PanelSizeMode) => {
+    try {
+      const panel = getPanel();
+      if (panel) {
+        panel.setAttribute("data-size", mode === "collapsed" ? "compact" : mode);
+      }
+    } catch (error) {
+      logError("applyPanelSizeToDOM", error);
+    }
+    void safeRuntimeSendMessage({ type: "SOPHIA_SET_SIZE_MODE", sizeMode: mode });
+  };
+
+  const handleToggleSizeMode = () => {
+    const next: PanelSizeMode = isStandard ? "compact" : "standard";
+    actions.setPanelSizeMode(next);
+  };
+
+  const actionsRef = useRef(actions);
+  actionsRef.current = actions;
+  const toggleRef = useRef(handleToggleSizeMode);
+  toggleRef.current = handleToggleSizeMode;
+
+  // Ref to hold the latest setPanelSizeMode for event listener
+  const setPanelSizeModeRef = useRef(actions.setPanelSizeMode);
+  setPanelSizeModeRef.current = actions.setPanelSizeMode;
+
+  useEffect(() => {
+    const mountPoint = getMountPoint();
+    if (!mountPoint) return;
+
+    const onTabChange = (e: Event) => {
+      const tab = (e as CustomEvent).detail as TabId;
+      if (tab) actionsRef.current.handleTabChange(tab);
+    };
+
+    const onAction = (e: Event) => {
+      const action = (e as CustomEvent).detail as string;
+      if (action === "toggle-size") toggleRef.current();
+      else if (action === "history") actionsRef.current.setSubView("history");
+      else if (action === "settings") actionsRef.current.setSubView("settings");
+    };
+
+    /**
+     * Listen for size mode changes from loader.ts shell.
+     * This syncs the internal React state when the shell changes mode independently,
+     * e.g., when clicking the collapsed handle to expand.
+     */
+    const onSetSizeMode = (e: Event) => {
+      const mode = (e as CustomEvent<PanelSizeMode>).detail;
+      if (mode && mode !== "collapsed") {
+        setPanelSizeModeRef.current(mode);
+      }
+    };
+
+    mountPoint.addEventListener("sophia-tab-change", onTabChange);
+    mountPoint.addEventListener("sophia-action", onAction);
+    mountPoint.addEventListener("sophia-set-size-mode", onSetSizeMode);
+    return () => {
+      mountPoint.removeEventListener("sophia-tab-change", onTabChange);
+      mountPoint.removeEventListener("sophia-action", onAction);
+      mountPoint.removeEventListener("sophia-set-size-mode", onSetSizeMode);
+    };
+  }, []);
+
+  useEffect(() => {
+    applyPanelSizeToDOM(panelSizeMode);
+  }, [panelSizeMode]);
+
+  useEffect(() => {
+    try {
+      const panel = getPanel();
+      if (!panel) return;
+
+      panel.querySelectorAll("._tab-btn").forEach(btn => {
+        const tab = (btn as HTMLElement).dataset.tab;
+        btn.classList.toggle("_tab-btn--active", tab === state.activeTab);
+      });
+
+      const tabNav = panel.querySelector("._tab-nav") as HTMLElement | null;
+      if (tabNav) {
+        tabNav.style.opacity = state.subView === "main" ? "1" : "0.4";
+        tabNav.style.pointerEvents = state.subView === "main" ? "auto" : "none";
+      }
+    } catch (error) {
+      logError("updateTabUI", error);
+    }
+  }, [state.activeTab, state.subView]);
 
   return (
-    <main className="sophia-shell">
+    <main className={`sophia-shell ${isCompact ? "sophia-shell--compact" : "sophia-shell--standard"}`}>
       <input ref={refs.imageFileRef} className="hidden-file-input" type="file" accept={IMAGE_ACCEPT} onChange={(e) => void actions.handleLocalUpload(e, "image")} />
       <input ref={refs.videoFileRef} className="hidden-file-input" type="file" accept={VIDEO_ACCEPT} onChange={(e) => void actions.handleLocalUpload(e, "video")} />
 
       {state.subView === "main" ? (
         <>
-          <header className="app-header">
-            <div className="header-brand">
-              <img src="icons/logo_new1.png" alt="Sophia" className="brand-icon" />
-            </div>
-            <div className="header-nav-wrap">
-              <nav className="tab-nav" role="tablist">
-                <button
-                  role="tab"
-                  aria-selected={state.activeTab === "image"}
-                  className={`tab-nav-btn ${state.activeTab === "image" ? "tab-nav-btn--active" : ""}`}
-                  onClick={() => actions.handleTabChange("image")}
-                  title="图片视图"
-                >
-                  <img src="icons/image.svg" alt="图片视图" className="tab-icon-img" />
-                  <span className="tab-tooltip">图片视图</span>
-                </button>
-                <button
-                  role="tab"
-                  aria-selected={state.activeTab === "video"}
-                  className={`tab-nav-btn ${state.activeTab === "video" ? "tab-nav-btn--active" : ""}`}
-                  onClick={() => actions.handleTabChange("video")}
-                  title="视频视图"
-                >
-                  <img src="icons/video.svg" alt="视频视图" className="tab-icon-img" />
-                  <span className="tab-tooltip">视频视图</span>
-                </button>
-                <button
-                  role="tab"
-                  aria-selected={state.activeTab === "enhancer"}
-                  className={`tab-nav-btn ${state.activeTab === "enhancer" ? "tab-nav-btn--active" : ""}`}
-                  onClick={() => actions.handleTabChange("enhancer")}
-                  title="提示词增强"
-                >
-                  <img src="icons/text.svg" alt="提示词增强" className="tab-icon-img" />
-                  <span className="tab-tooltip">提示词增强</span>
-                </button>
-              </nav>
-            </div>
-            <div className="header-actions" ref={menuRef}>
-              <button
-                className="header-action-btn"
-                aria-label="菜单"
-                onClick={() => setMenuOpen(!menuOpen)}
-              >
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="4" y1="6" x2="20" y2="6" />
-                  <line x1="4" y1="12" x2="20" y2="12" />
-                  <line x1="4" y1="18" x2="20" y2="18" />
-                </svg>
-              </button>
-              {menuOpen && (
-                <div className="action-menu-dropdown">
-                  <button
-                    className="menu-item"
-                    onClick={() => {
-                      actions.setSubView("history");
-                      setMenuOpen(false);
-                    }}
-                  >
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M3 12a9 9 0 1 0 3-6.7" />
-                      <path d="M3 3v4h4" />
-                      <path d="M12 7v5l3 2" />
-                    </svg>
-                    <span>历史记录</span>
-                  </button>
-                  <button
-                    className="menu-item"
-                    onClick={() => {
-                      actions.setSubView("settings");
-                      setMenuOpen(false);
-                    }}
-                  >
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                      <circle cx="12" cy="12" r="3" />
-                      <path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 0 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-1.8-.3 1.6 1.6 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.6 1.6 0 0 0-1-1.5 1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 0 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0 .3-1.8 1.6 1.6 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.6 1.6 0 0 0 1.5-1 1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 0 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3h.1a1.6 1.6 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.6 1.6 0 0 0 1 1.5h.1a1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 0 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8v.1a1.6 1.6 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1Z" />
-                    </svg>
-                    <span>设置</span>
-                  </button>
-                </div>
-              )}
-            </div>
-          </header>
-
           <div className="page-content">
             {state.activeTab === "image" ? (
               <ImageVideoPage
@@ -115,6 +124,7 @@ export function App() {
                 showCopy={state.showCopy}
                 currentMediaPreview={state.currentMediaPreview}
                 currentMediaAspectRatio={state.currentMediaAspectRatio}
+                panelSizeMode={panelSizeMode}
                 onUploadClick={actions.handleUploadClick}
                 onAnalyze={actions.handleAnalyze}
                 onClear={actions.handleClear}
@@ -127,6 +137,8 @@ export function App() {
                 displayContentText={state.displayContentText}
                 showStyleCopy={state.showStyleCopy}
                 showContentCopy={state.showContentCopy}
+                styleCopyLabel={state.styleCopyLabel}
+                contentCopyLabel={state.contentCopyLabel}
                 onEditStyle={(val) => actions.updateIVTab("image", { editedStyleText: val })}
                 onEditContent={(val) => actions.updateIVTab("image", { editedContentText: val })}
                 onCopyStyle={actions.handleCopyStyle}
@@ -147,6 +159,7 @@ export function App() {
                 currentMediaPreview={state.currentMediaPreview}
                 currentMediaAspectRatio={state.currentMediaAspectRatio}
                 frameSamplingMode={state.settings.frameSamplingMode}
+                panelSizeMode={panelSizeMode}
                 onUploadClick={actions.handleUploadClick}
                 onAnalyze={actions.handleAnalyze}
                 onClear={actions.handleClear}
@@ -160,6 +173,8 @@ export function App() {
                 displayContentText={state.displayContentText}
                 showStyleCopy={state.showStyleCopy}
                 showContentCopy={state.showContentCopy}
+                styleCopyLabel={state.styleCopyLabel}
+                contentCopyLabel={state.contentCopyLabel}
                 onEditStyle={(val) => actions.updateIVTab("video", { editedStyleText: val })}
                 onEditContent={(val) => actions.updateIVTab("video", { editedContentText: val })}
                 onCopyStyle={actions.handleCopyStyle}
@@ -184,6 +199,7 @@ export function App() {
                 onEnhance={actions.handleEnhancePrompt}
                 onAbortEnhancer={actions.handleAbortEnhancer}
                 onCopyEnhancer={() => void actions.handleCopyEnhancerResult()}
+                panelSizeMode={panelSizeMode}
               />
             ) : null}
           </div>
@@ -210,6 +226,7 @@ export function App() {
       {state.subView === "settings" ? (
         <SettingsView
           settings={state.settings}
+          panelSizeMode={panelSizeMode}
           onBack={() => actions.setSubView("main")}
           onSelectModel={(modelId) => actions.handleSelectModel(modelId)}
           onAddModel={(model) => void actions.handleAddModel(model)}

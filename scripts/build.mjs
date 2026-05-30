@@ -40,6 +40,9 @@ await esbuild({
   platform: "browser",
   target: "chrome114",
   minify: true,
+  loader: {
+    ".css": "text",
+  },
 });
 
 // ── Step 4: esbuild builds sophia-app.js (Preact, ESM) ────────────

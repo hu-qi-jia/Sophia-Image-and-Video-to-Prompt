@@ -10,7 +10,10 @@ export function useClickOutside(
     if (!isOpen) return;
 
     function handleClick(event: MouseEvent) {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
+      // Use composedPath() to get the real target inside Shadow DOM
+      // (event.target gets retargeted to the host element across shadow boundaries)
+      const path = event.composedPath();
+      if (ref.current && !path.includes(ref.current)) {
         onClose();
       }
     }

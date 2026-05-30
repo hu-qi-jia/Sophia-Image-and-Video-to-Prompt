@@ -16,6 +16,7 @@ import {
   saveFrameSamplingMode,
   getActiveModel
 } from "../lib/storage";
+import { TOAST_DURATION_MS } from "../lib/constants";
 
 const FRAME_MODE_LABELS: Record<FrameSamplingMode, string> = {
   fast: "快速",
@@ -90,17 +91,17 @@ export function App() {
 
     if (!formModel.trim()) {
       setStatusMessage("请填写模型名称。");
-      setTimeout(() => setStatusMessage(null), 1800);
+      setTimeout(() => setStatusMessage(null), TOAST_DURATION_MS);
       return;
     }
     if (!formKey.trim()) {
       setStatusMessage("请填写 API 密钥。");
-      setTimeout(() => setStatusMessage(null), 1800);
+      setTimeout(() => setStatusMessage(null), TOAST_DURATION_MS);
       return;
     }
     if (formProvider === "openai" && !formBaseUrl.trim()) {
       setStatusMessage("请填写接口地址。");
-      setTimeout(() => setStatusMessage(null), 1800);
+      setTimeout(() => setStatusMessage(null), TOAST_DURATION_MS);
       return;
     }
 
@@ -128,7 +129,7 @@ export function App() {
       setSettings(nextSettings);
     }
     setStatusMessage(editingId ? "模型已更新。" : "模型已添加。");
-    setTimeout(() => setStatusMessage(null), 1800);
+    setTimeout(() => setStatusMessage(null), TOAST_DURATION_MS);
     cancelForm();
   }
 
@@ -139,7 +140,7 @@ export function App() {
     setSettings(nextSettings);
     if (editingId === modelId) cancelForm();
     setStatusMessage("模型已删除。");
-    setTimeout(() => setStatusMessage(null), 1800);
+    setTimeout(() => setStatusMessage(null), TOAST_DURATION_MS);
   }
 
   async function handleSelectModel(modelId: string) {
@@ -164,7 +165,7 @@ export function App() {
     const nextSettings = await saveFrameSamplingMode(mode);
     setSettings(nextSettings);
     setStatusMessage("帧采样模式已保存。");
-    setTimeout(() => setStatusMessage(null), 1800);
+    setTimeout(() => setStatusMessage(null), TOAST_DURATION_MS);
   }
 
   const showForm = formProvider !== null;

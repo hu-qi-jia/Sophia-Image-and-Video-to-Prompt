@@ -47,6 +47,7 @@ export type FrameSamplingMode = (typeof FRAME_SAMPLING_MODES)[number];
 export type PromptFormat = "json";
 export const DEFAULT_PROMPT_FORMAT: PromptFormat = "json";
 export type PanelMode = "global" | "manual";
+export type PanelSizeMode = "standard" | "compact" | "collapsed";
 export type PromptEnhancerMode = "video" | "image";
 export type FrameExtractionOptions = {
   mode?: FrameSamplingMode;
@@ -128,6 +129,7 @@ export type PromptHistoryItem = {
   sourceUrl?: string;
   pageTitle?: string;
   thumbnailDataUrl?: string;
+  aspectRatio?: number;
   promptText: string;
   videoSummary?: string;
   promptResult?: GeminiPromptResponse;
@@ -348,4 +350,8 @@ export type RuntimeMessage =
       type: "VIDEO2PROMPT_DRAWER_STATE_RESPONSE";
       mode: PanelMode;
       drawerOpen: boolean;
+    }
+  | {
+      type: "SOPHIA_SET_SIZE_MODE";
+      sizeMode: PanelSizeMode;
     };

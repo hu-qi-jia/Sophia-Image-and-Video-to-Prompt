@@ -69,9 +69,13 @@ export function HistoryView({
               const isEnhancer = item.sourceType === "enhancer";
               const backPreview = item.promptText || "";
               const typeLabel = getHistoryTypeLabel(item);
+              const ar = item.aspectRatio;
+              const isPortrait = ar != null && ar < 0.85;
+              const isLandscape = ar != null && ar > 1.15;
+              const cardOrientation = isPortrait ? " history-card--portrait" : isLandscape ? " history-card--landscape" : "";
 
               return (
-                <article className={`history-card${isEditing ? " is-editing" : ""}`} key={item.id}>
+                <article className={`history-card${cardOrientation}${isEditing ? " is-editing" : ""}`} key={item.id}>
                   {isEditing ? (
                     <div className="history-card-edit-view">
                       <div className="history-card-edit-top">

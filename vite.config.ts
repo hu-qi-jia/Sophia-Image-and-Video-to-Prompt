@@ -14,14 +14,7 @@ export default defineConfig({
       input: {
         sidepanel: resolve(__dirname, "sidepanel.html"),
         options: resolve(__dirname, "options.html"),
-        background: resolve(__dirname, "src/background/background.ts")
       },
-      output: {
-        entryFileNames: (chunkInfo) => {
-          if (chunkInfo.name === "background") return "assets/background.js";
-          return "assets/[name]-[hash].js";
-        }
-      }
     }
   }
 });

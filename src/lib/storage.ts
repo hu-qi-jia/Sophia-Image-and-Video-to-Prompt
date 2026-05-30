@@ -8,6 +8,7 @@ import {
   type FrameSamplingMode,
   type ModelProvider,
   type PanelMode,
+  type PanelSizeMode,
   type PromptFormat,
   type PromptHistoryItem,
   type ProviderType,
@@ -95,7 +96,8 @@ export async function getSettings(): Promise<StoredSettings> {
     activeModelId: (raw.activeModelId as string) ?? (models.length > 0 ? models[0].id : ""),
     targetModel: normalizeTargetModel(raw.targetModel),
     frameSamplingMode: normalizeFrameSamplingMode(raw.frameSamplingMode),
-    promptFormat: normalizePromptFormat(raw.promptFormat)
+    promptFormat: normalizePromptFormat(raw.promptFormat),
+    panelMode: (raw.panelMode as PanelMode) ?? "global",
   };
 }
 
@@ -273,6 +275,19 @@ export async function getPanelMode(): Promise<PanelMode> {
 
 export async function setPanelMode(mode: PanelMode): Promise<void> {
   await chrome.storage.local.set({ [PANEL_MODE_KEY]: mode });
+}
+
+// ── Panel size mode ───────────────────────────────────────────────
+
+const PANEL_SIZE_MODE_KEY = "video2prompt:panelSizeMode";
+
+export async function getPanelSizeMode(): Promise<PanelSizeMode> {
+  const stored = await chrome.storage.local.get(PANEL_SIZE_MODE_KEY);
+  return (stored[PANEL_SIZE_MODE_KEY] as PanelSizeMode) ?? "standard";
+}
+
+export async function setPanelSizeMode(mode: PanelSizeMode): Promise<void> {
+  await chrome.storage.local.set({ [PANEL_SIZE_MODE_KEY]: mode });
 }
 
 // ── Global drawer state ───────────────────────────────────────────

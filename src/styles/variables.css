@@ -1,0 +1,487 @@
+/* ─────────────────────────────────────────────
+   Sophia — iOS 26 Liquid Glass Design System
+   CSS Variables — Single Source of Truth
+   Frosted · Luminous · Layered · Organic
+   ───────────────────────────────────────────── */
+
+:root {
+  /* ══ Layer 1: Atmosphere ══ */
+  --bg-page: #ECEAEF;
+  --bg-card: rgba(255, 255, 255, 0.55);
+  --bg-card-solid: #FFFFFF;
+  --bg-subtle: rgba(245, 245, 247, 0.5);
+  --bg-input: rgba(245, 245, 247, 0.65);
+  --bg-hover: rgba(0, 0, 0, 0.03);
+  --bg-dark: #2b2b2b;
+  --bg-dark-elevated: #3a3a3a;
+
+  /* ══ Layer 2: Liquid Glass ══ */
+  --glass-bg: rgba(255, 255, 255, 0.30);
+  --glass-bg-hover: rgba(255, 255, 255, 0.46);
+  --glass-bg-active: rgba(255, 255, 255, 0.58);
+  --glass-border: rgba(255, 255, 255, 0.40);
+  --glass-border-hover: rgba(255, 255, 255, 0.54);
+  --glass-border-subtle: rgba(255, 255, 255, 0.22);
+  --glass-blur: blur(18px) saturate(180%);
+  --glass-blur-sm: blur(10px) saturate(160%);
+  --glass-blur-lg: blur(26px) saturate(200%);
+  --glass-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.08),
+    0 4px 16px rgba(0, 0, 0, 0.10),
+    0 12px 40px rgba(0, 0, 0, 0.10);
+  --glass-shadow-hover:
+    0 4px 8px rgba(0, 0, 0, 0.06),
+    0 12px 28px rgba(0, 0, 0, 0.10),
+    0 20px 56px rgba(0, 0, 0, 0.08);
+  --glass-shadow-elevated:
+    0 6px 12px rgba(0, 0, 0, 0.06),
+    0 16px 40px rgba(0, 0, 0, 0.12),
+    0 32px 80px rgba(0, 0, 0, 0.08);
+  --glass-inner-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  --glass-inner-shadow-dark: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  --glass-edge-light: inset 0 0 0 0.5px rgba(255, 255, 255, 0.6);
+  --glass-shine: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.25) 0%,
+    rgba(255, 255, 255, 0.08) 30%,
+    rgba(255, 255, 255, 0) 60%
+  );
+  --glass-refraction: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.05) 40%,
+    rgba(200, 200, 255, 0.04) 70%,
+    rgba(255, 255, 255, 0) 100%
+  );
+
+  /* ══ Layer 3: Semantic ══ */
+  --text-primary: #2b2b2b;
+  --text-secondary: #5a5a5e;
+  --text-tertiary: #AEAEB2;
+  --text-placeholder: #C7C7CC;
+  --text-on-dark: #F5F5F7;
+  --text-on-dark-muted: rgba(245, 245, 247, 0.45);
+  --text-on-dark-secondary: rgba(255, 255, 255, 0.6);
+  --text-on-dark-tertiary: rgba(255, 255, 255, 0.35);
+
+  --accent: #333333;
+  --accent-hover: #0A0A0B;
+  --accent-soft: rgba(28, 28, 30, 0.05);
+  --accent-glow: rgba(28, 28, 30, 0.1);
+
+  --success: #34C759;
+  --success-soft: rgba(52, 199, 89, 0.08);
+  --success-light: #86EFAC;
+  --danger: #FF3B30;
+  --danger-soft: rgba(255, 59, 48, 0.08);
+  --danger-light: #FCA5A5;
+  --info-light: #93C5FD;
+
+  --border-light: rgba(0, 0, 0, 0.04);
+  --border-medium: rgba(0, 0, 0, 0.08);
+  --border-subtle: rgba(0, 0, 0, 0.02);
+
+  /* ══ Shadow System ══ */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.03), 0 2px 8px rgba(0, 0, 0, 0.02);
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.03), 0 8px 24px rgba(0, 0, 0, 0.04);
+  --shadow-elevated: 0 4px 12px rgba(0, 0, 0, 0.05), 0 16px 48px rgba(0, 0, 0, 0.08);
+
+  /* ══ Radius ══ */
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 22px;
+  --radius-2xl: 28px;
+  --radius-pill: 100px;
+
+  /* ══ Button Design System ══ */
+  --btn-radius: var(--radius-md);
+  --btn-radius-lg: var(--radius-xl);
+  --btn-radius-pill: var(--radius-pill);
+  --btn-height-xs: 28px;
+  --btn-height-sm: 32px;
+  --btn-height-md: 36px;
+  --btn-height-lg: 42px;
+  --btn-padding-xs: 4px 10px;
+  --btn-padding-sm: 6px 14px;
+  --btn-padding-md: 8px 18px;
+  --btn-padding-lg: 11px 24px;
+  --btn-font-size: var(--text-sm);
+  --btn-font-weight: var(--font-medium);
+  --btn-icon-size: 14px;
+  --btn-icon-size-sm: 12px;
+  --btn-icon-size-lg: 16px;
+  --btn-gap: var(--space-2);
+  --btn-duration: var(--duration-fast);
+  --btn-ease: var(--ease-out);
+
+  /* ══ Spacing ══ */
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+  --space-5: 20px; --space-6: 24px; --space-8: 32px; --space-10: 40px;
+  --space-12: 48px;
+
+  /* ══ Typography ══ */
+  --text-xxs: 0.6875rem; --text-xs: 0.75rem; --text-sm: 0.8125rem; --text-base: 0.875rem;
+  --text-lg: 1rem; --text-xl: 1.125rem; --text-2xl: 1.35rem; --text-3xl: 1.625rem;
+
+  /* ══ Font Weights ══ */
+  --font-light: 300;
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+
+  /* ══ Motion ══ */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.40);
+  --ease-bounce: cubic-bezier(0.34, 1.80, 0.64, 1);
+  --duration-fast: 0.18s;
+  --duration-normal: 0.28s;
+  --duration-slow: 0.4s;
+  --duration-lift: 0.35s;
+
+  /* ══ Light-mode component tokens ══ */
+  --tab-nav-bg: rgba(255, 255, 255, 0.32);
+  --tab-nav-border: var(--glass-border-subtle);
+  --tab-btn-hover-bg: rgba(255, 255, 255, 0.25);
+  --tab-btn-active-bg: rgba(255, 255, 255, 0.6);
+  --tab-btn-active-border: var(--glass-border);
+  --tab-icon-filter: invert(60%) sepia(8%) saturate(200%) hue-rotate(180deg) brightness(85%) contrast(85%);
+  --tab-icon-hover-filter: invert(30%) sepia(8%) saturate(200%) hue-rotate(180deg) brightness(90%) contrast(90%);
+  --tab-icon-active-filter: invert(0%) brightness(0%) contrast(100%);
+
+  --header-action-color: var(--text-secondary);
+  --header-action-hover-bg: var(--bg-hover);
+
+  --upload-zone-bg: transparent;
+  --upload-zone-border: var(--border-medium);
+  --upload-zone-hover-bg: var(--bg-hover);
+  --upload-zone-icon-color: var(--text-tertiary);
+
+  --result-card-bg: var(--glass-bg);
+  --result-card-border: var(--glass-border);
+
+  --history-card-bg: linear-gradient(160deg, rgba(26, 26, 30, 0.95) 0%, rgba(40, 40, 44, 0.92) 100%);
+  --history-card-border: rgba(255, 255, 255, 0.10);
+  --history-card-text: #F5F5F7;
+  --history-card-date: rgba(255, 255, 255, 0.25);
+  --history-card-btn-bg: rgba(255, 255, 255, 0.05);
+  --history-card-btn-hover-bg: rgba(255, 255, 255, 0.12);
+  --history-card-edit-border: rgba(255, 255, 255, 0.06);
+  --history-card-edit-bg: rgba(255, 255, 255, 0.03);
+  --history-card-edit-focus: rgba(59, 130, 246, 0.4);
+  --history-card-edit-focus-bg: rgba(59, 130, 246, 0.05);
+
+  --enhancer-hero-bg: var(--glass-bg);
+  --enhancer-hero-border: var(--glass-border);
+  --enhancer-abort-hover-bg: rgba(255, 59, 48, 0.15);
+
+  --settings-icon-box-bg: rgba(34, 197, 94, 0.06);
+  --settings-icon-box-border: rgba(34, 197, 94, 0.12);
+
+  --btn-dark-bg: #333333;
+  --btn-dark-hover-bg: linear-gradient(180deg, #5a5a5a 0%, #2b2b2b 100%);
+  --btn-dark-shadow: 0 1px 2px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  --btn-dark-hover-shadow: 0 4px 12px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
+  --scrollbar-thumb: rgba(0, 0, 0, 0.12);
+  --spinner-border: rgba(0, 0, 0, 0.06);
+  --spinner-border-top: rgba(0, 0, 0, 0.25);
+  --loading-color: var(--text-secondary);
+
+  --panel-mode-active-bg: rgba(99, 102, 241, 0.08);
+  --panel-mode-active-border: var(--accent);
+
+  --provider-badge-bg: rgba(0, 0, 0, 0.05);
+  --provider-badge-border: rgba(0, 0, 0, 0.08);
+
+  --shimmer-base: var(--bg-subtle);
+  --shimmer-highlight: rgba(255, 255, 255, 0.5);
+
+  --settings-delete-hover-bg: rgba(255, 59, 48, 0.15);
+  --settings-delete-focus-shadow: rgba(255, 59, 48, 0.15);
+
+  --frame-sampling-menu-bg: rgba(255, 255, 255, 0.85);
+
+  color-scheme: light;
+  font-family: "PingFang SC", "Inter", -apple-system, "Microsoft YaHei", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Dark Mode — System Preference
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+
+    --bg-page: #1C1C1E;
+    --bg-card: rgba(44, 44, 46, 0.55);
+    --bg-card-solid: #2C2C2E;
+    --bg-subtle: rgba(58, 58, 60, 0.5);
+    --bg-input: rgba(58, 58, 60, 0.65);
+    --bg-hover: rgba(255, 255, 255, 0.06);
+    --bg-dark: #1C1C1E;
+    --bg-dark-elevated: #2C2C2E;
+
+    --glass-bg: rgba(44, 44, 46, 0.30);
+    --glass-bg-hover: rgba(58, 58, 60, 0.46);
+    --glass-bg-active: rgba(72, 72, 74, 0.58);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-border-hover: rgba(255, 255, 255, 0.15);
+    --glass-border-subtle: rgba(255, 255, 255, 0.03);
+    --glass-blur: blur(18px) saturate(180%);
+    --glass-blur-sm: blur(10px) saturate(140%);
+    --glass-blur-lg: blur(26px) saturate(180%);
+    --glass-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.08),
+      0 4px 16px rgba(0, 0, 0, 0.12),
+      0 12px 40px rgba(0, 0, 0, 0.12);
+    --glass-shadow-hover:
+      0 4px 8px rgba(0, 0, 0, 0.15),
+      0 12px 28px rgba(0, 0, 0, 0.28),
+      0 20px 56px rgba(0, 0, 0, 0.24);
+    --glass-shadow-elevated:
+      0 6px 12px rgba(0, 0, 0, 0.18),
+      0 16px 40px rgba(0, 0, 0, 0.35),
+      0 32px 80px rgba(0, 0, 0, 0.26);
+    --glass-inner-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    --glass-inner-shadow-dark: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    --glass-edge-light: inset 0 0 0 0.5px rgba(255, 255, 255, 0.10);
+    --glass-shine: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 30%, rgba(255, 255, 255, 0) 60%);
+    --glass-refraction: linear-gradient(160deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 40%, rgba(120, 120, 200, 0.03) 70%, rgba(255, 255, 255, 0) 100%);
+
+    --text-primary: #F5F5F7;
+    --text-secondary: #A1A1A6;
+    --text-tertiary: #636366;
+    --text-placeholder: #48484A;
+    --text-on-dark: #FFFFFF;
+    --text-on-dark-muted: rgba(255, 255, 255, 0.45);
+    --text-on-dark-secondary: rgba(255, 255, 255, 0.60);
+    --text-on-dark-tertiary: rgba(255, 255, 255, 0.35);
+
+    --accent: rgba(255, 255, 255, 0.85);
+    --accent-hover: #FFFFFF;
+    --accent-soft: rgba(255, 255, 255, 0.08);
+    --accent-glow: rgba(255, 255, 255, 0.15);
+
+    --success: #30D158;
+    --success-soft: rgba(48, 209, 88, 0.12);
+    --success-light: #34C759;
+    --danger: #FF453A;
+    --danger-soft: rgba(255, 69, 58, 0.12);
+    --danger-light: #FF6961;
+    --info-light: #64D2FF;
+
+    --border-light: rgba(255, 255, 255, 0.06);
+    --border-medium: rgba(255, 255, 255, 0.10);
+    --border-subtle: rgba(255, 255, 255, 0.03);
+
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.15);
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.18), 0 2px 8px rgba(0, 0, 0, 0.12);
+    --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.20), 0 8px 24px rgba(0, 0, 0, 0.16);
+    --shadow-elevated: 0 4px 12px rgba(0, 0, 0, 0.25), 0 16px 48px rgba(0, 0, 0, 0.30);
+
+    --tab-nav-bg: rgba(255, 255, 255, 0.06);
+    --tab-nav-border: rgba(255, 255, 255, 0.08);
+    --tab-btn-hover-bg: rgba(255, 255, 255, 0.08);
+    --tab-btn-active-bg: rgba(255, 255, 255, 0.14);
+    --tab-btn-active-border: rgba(255, 255, 255, 0.12);
+    --tab-icon-filter: invert(80%) sepia(5%) saturate(150%) hue-rotate(180deg) brightness(110%) contrast(85%);
+    --tab-icon-hover-filter: invert(90%) sepia(5%) saturate(150%) hue-rotate(180deg) brightness(115%) contrast(90%);
+    --tab-icon-active-filter: invert(100%) brightness(100%) contrast(100%);
+
+    --header-action-color: rgba(255, 255, 255, 0.70);
+    --header-action-hover-bg: rgba(255, 255, 255, 0.10);
+
+    --upload-zone-bg: rgba(255, 255, 255, 0.03);
+    --upload-zone-border: rgba(255, 255, 255, 0.08);
+    --upload-zone-hover-bg: rgba(255, 255, 255, 0.06);
+    --upload-zone-icon-color: rgba(255, 255, 255, 0.35);
+
+    --result-card-bg: rgba(255, 255, 255, 0.04);
+    --result-card-border: rgba(255, 255, 255, 0.06);
+
+    --history-card-bg: linear-gradient(160deg, rgba(30, 30, 34, 0.95) 0%, rgba(44, 44, 48, 0.92) 100%);
+    --history-card-border: rgba(255, 255, 255, 0.06);
+    --history-card-text: #F5F5F7;
+    --history-card-date: rgba(255, 255, 255, 0.35);
+    --history-card-btn-bg: rgba(255, 255, 255, 0.06);
+    --history-card-btn-hover-bg: rgba(255, 255, 255, 0.12);
+    --history-card-edit-border: rgba(255, 255, 255, 0.06);
+    --history-card-edit-bg: rgba(255, 255, 255, 0.03);
+    --history-card-edit-focus: rgba(255, 255, 255, 0.25);
+    --history-card-edit-focus-bg: rgba(255, 255, 255, 0.04);
+
+    --enhancer-hero-bg: var(--glass-bg);
+    --enhancer-hero-border: var(--glass-border);
+    --enhancer-abort-hover-bg: rgba(255, 69, 58, 0.18);
+
+    --settings-icon-box-bg: rgba(48, 209, 88, 0.10);
+    --settings-icon-box-border: rgba(48, 209, 88, 0.18);
+
+    --btn-dark-bg: rgba(255, 255, 255, 0.85);
+    --btn-dark-hover-bg: #FFFFFF;
+    --btn-dark-shadow: 0 1px 3px rgba(0, 0, 0, 0.30), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    --btn-dark-hover-shadow: 0 4px 16px rgba(0, 0, 0, 0.40), inset 0 1px 0 rgba(255, 255, 255, 0.20);
+
+    --scrollbar-thumb: rgba(255, 255, 255, 0.15);
+    --spinner-border: rgba(255, 255, 255, 0.10);
+    --spinner-border-top: rgba(255, 255, 255, 0.40);
+    --loading-color: rgba(255, 255, 255, 0.50);
+
+    --panel-mode-active-bg: rgba(255, 255, 255, 0.08);
+    --panel-mode-active-border: var(--accent);
+
+    --provider-badge-bg: rgba(255, 255, 255, 0.06);
+    --provider-badge-border: rgba(255, 255, 255, 0.10);
+
+    --shimmer-base: rgba(58, 58, 60, 0.5);
+    --shimmer-highlight: rgba(255, 255, 255, 0.08);
+
+    --settings-delete-hover-bg: rgba(255, 69, 58, 0.18);
+    --settings-delete-focus-shadow: rgba(255, 69, 58, 0.20);
+
+    --frame-sampling-menu-bg: rgba(44, 44, 46, 0.85);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Dark Mode — Explicit User Preference
+   ═══════════════════════════════════════════════════════════════ */
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg-page: #1C1C1E;
+  --bg-card: rgba(44, 44, 46, 0.55);
+  --bg-card-solid: #2C2C2E;
+  --bg-subtle: rgba(58, 58, 60, 0.5);
+  --bg-input: rgba(58, 58, 60, 0.65);
+  --bg-hover: rgba(255, 255, 255, 0.06);
+  --bg-dark: #1C1C1E;
+  --bg-dark-elevated: #2C2C2E;
+
+  --glass-bg: rgba(44, 44, 46, 0.30);
+  --glass-bg-hover: rgba(58, 58, 60, 0.46);
+  --glass-bg-active: rgba(72, 72, 74, 0.58);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-border-hover: rgba(255, 255, 255, 0.15);
+  --glass-border-subtle: rgba(255, 255, 255, 0.03);
+  --glass-blur: blur(18px) saturate(180%);
+  --glass-blur-sm: blur(10px) saturate(140%);
+  --glass-blur-lg: blur(26px) saturate(180%);
+  --glass-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.08),
+    0 4px 16px rgba(0, 0, 0, 0.12),
+    0 12px 40px rgba(0, 0, 0, 0.12);
+  --glass-shadow-hover:
+    0 4px 8px rgba(0, 0, 0, 0.15),
+    0 12px 28px rgba(0, 0, 0, 0.28),
+    0 20px 56px rgba(0, 0, 0, 0.24);
+  --glass-shadow-elevated:
+    0 6px 12px rgba(0, 0, 0, 0.18),
+    0 16px 40px rgba(0, 0, 0, 0.35),
+    0 32px 80px rgba(0, 0, 0, 0.26);
+  --glass-inner-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  --glass-inner-shadow-dark: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  --glass-edge-light: inset 0 0 0 0.5px rgba(255, 255, 255, 0.10);
+  --glass-shine: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 30%, rgba(255, 255, 255, 0) 60%);
+  --glass-refraction: linear-gradient(160deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 40%, rgba(120, 120, 200, 0.03) 70%, rgba(255, 255, 255, 0) 100%);
+
+  --text-primary: #F5F5F7;
+  --text-secondary: #A1A1A6;
+  --text-tertiary: #636366;
+  --text-placeholder: #48484A;
+  --text-on-dark: #FFFFFF;
+  --text-on-dark-muted: rgba(255, 255, 255, 0.45);
+  --text-on-dark-secondary: rgba(255, 255, 255, 0.60);
+  --text-on-dark-tertiary: rgba(255, 255, 255, 0.35);
+
+  --accent: rgba(255, 255, 255, 0.85);
+  --accent-hover: #FFFFFF;
+  --accent-soft: rgba(255, 255, 255, 0.08);
+  --accent-glow: rgba(255, 255, 255, 0.15);
+
+  --success: #30D158;
+  --success-soft: rgba(48, 209, 88, 0.12);
+  --success-light: #34C759;
+  --danger: #FF453A;
+  --danger-soft: rgba(255, 69, 58, 0.12);
+  --danger-light: #FF6961;
+  --info-light: #64D2FF;
+
+  --border-light: rgba(255, 255, 255, 0.06);
+  --border-medium: rgba(255, 255, 255, 0.10);
+  --border-subtle: rgba(255, 255, 255, 0.03);
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.15);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.18), 0 2px 8px rgba(0, 0, 0, 0.12);
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.20), 0 8px 24px rgba(0, 0, 0, 0.16);
+  --shadow-elevated: 0 4px 12px rgba(0, 0, 0, 0.25), 0 16px 48px rgba(0, 0, 0, 0.30);
+
+  --tab-nav-bg: rgba(255, 255, 255, 0.06);
+  --tab-nav-border: rgba(255, 255, 255, 0.08);
+  --tab-btn-hover-bg: rgba(255, 255, 255, 0.08);
+  --tab-btn-active-bg: rgba(255, 255, 255, 0.14);
+  --tab-btn-active-border: rgba(255, 255, 255, 0.12);
+  --tab-icon-filter: invert(80%) sepia(5%) saturate(150%) hue-rotate(180deg) brightness(110%) contrast(85%);
+  --tab-icon-hover-filter: invert(90%) sepia(5%) saturate(150%) hue-rotate(180deg) brightness(115%) contrast(90%);
+  --tab-icon-active-filter: invert(100%) brightness(100%) contrast(100%);
+
+  --header-action-color: rgba(255, 255, 255, 0.70);
+  --header-action-hover-bg: rgba(255, 255, 255, 0.10);
+
+  --upload-zone-bg: rgba(255, 255, 255, 0.03);
+  --upload-zone-border: rgba(255, 255, 255, 0.08);
+  --upload-zone-hover-bg: rgba(255, 255, 255, 0.06);
+  --upload-zone-icon-color: rgba(255, 255, 255, 0.35);
+
+  --result-card-bg: rgba(255, 255, 255, 0.04);
+  --result-card-border: rgba(255, 255, 255, 0.06);
+
+  --history-card-bg: linear-gradient(160deg, rgba(30, 30, 34, 0.95) 0%, rgba(44, 44, 48, 0.92) 100%);
+  --history-card-border: rgba(255, 255, 255, 0.06);
+  --history-card-text: #F5F5F7;
+  --history-card-date: rgba(255, 255, 255, 0.35);
+  --history-card-btn-bg: rgba(255, 255, 255, 0.06);
+  --history-card-btn-hover-bg: rgba(255, 255, 255, 0.12);
+  --history-card-edit-border: rgba(255, 255, 255, 0.06);
+  --history-card-edit-bg: rgba(255, 255, 255, 0.03);
+  --history-card-edit-focus: rgba(255, 255, 255, 0.25);
+  --history-card-edit-focus-bg: rgba(255, 255, 255, 0.04);
+
+  --enhancer-hero-bg: var(--glass-bg);
+  --enhancer-hero-border: var(--glass-border);
+  --enhancer-abort-hover-bg: rgba(255, 69, 58, 0.18);
+
+  --settings-icon-box-bg: rgba(48, 209, 88, 0.10);
+  --settings-icon-box-border: rgba(48, 209, 88, 0.18);
+
+  --btn-dark-bg: rgba(255, 255, 255, 0.85);
+  --btn-dark-hover-bg: #FFFFFF;
+  --btn-dark-shadow: 0 1px 3px rgba(0, 0, 0, 0.30), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  --btn-dark-hover-shadow: 0 4px 16px rgba(0, 0, 0, 0.40), inset 0 1px 0 rgba(255, 255, 255, 0.20);
+
+  --scrollbar-thumb: rgba(255, 255, 255, 0.15);
+  --spinner-border: rgba(255, 255, 255, 0.10);
+  --spinner-border-top: rgba(255, 255, 255, 0.40);
+  --loading-color: rgba(255, 255, 255, 0.50);
+
+  --panel-mode-active-bg: rgba(255, 255, 255, 0.08);
+  --panel-mode-active-border: var(--accent);
+
+  --provider-badge-bg: rgba(255, 255, 255, 0.06);
+  --provider-badge-border: rgba(255, 255, 255, 0.10);
+
+  --shimmer-base: rgba(58, 58, 60, 0.5);
+  --shimmer-highlight: rgba(255, 255, 255, 0.08);
+
+  --settings-delete-hover-bg: rgba(255, 69, 58, 0.18);
+  --settings-delete-focus-shadow: rgba(255, 69, 58, 0.20);
+
+  --frame-sampling-menu-bg: rgba(44, 44, 46, 0.85);
+}

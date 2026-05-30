@@ -13,6 +13,34 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      if (!window.chrome || !chrome.runtime) {
+        const noop = () => {};
+        const noopPromise = () => Promise.resolve({});
+        window.chrome = {
+          runtime: {
+            getURL: (p) => "/" + p,
+            onMessage: { addListener: noop, removeListener: noop },
+            sendMessage: (msg, cb) => {
+              const result = { activeTabId: null, state: null };
+              if (cb) cb(result);
+              return Promise.resolve(result);
+            },
+            lastError: null,
+          },
+          storage: {
+            local: {
+              get: noopPromise,
+              set: () => Promise.resolve(),
+            },
+            onChanged: {
+              addListener: noop,
+              removeListener: noop,
+            },
+          },
+        };
+      }
+    </script>
     <script type="module" src="/src/sidepanel/main.tsx"></script>
   </body>
 </html>

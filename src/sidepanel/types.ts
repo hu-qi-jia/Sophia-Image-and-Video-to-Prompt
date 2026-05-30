@@ -58,6 +58,8 @@ export type IVTabData = {
   resultMediaType: AnalysisMediaType;
   displayFormat: PromptFormat;
   copyLabel: string;
+  styleCopyLabel: string;
+  contentCopyLabel: string;
   uploadError: string | null;
   isExpanded: boolean;
   analysisState: AnalysisState;
@@ -80,6 +82,8 @@ export function createInitialIVTabData(targetModel: TargetModelId = DEFAULT_TARG
     resultMediaType: "image",
     displayFormat: "json",
     copyLabel: "复制",
+    styleCopyLabel: "复制",
+    contentCopyLabel: "复制",
     uploadError: null,
     isExpanded: false,
     analysisState: { phase: "idle", statusText: "结果将在此呈现", targetModel, tabId: null, updatedAt: Date.now() } as AnalysisState,

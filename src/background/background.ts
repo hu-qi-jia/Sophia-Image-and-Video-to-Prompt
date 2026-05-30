@@ -17,6 +17,7 @@ import {
   saveGlobalAnalysisState,
   setGlobalDrawerOpen,
 } from "../lib/storage";
+import { hasValidApiKey } from "../lib/model-utils";
 import {
   DEFAULT_TARGET_MODEL,
   type AnalysisPhase,
@@ -144,11 +145,7 @@ async function startWebImageAnalysis({
   }
 
   const activeModel = getActiveModel(settings);
-  const hasConfig =
-    activeModel !== null &&
-    activeModel.apiKey.trim().length > 0 &&
-    activeModel.modelName.trim().length > 0 &&
-    (activeModel.providerType === "gemini" || activeModel.baseUrl.trim().length > 0);
+  const hasConfig = hasValidApiKey(activeModel);
 
   if (!hasConfig) {
     const state = await setState(
@@ -376,6 +373,22 @@ chrome.runtime.onMessage.addListener(
         sendResponse({ mode, drawerOpen });
       })();
       return true;
+    }
+
+    if (message.type === "SOPHIA_SET_SIZE_MODE" && message.sizeMode) {
+      void chrome.tabs.query({}).then((tabs) => {
+        for (const tab of tabs) {
+          if (tab.id) {
+            chrome.tabs
+              .sendMessage(tab.id, {
+                type: "SOPHIA_SET_SIZE_MODE",
+                sizeMode: message.sizeMode,
+              })
+              .catch(() => {});
+          }
+        }
+      });
+      return false;
     }
 
     return false;

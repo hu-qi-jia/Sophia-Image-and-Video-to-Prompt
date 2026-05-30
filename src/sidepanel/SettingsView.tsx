@@ -1,11 +1,12 @@
 import { useState, useRef, useCallback, useEffect } from "react";
-import { type ModelProvider, type ProviderType, type StoredSettings, type PanelMode, PROVIDER_TYPES } from "../lib/types";
+import { type ModelProvider, type ProviderType, type StoredSettings, type PanelMode, type PanelSizeMode, PROVIDER_TYPES } from "../lib/types";
 import { getActiveModel } from "../lib/storage";
 import { BackIcon } from "./icons";
 import { useClickOutside } from "./useClickOutside";
 
 interface SettingsViewProps {
   settings: StoredSettings;
+  panelSizeMode?: PanelSizeMode;
   onBack: () => void;
   onSelectModel: (modelId: string) => void;
   onAddModel: (model: ModelProvider) => void;
@@ -16,6 +17,7 @@ interface SettingsViewProps {
 
 export function SettingsView({
   settings,
+  panelSizeMode = "standard",
   onBack,
   onSelectModel,
   onAddModel,
@@ -24,19 +26,10 @@ export function SettingsView({
   onPanelModeChange,
 }: SettingsViewProps) {
   const activeModel = getActiveModel(settings);
+  const isCompact = panelSizeMode === "compact";
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [dropdownPos, setDropdownPos] = useState({ top: 0, right: 0 });
   const dropdownRef = useClickOutside(dropdownOpen, () => setDropdownOpen(false));
-  const triggerRef = useRef<HTMLButtonElement>(null);
-
-  const toggleDropdown = useCallback(() => {
-    if (!dropdownOpen && triggerRef.current) {
-      const rect = triggerRef.current.getBoundingClientRect();
-      setDropdownPos({ top: rect.bottom + 6, right: window.innerWidth - rect.right });
-    }
-    setDropdownOpen((v) => !v);
-  }, [dropdownOpen]);
 
   const [addFormProvider, setAddFormProvider] = useState<ProviderType | null>(null);
   const [addFormModel, setAddFormModel] = useState("");
@@ -157,14 +150,28 @@ export function SettingsView({
           <h2 className="subview-title">设置</h2>
         </div>
       </div>
-      <section className="settings-stack">
+      <section className={`settings-stack${isCompact ? " settings-stack--compact" : " settings-stack--standard"}`}>
         <article className="sophia-card settings-hero-card">
           <div className="settings-hero-top" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <h3 className="settings-hero-title">模型配置</h3>
             <div className={`add-model-dropdown${dropdownOpen ? " open" : ""}`} ref={dropdownRef}>
-              <button className="add-model-trigger-icon" ref={triggerRef} onClick={toggleDropdown}>
+              <button className="add-model-trigger-icon" onClick={() => setDropdownOpen((v) => !v)}>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
               </button>
+              {dropdownOpen ? (
+                <div className="add-model-menu" onMouseDown={(e) => e.stopPropagation()}>
+                  {PROVIDER_TYPES.map((pt) => (
+                    <button key={pt.id} className="add-model-menu-item" onClick={() => { openAddForm(pt.id); setDropdownOpen(false); }}>
+                      <div>
+                        <div className="add-model-menu-item-label">{pt.label}</div>
+                        <div className="add-model-menu-item-desc">
+                          {pt.id === "openai" ? "支持任意兼容 OpenAI 接口的模型" : "Google Gemini 原生接口"}
+                        </div>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              ) : null}
             </div>
           </div>
           <div className="settings-hero-divider" />
@@ -295,6 +302,7 @@ export function SettingsView({
             <div className="model-empty">尚未配置模型，点击 + 添加开始配置</div>
           )}
         </article>
+        <div className="settings-right-panel">
         <article className="sophia-card settings-panel-mode-card">
           <div className="settings-hero-top">
             <h3 className="settings-hero-title">面板模式</h3>
@@ -335,21 +343,8 @@ export function SettingsView({
             </div>
           </div>
         </article>
-      </section>
-      {dropdownOpen ? (
-        <div className="add-model-menu add-model-menu--fixed" style={{ position: "fixed", top: dropdownPos.top, right: dropdownPos.right }} onMouseDown={(e) => e.stopPropagation()}>
-          {PROVIDER_TYPES.map((pt) => (
-            <button key={pt.id} className="add-model-menu-item" onClick={() => { openAddForm(pt.id); setDropdownOpen(false); }}>
-              <div>
-                <div className="add-model-menu-item-label">{pt.label}</div>
-                <div className="add-model-menu-item-desc">
-                  {pt.id === "openai" ? "支持任意兼容 OpenAI 接口的模型" : "Google Gemini 原生接口"}
-                </div>
-              </div>
-            </button>
-          ))}
         </div>
-      ) : null}
+      </section>
     </section>
   );
 }
