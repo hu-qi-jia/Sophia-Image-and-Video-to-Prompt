@@ -441,21 +441,33 @@ function inject(): void {
   // Mark as initialized to prevent duplicate initialization
   isInitialized = false;
 
+  // Safety timeout: if initialization hangs, force fallback render
+  const initTimeout = setTimeout(() => {
+    if (!isInitialized) {
+      console.warn("[Sophia] Initialization timed out — forcing fallback render");
+      ensureElements();
+      isInitialized = true;
+      render();
+    }
+  }, 3000);
+
   // Unified initialization - wait for all async operations
   initializeState().then(({ sizeMode: initSizeMode, isOpen: initOpen }) => {
+    clearTimeout(initTimeout);
     // Apply the resolved state atomically
     sizeMode = initSizeMode;
     isOpen = initOpen;
-    
+
     // Create DOM elements
     ensureElements();
-    
+
     // Mark as initialized
     isInitialized = true;
-    
+
     // Initial render with final state
     render();
   }).catch((err) => {
+    clearTimeout(initTimeout);
     console.error("[Sophia] Initialization failed:", err);
     // Fallback: render with defaults
     ensureElements();
@@ -463,25 +475,32 @@ function inject(): void {
     render();
   });
 
-  // Message listener for runtime updates (after initial render)
+  // Message listener for runtime updates
+  // Gated behind isInitialized to prevent race conditions during page load
   chrome.runtime.onMessage.addListener((msg: { type: string; open?: boolean; sizeMode?: PanelSizeMode }) => {
+    // Ignore messages until initialization is complete
+    if (!isInitialized) return;
+
     // Handle toggle
-    if (msg.type === "VIDEO2PROMPT_TOGGLE_DRAWER") { 
-      isOpen = !isOpen; 
-      render(); 
+    if (msg.type === "VIDEO2PROMPT_TOGGLE_DRAWER") {
+      isOpen = !isOpen;
+      render();
     }
-    
+
     // Handle global drawer state change
-    if (msg.type === "VIDEO2PROMPT_SET_GLOBAL_DRAWER") { 
-      isOpen = msg.open ?? false; 
-      render(); 
+    if (msg.type === "VIDEO2PROMPT_SET_GLOBAL_DRAWER") {
+      isOpen = msg.open ?? false;
+      render();
     }
-    
+
     // Handle size mode change
     if (msg.type === "SOPHIA_SET_SIZE_MODE" && msg.sizeMode) {
       applySizeMode(msg.sizeMode);
-      if (msg.sizeMode !== "collapsed") {
-        isOpen = true;
+      // Only call render() for collapsed mode (panel → floating button transition).
+      // For standard/compact mode changes while the panel is already open,
+      // the Preact app handles its own re-render. Calling render() here would
+      // cause redundant DOM manipulation that can blank the page.
+      if (msg.sizeMode === "collapsed") {
         render();
       }
     }

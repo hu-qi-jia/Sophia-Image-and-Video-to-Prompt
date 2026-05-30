@@ -1,7 +1,7 @@
 import variablesCss from "../styles/variables.css";
 
 const STANDARD_W = 680;
-const STANDARD_H = 540;
+const STANDARD_H = 580;
 const COMPACT_W = 370;
 const COMPACT_H = 640;
 const FLOATING_SIZE = 52;
