@@ -52,6 +52,8 @@ export function ImageVideoPage({
   onCopyStyle,
   onCopyContent,
   onCopyAll,
+  styleCopyLabel,
+  contentCopyLabel,
   panelSizeMode,
 }: {
   mode: "image" | "video";

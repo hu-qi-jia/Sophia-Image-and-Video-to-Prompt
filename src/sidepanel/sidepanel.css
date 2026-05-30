@@ -1402,12 +1402,12 @@
   max-height: 70px;
 }
 .iv-split-layout--compact .upload-form-card .upload-empty {
-  flex-direction: row;
-  gap: 12px;
+  flex-direction: column;
+  gap: 6px;
 }
 .iv-split-layout--compact .upload-form-card .upload-icon-ring img {
-  width: 32px;
-  height: 32px;
+  width: 48px;
+  height: 48px;
 }
 .iv-split-layout--compact .upload-form-card .upload-title {
   font-size: var(--text-xs);
@@ -1415,6 +1415,8 @@
 .iv-split-layout--compact .frame-sampling-row {
   flex-wrap: wrap;
 }
+
+.sophia-shell { flex: 1; min-height: 0; display: flex; flex-direction: column; }
 
 /* Compact mode: single-column history masonry */
 .sophia-shell--compact .history-masonry {
@@ -1635,7 +1637,7 @@
   transition: all 0.35s var(--ease-out);
 }
 .upload-form-card .upload-icon-ring img {
-  width: 56px; height: 56px;
+  width: 72px; height: 72px;
   object-fit: contain; opacity: 0.6;
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
   transition: all 0.35s var(--ease-out);

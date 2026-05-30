@@ -105,108 +105,110 @@ export function App() {
     }
   }, [state.activeTab, state.subView]);
 
+  const isMain = state.subView === "main";
+  const isHistory = state.subView === "history";
+  const isSettings = state.subView === "settings";
+
   return (
     <main className={`sophia-shell ${isCompact ? "sophia-shell--compact" : "sophia-shell--standard"}`}>
       <input ref={refs.imageFileRef} className="hidden-file-input" type="file" accept={IMAGE_ACCEPT} onChange={(e) => void actions.handleLocalUpload(e, "image")} />
       <input ref={refs.videoFileRef} className="hidden-file-input" type="file" accept={VIDEO_ACCEPT} onChange={(e) => void actions.handleLocalUpload(e, "video")} />
 
-      {state.subView === "main" ? (
-        <>
-          <div className="page-content">
-            {state.activeTab === "image" ? (
-              <ImageVideoPage
-                mode="image"
-                tabData={state.ivTabData.image}
-                isAnalyzing={state.isAnalyzing}
-                canAnalyze={state.canAnalyze}
-                hasApiKey={state.hasApiKey}
-                displayResultText={state.displayResultText}
-                showCopy={state.showCopy}
-                currentMediaPreview={state.currentMediaPreview}
-                currentMediaAspectRatio={state.currentMediaAspectRatio}
-                panelSizeMode={panelSizeMode}
-                onUploadClick={actions.handleUploadClick}
-                onAnalyze={actions.handleAnalyze}
-                onClear={actions.handleClear}
-                onAbort={actions.handleAbort}
-                onCopy={actions.handleCopy}
-                onEditResult={(val) => actions.updateIVTab("image", { editedResultText: val })}
-                onToggleExpanded={() => actions.updateIVTab("image", { isExpanded: !state.ivTabData.image.isExpanded })}
-                onFileDrop={(file) => actions.handleFileDrop(file, "image")}
-                displayStyleText={state.displayStyleText}
-                displayContentText={state.displayContentText}
-                showStyleCopy={state.showStyleCopy}
-                showContentCopy={state.showContentCopy}
-                styleCopyLabel={state.styleCopyLabel}
-                contentCopyLabel={state.contentCopyLabel}
-                onEditStyle={(val) => actions.updateIVTab("image", { editedStyleText: val })}
-                onEditContent={(val) => actions.updateIVTab("image", { editedContentText: val })}
-                onCopyStyle={actions.handleCopyStyle}
-                onCopyContent={actions.handleCopyContent}
-                onCopyAll={actions.handleCopyAll}
-              />
-            ) : null}
+      {/* ── Main content (tabs) — always mounted, hidden when subView changes ── */}
+      <div className="page-content" style={{ display: isMain ? "flex" : "none" }}>
+        <div style={{ display: state.activeTab === "image" ? "contents" : "none" }}>
+          <ImageVideoPage
+            mode="image"
+            tabData={state.ivTabData.image}
+            isAnalyzing={state.isAnalyzing}
+            canAnalyze={state.canAnalyze}
+            hasApiKey={state.hasApiKey}
+            displayResultText={state.displayResultText}
+            showCopy={state.showCopy}
+            currentMediaPreview={state.currentMediaPreview}
+            currentMediaAspectRatio={state.currentMediaAspectRatio}
+            panelSizeMode={panelSizeMode}
+            onUploadClick={actions.handleUploadClick}
+            onAnalyze={actions.handleAnalyze}
+            onClear={actions.handleClear}
+            onAbort={actions.handleAbort}
+            onCopy={actions.handleCopy}
+            onEditResult={(val) => actions.updateIVTab("image", { editedResultText: val })}
+            onToggleExpanded={() => actions.updateIVTab("image", { isExpanded: !state.ivTabData.image.isExpanded })}
+            onFileDrop={(file) => actions.handleFileDrop(file, "image")}
+            displayStyleText={state.displayStyleText}
+            displayContentText={state.displayContentText}
+            showStyleCopy={state.showStyleCopy}
+            showContentCopy={state.showContentCopy}
+            styleCopyLabel={state.styleCopyLabel}
+            contentCopyLabel={state.contentCopyLabel}
+            onEditStyle={(val) => actions.updateIVTab("image", { editedStyleText: val })}
+            onEditContent={(val) => actions.updateIVTab("image", { editedContentText: val })}
+            onCopyStyle={actions.handleCopyStyle}
+            onCopyContent={actions.handleCopyContent}
+            onCopyAll={actions.handleCopyAll}
+          />
+        </div>
 
-            {state.activeTab === "video" ? (
-              <ImageVideoPage
-                mode="video"
-                tabData={state.ivTabData.video}
-                isAnalyzing={state.isAnalyzing}
-                canAnalyze={state.canAnalyze}
-                hasApiKey={state.hasApiKey}
-                displayResultText={state.displayResultText}
-                showCopy={state.showCopy}
-                currentMediaPreview={state.currentMediaPreview}
-                currentMediaAspectRatio={state.currentMediaAspectRatio}
-                frameSamplingMode={state.settings.frameSamplingMode}
-                panelSizeMode={panelSizeMode}
-                onUploadClick={actions.handleUploadClick}
-                onAnalyze={actions.handleAnalyze}
-                onClear={actions.handleClear}
-                onAbort={actions.handleAbort}
-                onCopy={actions.handleCopy}
-                onEditResult={(val) => actions.updateIVTab("video", { editedResultText: val })}
-                onToggleExpanded={() => actions.updateIVTab("video", { isExpanded: !state.ivTabData.video.isExpanded })}
-                onFrameSamplingModeChange={actions.handleFrameSamplingModeChange}
-                onFileDrop={(file) => actions.handleFileDrop(file, "video")}
-                displayStyleText={state.displayStyleText}
-                displayContentText={state.displayContentText}
-                showStyleCopy={state.showStyleCopy}
-                showContentCopy={state.showContentCopy}
-                styleCopyLabel={state.styleCopyLabel}
-                contentCopyLabel={state.contentCopyLabel}
-                onEditStyle={(val) => actions.updateIVTab("video", { editedStyleText: val })}
-                onEditContent={(val) => actions.updateIVTab("video", { editedContentText: val })}
-                onCopyStyle={actions.handleCopyStyle}
-                onCopyContent={actions.handleCopyContent}
-                onCopyAll={actions.handleCopyAll}
-              />
-            ) : null}
+        <div style={{ display: state.activeTab === "video" ? "contents" : "none" }}>
+          <ImageVideoPage
+            mode="video"
+            tabData={state.ivTabData.video}
+            isAnalyzing={state.isAnalyzing}
+            canAnalyze={state.canAnalyze}
+            hasApiKey={state.hasApiKey}
+            displayResultText={state.displayResultText}
+            showCopy={state.showCopy}
+            currentMediaPreview={state.currentMediaPreview}
+            currentMediaAspectRatio={state.currentMediaAspectRatio}
+            frameSamplingMode={state.settings.frameSamplingMode}
+            panelSizeMode={panelSizeMode}
+            onUploadClick={actions.handleUploadClick}
+            onAnalyze={actions.handleAnalyze}
+            onClear={actions.handleClear}
+            onAbort={actions.handleAbort}
+            onCopy={actions.handleCopy}
+            onEditResult={(val) => actions.updateIVTab("video", { editedResultText: val })}
+            onToggleExpanded={() => actions.updateIVTab("video", { isExpanded: !state.ivTabData.video.isExpanded })}
+            onFrameSamplingModeChange={actions.handleFrameSamplingModeChange}
+            onFileDrop={(file) => actions.handleFileDrop(file, "video")}
+            displayStyleText={state.displayStyleText}
+            displayContentText={state.displayContentText}
+            showStyleCopy={state.showStyleCopy}
+            showContentCopy={state.showContentCopy}
+            styleCopyLabel={state.styleCopyLabel}
+            contentCopyLabel={state.contentCopyLabel}
+            onEditStyle={(val) => actions.updateIVTab("video", { editedStyleText: val })}
+            onEditContent={(val) => actions.updateIVTab("video", { editedContentText: val })}
+            onCopyStyle={actions.handleCopyStyle}
+            onCopyContent={actions.handleCopyContent}
+            onCopyAll={actions.handleCopyAll}
+          />
+        </div>
 
-            {state.activeTab === "enhancer" ? (
-              <EnhancerPage
-                enhancerMode={state.enhancerMode}
-                enhancerInput={state.enhancerInput}
-                isEnhancingPrompt={state.isEnhancingPrompt}
-                canEnhancePrompt={state.canEnhancePrompt}
-                hasApiKey={state.hasApiKey}
-                enhancerResultMode={state.enhancerResultMode}
-                enhancerResultText={state.enhancerResultText}
-                enhancerCopyLabel={state.enhancerCopyLabel}
-                showEnhancerCopy={state.showEnhancerCopy}
-                onSetEnhancerMode={(mode) => { actions.setEnhancerMode(mode); actions.resetEnhancerResult(); }}
-                onSetEnhancerInput={actions.setEnhancerInput}
-                onEnhance={actions.handleEnhancePrompt}
-                onAbortEnhancer={actions.handleAbortEnhancer}
-                onCopyEnhancer={() => void actions.handleCopyEnhancerResult()}
-                panelSizeMode={panelSizeMode}
-              />
-            ) : null}
-          </div>
-        </>
-      ) : null}
+        <div style={{ display: state.activeTab === "enhancer" ? "contents" : "none" }}>
+          <EnhancerPage
+            enhancerMode={state.enhancerMode}
+            enhancerInput={state.enhancerInput}
+            isEnhancingPrompt={state.isEnhancingPrompt}
+            canEnhancePrompt={state.canEnhancePrompt}
+            hasApiKey={state.hasApiKey}
+            enhancerResultMode={state.enhancerResultMode}
+            enhancerResultText={state.enhancerResultText}
+            enhancerCopyLabel={state.enhancerCopyLabel}
+            showEnhancerCopy={state.showEnhancerCopy}
+            onSetEnhancerMode={(mode) => { actions.setEnhancerMode(mode); actions.resetEnhancerResult(); }}
+            onSetEnhancerInput={actions.setEnhancerInput}
+            onEnhance={actions.handleEnhancePrompt}
+            onAbortEnhancer={actions.handleAbortEnhancer}
+            onCopyEnhancer={() => void actions.handleCopyEnhancerResult()}
+            panelSizeMode={panelSizeMode}
+          />
+        </div>
+      </div>
 
-      {state.subView === "history" ? (
+      {/* ── History view — always mounted, hidden when not active ── */}
+      <div style={{ display: isHistory ? "contents" : "none" }}>
         <HistoryView
           historyItems={state.historyItems}
           copiedHistoryId={state.copiedHistoryId}
@@ -221,9 +223,10 @@ export function App() {
           onEditingTextChange={actions.setEditingText}
           getHistoryTypeLabel={actions.getHistoryTypeLabel}
         />
-      ) : null}
+      </div>
 
-      {state.subView === "settings" ? (
+      {/* ── Settings view — always mounted, hidden when not active ── */}
+      <div style={{ display: isSettings ? "contents" : "none" }}>
         <SettingsView
           settings={state.settings}
           panelSizeMode={panelSizeMode}
@@ -234,7 +237,7 @@ export function App() {
           onDeleteModel={(modelId) => void actions.handleDeleteModel(modelId)}
           onPanelModeChange={(mode) => void actions.handlePanelModeChange(mode)}
         />
-      ) : null}
+      </div>
 
       {state.statusMessage ? <div className="toast-modern">{state.statusMessage}</div> : null}
     </main>

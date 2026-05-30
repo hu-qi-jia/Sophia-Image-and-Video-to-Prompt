@@ -332,7 +332,7 @@ function render(): void {
         setTimeout(() => {
           panelEl!.classList.remove("_ios-open");
           panelEl!.classList.add("_visible");
-        }, 550);
+        }, 300);
       });
     } else {
       requestAnimationFrame(() => { panelEl!.classList.add("_visible"); });
@@ -477,7 +477,7 @@ function inject(): void {
 
   // Message listener for runtime updates
   // Gated behind isInitialized to prevent race conditions during page load
-  chrome.runtime.onMessage.addListener((msg: { type: string; open?: boolean; sizeMode?: PanelSizeMode }) => {
+  chrome.runtime.onMessage.addListener((msg: { type: string; open?: boolean; sizeMode?: PanelSizeMode; state?: unknown }) => {
     // Ignore messages until initialization is complete
     if (!isInitialized) return;
 
@@ -503,6 +503,11 @@ function inject(): void {
       if (msg.sizeMode === "collapsed") {
         render();
       }
+    }
+
+    // Forward analysis state updates to extension pages (sidepanel)
+    if (msg.type === "VIDEO2PROMPT_ANALYSIS_STATE_UPDATED" && msg.state) {
+      chrome.runtime.sendMessage(msg).catch(() => {});
     }
   });
 }

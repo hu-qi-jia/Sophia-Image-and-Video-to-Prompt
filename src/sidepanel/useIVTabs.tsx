@@ -105,6 +105,7 @@ export function useIVTabs(
         resultMediaType: state.mediaType ?? "image",
         displayFormat: "json",
         copyLabel: "复制",
+        isAnalyzingLocal: false,
       });
       void persistHistoryRecord({
         sourceType: state.sourceType ?? "web",
@@ -123,8 +124,8 @@ export function useIVTabs(
     }
 
     if (state.phase === "error") {
-      if (shouldFocusSettings) { resetIVTabResult(tab); return; }
-      updateIVTab(tab, { resultMode: "error", resultText: state.errorMessage ?? state.statusText });
+      if (shouldFocusSettings) { resetIVTabResult(tab); updateIVTab(tab, { isAnalyzingLocal: false }); return; }
+      updateIVTab(tab, { resultMode: "error", resultText: state.errorMessage ?? state.statusText, isAnalyzingLocal: false });
       return;
     }
 
@@ -155,23 +156,29 @@ export function useIVTabs(
     const tab = currentIVTab;
     const mediaSrc = ivTabData[tab].mediaSource;
     resetIVTabResult(tab);
-    updateIVTab(tab, { resultMode: "loading", resultText: "正在识别中..." });
+    updateIVTab(tab, { resultMode: "loading", resultText: "正在识别中...", isAnalyzingLocal: true, streamText: "" });
 
     const controller = new AbortController();
     abortControllerRefs.current[tab] = controller;
 
     if (mediaSrc.kind === "web-image") {
-      const response = await safeRuntimeSendMessage<StartAnalysisResponse>({
-        type: "VIDEO2PROMPT_START_ANALYSIS", tabId: activeTabId ?? undefined,
-        imageUrl: mediaSrc.imageInfo?.src, triggeredFrom: "sidePanel",
-      } satisfies RuntimeMessage);
-      if (response?.state) syncFromBackgroundState(response.state);
-      abortControllerRefs.current[tab] = null;
+      try {
+        const response = await safeRuntimeSendMessage<StartAnalysisResponse>({
+          type: "VIDEO2PROMPT_START_ANALYSIS", tabId: activeTabId ?? undefined,
+          imageUrl: mediaSrc.imageInfo?.src, triggeredFrom: "sidePanel",
+        } satisfies RuntimeMessage);
+        if (response?.state) syncFromBackgroundState(response.state);
+      } catch (error) {
+        if (error instanceof DOMException && error.name === "AbortError") { resetIVTabResult(tab); updateIVTab(tab, { isAnalyzingLocal: false }); return; }
+        const message = error instanceof Error ? error.message : "无法分析此图片，请重试。";
+        updateIVTab(tab, { analysisState: createAnalysisState(activeTabId, "error", message, settings.targetModel, { errorMessage: message }), resultMode: "error", resultText: message, isAnalyzingLocal: false });
+      } finally {
+        abortControllerRefs.current[tab] = null;
+      }
       return;
     }
 
     if (mediaSrc.kind === "local-video") {
-      updateIVTab(tab, { isAnalyzingLocal: true });
       try {
         const video = await createVideoElement(mediaSrc.objectUrl);
         const videoInfo = buildLocalVideoInfo(video, mediaSrc.fileName);
@@ -206,7 +213,7 @@ export function useIVTabs(
     }
 
     if (mediaSrc.kind === "local-image") {
-      updateIVTab(tab, { isAnalyzingLocal: true, streamText: "" });
+      updateIVTab(tab, { streamText: "" });
       try {
         const [image, imageDataUrl] = await Promise.all([createImageElement(mediaSrc.objectUrl), readFileAsDataUrl(mediaSrc.file)]);
         const imageInfo = buildLocalImageInfo(image, mediaSrc.fileName);

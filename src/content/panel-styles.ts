@@ -284,12 +284,12 @@ const PANEL_CSS = `
 }
 ._floating-btn:hover img{opacity:1}
 
-/* ── iOS-style panel reveal ── */
+/* ── Panel reveal ── */
 ._panel._ios-open{
-  animation:_iosReveal .55s var(--ease-spring) forwards;
+  animation:_panelReveal .3s var(--ease-out) forwards;
 }
-@keyframes _iosReveal{
-  from{transform:scale(.1);opacity:.3}
+@keyframes _panelReveal{
+  from{transform:scale(.7);opacity:0}
   to{transform:scale(1);opacity:1}
 }
 

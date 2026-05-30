@@ -57,6 +57,14 @@ async function publishState(state: AnalysisState): Promise<void> {
         .catch(() => {});
     }
   }
+
+  // Also broadcast to extension pages (sidepanel) via runtime
+  chrome.runtime
+    .sendMessage({
+      type: "VIDEO2PROMPT_ANALYSIS_STATE_UPDATED",
+      state: serializableState,
+    } satisfies RuntimeMessage)
+    .catch(() => {});
 }
 
 async function setState(
@@ -318,17 +326,16 @@ chrome.runtime.onMessage.addListener(
     if (message.type === "VIDEO2PROMPT_GET_PANEL_CONTEXT") {
       void (async () => {
         const mode = await getPanelMode();
-        const activeTab = await getActiveTab();
-        const activeTabId = activeTab?.id ?? null;
+        const senderTabId = sender.tab?.id ?? null;
 
         let state: AnalysisState | null = null;
         if (mode === "global") {
           state = await getGlobalAnalysisState();
-        } else if (activeTabId) {
-          state = await getAnalysisState(activeTabId);
+        } else if (senderTabId) {
+          state = await getAnalysisState(senderTabId);
         }
 
-        sendResponse({ activeTabId, state });
+        sendResponse({ activeTabId: senderTabId, state });
       })();
       return true;
     }
