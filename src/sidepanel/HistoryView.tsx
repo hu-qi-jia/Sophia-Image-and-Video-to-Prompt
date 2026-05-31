@@ -1,3 +1,4 @@
+import { memo } from "react";
 import type { PromptHistoryItem } from "../lib/types";
 import { formatHistoryTime } from "./types";
 import {
@@ -28,7 +29,7 @@ interface HistoryViewProps {
   getHistoryTypeLabel: (item: PromptHistoryItem) => string;
 }
 
-export function HistoryView({
+export const HistoryView = memo(function HistoryView({
   historyItems,
   copiedHistoryId,
   editingCardId,
@@ -71,8 +72,14 @@ export function HistoryView({
               const typeLabel = getHistoryTypeLabel(item);
               const ar = item.aspectRatio;
               const isPortrait = ar != null && ar < 0.85;
-              const isLandscape = ar != null && ar > 1.15;
-              const cardOrientation = isPortrait ? " history-card--portrait" : isLandscape ? " history-card--landscape" : "";
+              const isLandscape = ar != null && ar > 1.4;
+              const cardOrientation = isPortrait
+                ? " history-card--portrait"
+                : isLandscape
+                  ? " history-card--landscape"
+                  : ar != null
+                    ? " history-card--square"
+                    : "";
 
               return (
                 <article className={`history-card${cardOrientation}${isEditing ? " is-editing" : ""}`} key={item.id}>
@@ -188,4 +195,4 @@ export function HistoryView({
       </section>
     </section>
   );
-}
+});

@@ -138,9 +138,7 @@ export function App() {
             onFileDrop={(file) => actions.handleFileDrop(file, "image")}
             displayStyleText={state.displayStyleText}
             displayContentText={state.displayContentText}
-            showStyleCopy={state.showStyleCopy}
-            showContentCopy={state.showContentCopy}
-            styleCopyLabel={state.styleCopyLabel}
+styleCopyLabel={state.styleCopyLabel}
             contentCopyLabel={state.contentCopyLabel}
             onEditStyle={(val) => actions.updateIVTab("image", { editedStyleText: val })}
             onEditContent={(val) => actions.updateIVTab("image", { editedContentText: val })}
@@ -174,9 +172,7 @@ export function App() {
             onFileDrop={(file) => actions.handleFileDrop(file, "video")}
             displayStyleText={state.displayStyleText}
             displayContentText={state.displayContentText}
-            showStyleCopy={state.showStyleCopy}
-            showContentCopy={state.showContentCopy}
-            styleCopyLabel={state.styleCopyLabel}
+styleCopyLabel={state.styleCopyLabel}
             contentCopyLabel={state.contentCopyLabel}
             onEditStyle={(val) => actions.updateIVTab("video", { editedStyleText: val })}
             onEditContent={(val) => actions.updateIVTab("video", { editedContentText: val })}

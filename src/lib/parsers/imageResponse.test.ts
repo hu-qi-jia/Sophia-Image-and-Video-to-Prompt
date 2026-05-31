@@ -60,26 +60,68 @@ function makeLegacyResponse(
   };
 }
 
-const SAMPLE_NL_RESPONSE = `[FRAME]
-Low angle, approximately 15° upward tilt. Telephoto cinema lens with strong spatial compression. Widescreen 2.39:1 aspect ratio. Shallow depth of field.
+const SAMPLE_NL_RESPONSE = `[ARCHETYPE]
+photograph
 
-[SUBJECT 1: sandworm]
-Core identity: ancient ecological-scale giant sandworm. Appearance: circular mouth opened wide facing camera, occupying roughly 80% of upper frame. Material: not biological skin—resembles cracked desert rock, weathered mineral crust, extremely matte and rough. Color: low-saturation ochre, deep sand brown.
+[AESTHETIC HOOK]
+This is a dramatic cinematic still with strong directional lighting and deep shadows. The visual language is epic science fiction — monumental scale contrast between the tiny human figures and the colossal sandworm. Color palette is desaturated desert tones: warm sand beige, gray ochre, deep earth brown, against pure black void. The medium is digital cinematography with shallow depth of field and telephoto compression.
 
-[SUBJECT 2: Fremen warriors]
+[VISUAL PRIORITY]
+1. massive scale contrast between sandworm mouth and human figures, 2. strong directional backlight from upper-right, 3. extreme shallow depth of field isolating sandworm mouth, 4. telephoto spatial compression flattening distance, 5. desaturated desert color palette, 6. dense sand particle atmosphere scattering light, 7. back-facing figures creating mystery, 8. circular mouth geometry dominating upper frame, 9. widescreen 2.39:1 aspect ratio, 10. dissolved shadow edges from sand diffusion
+
+[LIGHTING]
+Main light: natural daylight from upper-right of frame, strong directional side-backlight. Light quality: hard sunlight scattered through ultra-dense sand particles, creating directional soft-hard light with dissolved shadow edges. Contrast ratio: high — bright sandworm mouth interior vs near-black shadow areas. No fill light.
+
+[SHADOW GEOMETRY]
+Deep shadows inside sandworm mouth cavity, feathered edges due to sand particle diffusion. Contact shadows on warrior figures from backlight angle.
+
+[LOOK PIPELINE]
+Color palette: sand beige, gray ochre, deep earth brown, pure black. Extremely low saturation, approaching faded film photography. Tone curve: lifted blacks with warm tint in shadow areas, soft highlight rolloff. No visible split toning.
+
+[TONAL DISTRIBUTION]
+Low-key overall. Shadow occupancy ~60%, midtone ~30%, highlight ~10%.
+
+[OPTICAL DEPTH]
+Telephoto cinema lens with strong spatial compression. Shallow depth of field — sandworm mouth in sharp focus, warrior figures at bottom slightly soft. Bokeh character: smooth and creamy.
+
+[STYLE & TEXTURE]
+Style reference: epic sci-fi cinematography. Capture device: digital cinema camera. No visible beauty processing.
+
+[FRAME]
+Low angle, approximately 15° upward tilt. Widescreen 2.39:1 aspect ratio. Shot type: wide establishing.
+
+[COMPOSITION]
+Focal hierarchy: primary anchor at upper-center 30% — the illuminated sandworm mouth dominates by scale and brightness. Secondary anchor at lower-center 10% — five small warrior figures. Eye path: drawn immediately to the bright circular mouth, then down to the tiny figures. Negative space: surrounding black void ~50%.
+
+[ATMOSPHERE]
+Emotional tone: awe, dread, insignificance. Viewer as tiny observer confronting overwhelming scale.
+
+[PROMPT TAGS]
+Medium: photograph, cinematic still, photorealistic, concept art. Quality: masterpiece, highly detailed, sharp focus.
+
+[GENERATION CUES]
+telephoto compression, shallow depth of field, strong backlight, desaturated desert tones, sand particle atmosphere, widescreen aspect ratio, massive scale contrast
+
+[NEGATIVE PROMPT]
+watermark, signature, text, logo, worst quality, low quality, jpeg artifacts, plastic skin, CGI appearance
+
+[SUBJECT 1]
+Core identity: ancient ecological-scale giant sandworm. Appearance: circular mouth opened wide facing camera, occupying roughly 80% of upper frame. Material: not biological skin — resembles cracked desert rock, weathered mineral crust, extremely matte and rough. Color: low-saturation ochre, deep sand brown.
+
+[SUBJECT 2]
 Core identity: five desert warriors. Appearance: completely back-facing, positioned at very bottom of frame. Material: gray-white sealed weather suits, enclosed helmets. Action: holding long swords pointed at sandworm in defensive stance.
 
 [SPATIAL LAYERS]
 Foreground: five warriors with slight blur, occupying bottom 15-20% of frame. Midground: clean air layer. Background: sandworm mouth clearly emerging from sandstorm wall.
 
-[LIGHTING]
-Main light: natural daylight from upper-right of frame, strong directional side-backlight. Light quality: hard sunlight scattered through ultra-dense sand particles, creating directional soft-hard light with dissolved shadow edges.
+[ENVIRONMENT]
+Indoor not applicable. Desert landscape implied by sand particles and rock texture. No sky visible.
 
-[COLOR]
-Overall: low color temperature warm base. Dominant: sand beige, gray ochre, deep earth brown, pure black. Extremely low saturation, approaching faded film photography.
+[IMPERFECTIONS & PHYSICS]
+Grain: subtle film-like grain in shadow areas. No visible compression artifacts or physical damage.
 
 [CONSTRAINTS]
-Do not add sky or horizon where source shows none. Do not add vegetation or civilization traces. Do not complete the sandworm body beyond what is shown.`;
+Do not add sky or horizon where source shows none. Do not add vegetation or civilization traces. Do not complete the sandworm body beyond what is shown. Preserve the massive scale contrast.`;
 
 describe("parseImageResponse - natural language format", () => {
   it("解析包含【标签】的自然语言响应", () => {
@@ -92,18 +134,25 @@ describe("parseImageResponse - natural language format", () => {
   it("正确提取各模块内容", () => {
     const result = parseImageResponse(SAMPLE_NL_RESPONSE);
     expect(result.sections["FRAME"]).toContain("Low angle");
-    expect(result.sections["SUBJECT 1: sandworm"]).toContain("sandworm");
-    expect(result.sections["SUBJECT 2: Fremen warriors"]).toContain("warriors");
+    expect(result.sections["SUBJECT 1"]).toContain("sandworm");
+    expect(result.sections["SUBJECT 2"]).toContain("warriors");
     expect(result.sections["SPATIAL LAYERS"]).toContain("Foreground");
     expect(result.sections["LIGHTING"]).toContain("Main light");
-    expect(result.sections["COLOR"]).toContain("Overall");
+    expect(result.sections["LOOK PIPELINE"]).toContain("Color palette");
     expect(result.sections["CONSTRAINTS"]).toContain("Do not add sky");
   });
 
-  it("提取 negativePrompt 从生成约束", () => {
+  it("提取 negativePrompt 从 NEGATIVE PROMPT 标签", () => {
     const result = parseImageResponse(SAMPLE_NL_RESPONSE);
+    expect(result.negativePrompt).toContain("watermark");
+    expect(result.negativePrompt).toContain("worst quality");
+    expect(result.negativePrompt).not.toContain("Do not add sky");
+  });
+
+  it("无 NEGATIVE PROMPT 时回退到 CONSTRAINTS", () => {
+    const withoutNeg = SAMPLE_NL_RESPONSE.replace(/\[NEGATIVE PROMPT\]\n[\s\S]*?(?=\n\[)/, "");
+    const result = parseImageResponse(withoutNeg);
     expect(result.negativePrompt).toContain("Do not add sky");
-    expect(result.negativePrompt).toContain("Do not add vegetation");
   });
 
   it("detailedPrompt 等于原始文本", () => {

@@ -235,6 +235,7 @@ export async function getPromptHistory(): Promise<PromptHistoryItem[]> {
       sourceUrl: normalized.sourceUrl,
       pageTitle: normalized.pageTitle,
       thumbnailDataUrl: normalized.thumbnailDataUrl,
+      aspectRatio: normalized.aspectRatio,
       promptText: normalized.promptText ?? "",
       videoSummary: normalized.videoSummary,
       promptResult: normalized.promptResult

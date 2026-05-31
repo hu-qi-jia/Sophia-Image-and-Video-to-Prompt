@@ -3,7 +3,6 @@ import type { FrameSamplingMode, PanelSizeMode } from "../lib/types";
 import {
   SpinnerIcon,
   SparklePlaceholder,
-  ExpandIcon,
 } from "./icons";
 import { useClickOutside } from "./useClickOutside";
 import {
@@ -45,8 +44,6 @@ export function ImageVideoPage({
   onFileDrop,
   displayStyleText,
   displayContentText,
-  showStyleCopy,
-  showContentCopy,
   onEditStyle,
   onEditContent,
   onCopyStyle,
@@ -77,8 +74,6 @@ export function ImageVideoPage({
   onFileDrop?: (file: File) => void;
   displayStyleText: string;
   displayContentText: string;
-  showStyleCopy: boolean;
-  showContentCopy: boolean;
   styleCopyLabel: string;
   contentCopyLabel: string;
   onEditStyle: (val: string) => void;
@@ -96,7 +91,7 @@ export function ImageVideoPage({
   const [samplingDropdownOpen, setSamplingDropdownOpen] = useState(false);
   const samplingDropdownRef = useClickOutside(samplingDropdownOpen, () => setSamplingDropdownOpen(false));
   const [isDragOver, setIsDragOver] = useState(false);
-  const [expandedModule, setExpandedModule] = useState<"style" | "content" | null>(null);
+  const [resultTab, setResultTab] = useState<"all" | "style" | "content">("all");
   const dropZoneRef = useRef<HTMLElement>(null);
 
   // Use native DOM events for reliable drag-and-drop (Preact synthetic
@@ -214,6 +209,17 @@ export function ImageVideoPage({
 
   const isCompact = panelSizeMode === "compact";
 
+  const handleHeaderCopy = () => {
+    if (resultTab === "all") onCopyAll();
+    else if (resultTab === "style") onCopyStyle();
+    else onCopyContent();
+  };
+
+  const headerCopyLabel =
+    resultTab === "all" ? tabData.copyAllLabel :
+    resultTab === "style" ? styleCopyLabel :
+    contentCopyLabel;
+
   return (
     <div className={`iv-split-layout${isCompact ? " iv-split-layout--compact" : " iv-split-layout--standard"}`}>
       {/* ── Left: Media Panel ── */}
@@ -313,7 +319,27 @@ export function ImageVideoPage({
         <section className={`result-card ${isExpanded ? "result-card--expanded" : ""}`}>
           <div className="result-card-head">
             <span className="result-card-title">识别结果</span>
+            {(displayStyleText || displayContentText) ? (
+              <button
+                className={`result-copy-icon-btn${headerCopyLabel === "已复制" ? " is-copied" : ""}`}
+                onClick={handleHeaderCopy}
+                title={headerCopyLabel === "已复制" ? "已复制" : "复制"}
+              >
+                {headerCopyLabel === "已复制" ? (
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                ) : (
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                )}
+              </button>
+            ) : null}
           </div>
+          {(displayStyleText || displayContentText) ? (
+            <div className="result-tab-bar">
+              <button className={`result-tab-pill${resultTab === "all" ? " result-tab-pill--active" : ""}`} onClick={() => setResultTab("all")}>全部</button>
+              <button className={`result-tab-pill${resultTab === "style" ? " result-tab-pill--active" : ""}`} onClick={() => setResultTab("style")}>风格描述</button>
+              <button className={`result-tab-pill${resultTab === "content" ? " result-tab-pill--active" : ""}`} onClick={() => setResultTab("content")}>内容描述</button>
+            </div>
+          ) : null}
           <div className={`result-card-body result-body-${tabData.resultMode}`}>
             {tabData.resultMode === "loading" ? (
               <div className="result-loading">
@@ -329,71 +355,42 @@ export function ImageVideoPage({
             {tabData.resultMode === "error" ? <div className="result-error-state"><p>{tabData.resultText}</p></div> : null}
             {tabData.resultMode === "text" && (displayStyleText || displayContentText) ? (
               <div className="result-dual-modules">
-                <div className={`result-module${expandedModule === "style" ? " result-module--expanded" : ""}${expandedModule === "content" ? " result-module--collapsed" : ""}`}>
-                  <div className="result-module-head">
-                    <span className="result-module-title">风格描述</span>
-                    <div className="result-module-actions-inline">
-                      {showStyleCopy ? (
-                        <button
-                          className={`result-module-icon-btn${styleCopyLabel === "已复制" ? " is-copied" : ""}`}
-                          onClick={onCopyStyle}
-                          title={styleCopyLabel === "已复制" ? "已复制" : "复制风格"}
-                        >
-                          {styleCopyLabel === "已复制" ? (
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                          ) : (
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                          )}
-                        </button>
-                      ) : null}
-                      <button className="result-module-icon-btn" onClick={() => setExpandedModule(expandedModule === "style" ? null : "style")} title={expandedModule === "style" ? "收起" : "展开"}>
-                        <ExpandIcon expanded={expandedModule === "style"} />
-                      </button>
-                    </div>
+                {resultTab === "all" ? (
+                  <div className="result-module">
+                    <textarea
+                      className="result-edit-area result-module-area"
+                      value={displayResultText || [displayStyleText, displayContentText].filter(Boolean).join("\n\n")}
+                      onChange={(e) => onEditResult(e.target.value)}
+                      spellCheck={false}
+                      placeholder="识别结果..."
+                    />
                   </div>
-                  <textarea
-                    className="result-edit-area result-module-area"
-                    value={displayStyleText}
-                    onChange={(e) => onEditStyle(e.target.value)}
-                    spellCheck={false}
-                    placeholder="风格/氛围/色调/灯光..."
-                  />
-                </div>
-                <div className={`result-module${expandedModule === "content" ? " result-module--expanded" : ""}${expandedModule === "style" ? " result-module--collapsed" : ""}`}>
-                  <div className="result-module-head">
-                    <span className="result-module-title">内容描述</span>
-                    <div className="result-module-actions-inline">
-                      {showContentCopy ? (
-                        <button
-                          className={`result-module-icon-btn${contentCopyLabel === "已复制" ? " is-copied" : ""}`}
-                          onClick={onCopyContent}
-                          title={contentCopyLabel === "已复制" ? "已复制" : "复制内容"}
-                        >
-                          {contentCopyLabel === "已复制" ? (
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                          ) : (
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                          )}
-                        </button>
-                      ) : null}
-                      <button className="result-module-icon-btn" onClick={() => setExpandedModule(expandedModule === "content" ? null : "content")} title={expandedModule === "content" ? "收起" : "展开"}>
-                        <ExpandIcon expanded={expandedModule === "content"} />
-                      </button>
-                    </div>
-                  </div>
-                  <textarea
-                    className="result-edit-area result-module-area"
-                    value={displayContentText}
-                    onChange={(e) => onEditContent(e.target.value)}
-                    spellCheck={false}
-                    placeholder="主体/构图/环境..."
-                  />
-                </div>
-                {(showStyleCopy || showContentCopy) ? (
-                  <div className="result-module-actions">
-                    <button className={`result-copy-all-btn${tabData.copyAllLabel === "已复制" ? " is-copied" : ""}`} onClick={onCopyAll}>{tabData.copyAllLabel}</button>
-                  </div>
-                ) : null}
+                ) : (
+                  <>
+                    {(resultTab === "style") ? (
+                      <div className="result-module">
+                        <textarea
+                          className="result-edit-area result-module-area"
+                          value={displayStyleText}
+                          onChange={(e) => onEditStyle(e.target.value)}
+                          spellCheck={false}
+                          placeholder="风格/氛围/色调/灯光..."
+                        />
+                      </div>
+                    ) : null}
+                    {(resultTab === "content") ? (
+                      <div className="result-module">
+                        <textarea
+                          className="result-edit-area result-module-area"
+                          value={displayContentText}
+                          onChange={(e) => onEditContent(e.target.value)}
+                          spellCheck={false}
+                          placeholder="主体/构图/环境..."
+                        />
+                      </div>
+                    ) : null}
+                  </>
+                )}
               </div>
             ) : tabData.resultMode === "text" ? (
             <textarea

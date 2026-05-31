@@ -36,11 +36,18 @@ const SECTION_REGEX = /(?:^|\n)\[([^\]]+)\]\s*\n?([\s\S]*?)(?=\n\[[^\]]+\]|$)/g;
 
 // Required TAGs that must be present in a valid response
 const REQUIRED_TAGS = [
+  "ARCHETYPE",
   "AESTHETIC HOOK",
-  "FRAME",
+  "VISUAL PRIORITY",
   "LIGHTING",
-  "COLOR",
+  "SHADOW GEOMETRY",
+  "LOOK PIPELINE",
+  "TONAL DISTRIBUTION",
+  "OPTICAL DEPTH",
   "STYLE & TEXTURE",
+  "FRAME",
+  "COMPOSITION",
+  "GENERATION CUES",
   "PROMPT TAGS",
   "NEGATIVE PROMPT",
   "CONSTRAINTS",
@@ -55,15 +62,21 @@ const REQUIRED_CONTENT_PREFIXES = [
 // Minimum character count for a TAG's content to be considered substantive
 const MIN_CONTENT_LENGTH = 30;
 
+// ARCHETYPE is a short label (e.g. "photograph", "illustration"), not a paragraph.
+const TAG_MIN_LENGTH: Record<string, number> = {
+  ARCHETYPE: 3,
+};
+
 function validateSections(sections: Record<string, string>): string[] {
   const warnings: string[] = [];
   const presentTags = new Set(Object.keys(sections));
 
   // Check required style TAGs
   for (const tag of REQUIRED_TAGS) {
+    const minLen = TAG_MIN_LENGTH[tag] ?? MIN_CONTENT_LENGTH;
     if (!presentTags.has(tag)) {
       warnings.push(`缺少必填模块 [${tag}]`);
-    } else if (sections[tag].length < MIN_CONTENT_LENGTH) {
+    } else if (sections[tag].length < minLen) {
       warnings.push(`[${tag}] 内容过短（${sections[tag].length} 字符）`);
     }
   }
@@ -115,14 +128,14 @@ function extractNegativePromptFromSections(sections: Record<string, string>): st
 }
 
 const STYLE_TAGS = new Set([
-  "ARCHETYPE", "AESTHETIC HOOK", "STYLE & TEXTURE", "STYLE", "ATMOSPHERE", "COLOR",
-  "LIGHTING", "FRAME", "COMPOSITION", "MATERIAL RESPONSE",
-  "ERA SIGNALS", "IMAGE PHYSICS", "OPTICAL DEPTH", "FILTER & PROCESSING",
-  "STYLE EXCLUSIONS", "VISUAL HIERARCHY", "SNAPSHOT FEEL",
-  "PROMPT TAGS", "NEGATIVE PROMPT"
+  "ARCHETYPE", "AESTHETIC HOOK", "VISUAL PRIORITY", "LIGHTING",
+  "SHADOW GEOMETRY", "LOOK PIPELINE", "TONAL DISTRIBUTION", "OPTICAL DEPTH",
+  "STYLE & TEXTURE", "FRAME", "COMPOSITION",
+  "ATMOSPHERE", "SNAPSHOT FEEL", "ERA SIGNALS",
+  "GENERATION CUES", "PROMPT TAGS", "NEGATIVE PROMPT"
 ]);
 
-const CONTENT_TAG_PREFIXES = ["SUBJECT", "POSE REFINEMENT", "CLUTTER LOGIC", "SPATIAL LAYERS", "ENVIRONMENT", "IMPERFECTIONS & PHYSICS", "IMPERFECTIONS", "CONSTRAINTS"];
+const CONTENT_TAG_PREFIXES = ["SUBJECT", "MATERIAL RESPONSE", "SPATIAL LAYERS", "ENVIRONMENT", "IMPERFECTIONS & PHYSICS", "CONSTRAINTS"];
 
 function isContentTag(tag: string): boolean {
   return CONTENT_TAG_PREFIXES.some(prefix => tag.startsWith(prefix));

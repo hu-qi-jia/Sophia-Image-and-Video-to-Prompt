@@ -1,10 +1,11 @@
 import variablesCss from "../styles/variables.css";
 
-const STANDARD_W = 680;
-const STANDARD_H = 580;
-const COMPACT_W = 370;
+const STANDARD_W = 720;
+const STANDARD_H = 640;
+const COMPACT_W = 400;
 const COMPACT_H = 640;
-const FLOATING_SIZE = 52;
+const FLOATING_W = 120;
+const FLOATING_H = 72;
 
 const PANEL_CSS = `
 :host{all:initial;display:block;position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:2147483646;pointer-events:none;font-family:"PingFang SC","Inter",-apple-system,"Microsoft YaHei",sans-serif}
@@ -80,7 +81,7 @@ const PANEL_CSS = `
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:12px 14px;
+  padding:12px 18px;
   cursor:grab;
   user-select:none;
   -webkit-user-select:none;
@@ -100,16 +101,11 @@ const PANEL_CSS = `
   pointer-events:none;
 }
 ._titlebar-center h3{
-  font-size:13px;
-  font-weight:400;
-  color:var(--text-primary);
-  letter-spacing:-.01em;
   display:flex;
   align-items:center;
-  gap:8px;
-  white-space:nowrap;
+  justify-content:center;
 }
-._titlebar-center h3 img{width:22px;height:22px;opacity:.85}
+._titlebar-center h3 img{width:56px;height:auto;opacity:.9}
 ._titlebar-left{display:flex;align-items:center;gap:4px;z-index:1;margin-top:2px}
 ._titlebar-right{display:flex;align-items:center;gap:4px;z-index:1}
 
@@ -118,7 +114,7 @@ const PANEL_CSS = `
   display:inline-flex;
   align-items:center;
   gap:20px;
-  padding:3px 10px;
+  padding:3px 5px;
   background:rgba(242,242,247,.55);
   -webkit-backdrop-filter:blur(12px) saturate(160%);
   backdrop-filter:blur(12px) saturate(160%);
@@ -129,7 +125,7 @@ const PANEL_CSS = `
   align-items:center;
   justify-content:center;
   width:34px;
-  height:34px;
+  height:33px;
   padding:0;
   border:none;
   border-radius:8px;
@@ -142,8 +138,8 @@ const PANEL_CSS = `
 ._tab-btn:focus{outline:none;box-shadow:none}
 ._tab-btn:focus:not(:focus-visible){outline:none;box-shadow:none}
 ._tab-btn img{
-  width:17px;
-  height:17px;
+  width:16px;
+  height:16px;
   object-fit:contain;
   filter:invert(60%) sepia(8%) saturate(200%) hue-rotate(180deg) brightness(85%) contrast(85%);
   transition:filter .25s ease;
@@ -173,7 +169,7 @@ const PANEL_CSS = `
 
 /* ── Action Buttons (in titlebar) ── */
 ._btn-icon{
-  width:34px;height:34px;
+  width:33.5px;height:33.5px;
   border-radius:8px;
   display:flex;align-items:center;justify-content:center;
   cursor:pointer;
@@ -234,9 +230,9 @@ const PANEL_CSS = `
 /* ── Floating Button ── */
 ._floating-btn{
   position:fixed;
-  width:${FLOATING_SIZE}px;
-  height:${FLOATING_SIZE}px;
-  border-radius:50%;
+  width:${FLOATING_W}px;
+  height:${FLOATING_H}px;
+  border-radius:20px;
   user-select:none;
   -webkit-user-select:none;
   background:
@@ -276,9 +272,9 @@ const PANEL_CSS = `
 }
 ._floating-btn:active{cursor:grabbing;transform:scale(.95)}
 ._floating-btn img{
-  width:26px;
-  height:26px;
-  opacity:.8;
+  width:80px;
+  height:40px;
+  opacity:.9;
   transition:opacity .2s;
   pointer-events:none;
 }
@@ -307,7 +303,6 @@ const PANEL_CSS = `
   }
   ._panel::before{opacity:0}
   ._panel::after{display:none}
-  ._titlebar-center h3{color:var(--text-on-dark)}
   ._tab-nav{background:rgba(255,255,255,.06)}
   ._tab-btn img{filter:invert(80%) sepia(5%) saturate(150%) hue-rotate(180deg) brightness(110%) contrast(85%)}
   ._tab-btn:hover{background:rgba(255,255,255,.08)}
@@ -361,4 +356,4 @@ export function getPanelStyles(): string {
   return varsForShadowRoot + "\n" + PANEL_CSS;
 }
 
-export { STANDARD_W, STANDARD_H, COMPACT_W, COMPACT_H, FLOATING_SIZE };
+export { STANDARD_W, STANDARD_H, COMPACT_W, COMPACT_H, FLOATING_W, FLOATING_H };

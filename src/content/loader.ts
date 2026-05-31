@@ -8,12 +8,13 @@
  * On first click, lazy-loads the full Preact app (sophia-app.js).
  */
 
-import { getPanelStyles, STANDARD_W, STANDARD_H, COMPACT_W, COMPACT_H, FLOATING_SIZE } from "./panel-styles";
+import { getPanelStyles, STANDARD_W, STANDARD_H, COMPACT_W, COMPACT_H, FLOATING_W, FLOATING_H } from "./panel-styles";
 import { setShadowRoot, setMountPoint } from "../lib/shadow-dom";
 
 const HOST_ID = "sophia-float-host";
 const APP_URL = chrome.runtime.getURL("assets/sophia-app.js");
-const ICON_URL = chrome.runtime.getURL("icons/newlogo.png");
+const ICON_URL = chrome.runtime.getURL("icons/logo.svg");
+const LOGO_URL = chrome.runtime.getURL("icons/logo.svg");
 const IMG_ICON_URL = chrome.runtime.getURL("icons/image.svg");
 const VID_ICON_URL = chrome.runtime.getURL("icons/video.svg");
 const TXT_ICON_URL = chrome.runtime.getURL("icons/text.svg");
@@ -114,8 +115,8 @@ function onDragEnd(): void {
 
 function getFloatingDefaultPosition(): { x: number; y: number } {
   return {
-    x: Math.max(16, window.innerWidth - FLOATING_SIZE - 16),
-    y: Math.max(16, Math.round((window.innerHeight - FLOATING_SIZE) / 2)),
+    x: Math.max(16, window.innerWidth - FLOATING_W - 16),
+    y: Math.max(16, Math.round((window.innerHeight - FLOATING_H) / 2)),
   };
 }
 
@@ -242,7 +243,7 @@ function ensureElements(): void {
           '</div>' +
         '</div>' +
         '<div class="_titlebar-center">' +
-          '<h3><img src="' + ICON_URL + '" alt="">Sophia</h3>' +
+          '<h3><img src="' + LOGO_URL + '" alt="" draggable="false"></h3>' +
         '</div>' +
         '<div class="_titlebar-right">' +
           '<div class="_btn-icon" data-action="toggle-size" title="切换模式"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="17" height="17"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="14" y1="10" x2="21" y2="3"/><line x1="3" y1="21" x2="10" y2="14"/></svg></div>' +
