@@ -481,8 +481,8 @@
   margin-top: var(--space-2);
 }
 .enhancer-pill {
-  min-height: 32px; border: none;
-  border-bottom: 2px solid transparent;
+  min-height: 36px; border: none;
+  border-bottom: 1.5px solid transparent;
   border-radius: 0;
   background: transparent; color: var(--text-tertiary);
   cursor: pointer; font-size: var(--text-xs); font-weight: var(--font-medium);
@@ -496,7 +496,7 @@
   color: var(--text-primary);
   background: transparent;
   box-shadow: none;
-  border-bottom: 2px solid var(--text-secondary);
+  border-bottom: 1.5px solid var(--text-secondary);
   border-left: none; border-right: none; border-top: none;
 }
 .enhancer-pill:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--accent-glow); }
@@ -834,7 +834,7 @@
   padding: 0;
   border-radius: var(--radius-lg);
   clip-path: inset(0 round var(--radius-lg));
-  background: var(--glass-bg);
+  background: rgba(255, 255, 255, 0.32);
   -webkit-backdrop-filter: var(--glass-blur-sm);
   backdrop-filter: var(--glass-blur-sm);
   border: 0.5px solid var(--glass-border);
@@ -843,6 +843,9 @@
   position: relative;
   overflow: hidden;
   min-height: 80px;
+}
+.model-card:hover {
+  background: rgba(255, 255, 255, 0.42);
 }
 .model-card::before {
   content: '';
@@ -1535,8 +1538,8 @@
   width: 100%; position: relative; z-index: 1;
 }
 .enhancer-form-card .enhancer-pill {
-  min-height: 30px;
-  border: none; border-bottom: 2px solid transparent; border-radius: 0;
+  min-height: 34px;
+  border: none; border-bottom: 1.5px solid transparent; border-radius: 0;
   background: transparent;
   color: var(--text-tertiary);
   cursor: pointer;
@@ -1552,7 +1555,7 @@
 .enhancer-form-card .enhancer-pill--active {
   color: var(--text-primary);
   background: transparent; box-shadow: none;
-  border-bottom: 2px solid var(--text-secondary);
+  border-bottom: 1.5px solid var(--text-secondary);
   border-left: none; border-right: none; border-top: none;
   font-weight: var(--font-medium);
 }
