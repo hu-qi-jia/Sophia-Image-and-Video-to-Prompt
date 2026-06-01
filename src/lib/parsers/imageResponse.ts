@@ -141,6 +141,19 @@ function isContentTag(tag: string): boolean {
   return CONTENT_TAG_PREFIXES.some(prefix => tag.startsWith(prefix));
 }
 
+function splitConstraintLocks(content: string): {
+  styleLocks: string;
+  contentLocks: string;
+} {
+  const styleMatch = content.match(/(?:^|\n)STYLE LOCKS:\s*([\s\S]*?)(?=\nCONTENT LOCKS:|$)/i);
+  const contentMatch = content.match(/(?:^|\n)CONTENT LOCKS:\s*([\s\S]*?)$/i);
+
+  return {
+    styleLocks: styleMatch?.[1]?.trim() ?? "",
+    contentLocks: contentMatch?.[1]?.trim() ?? "",
+  };
+}
+
 function splitSectionsByGroup(sections: Record<string, string>): {
   styleText: string;
   contentText: string;
@@ -149,6 +162,19 @@ function splitSectionsByGroup(sections: Record<string, string>): {
   const contentParts: string[] = [];
 
   for (const [tag, content] of Object.entries(sections)) {
+    if (tag === "CONSTRAINTS") {
+      const { styleLocks, contentLocks } = splitConstraintLocks(content);
+      if (styleLocks || contentLocks) {
+        if (styleLocks) {
+          styleParts.push(`[CONSTRAINTS - STYLE]\n${styleLocks}`);
+        }
+        if (contentLocks) {
+          contentParts.push(`[CONSTRAINTS - CONTENT]\n${contentLocks}`);
+        }
+        continue;
+      }
+    }
+
     const entry = `[${tag}]\n${content}`;
     if (STYLE_TAGS.has(tag)) {
       styleParts.push(entry);

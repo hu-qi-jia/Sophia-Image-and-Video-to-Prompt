@@ -121,7 +121,9 @@ Indoor not applicable. Desert landscape implied by sand particles and rock textu
 Grain: subtle film-like grain in shadow areas. No visible compression artifacts or physical damage.
 
 [CONSTRAINTS]
-Do not add sky or horizon where source shows none. Do not add vegetation or civilization traces. Do not complete the sandworm body beyond what is shown. Preserve the massive scale contrast.`;
+output aspect ratio must match source exactly: 2.39:1.
+STYLE LOCKS: keep the desaturated desert palette, telephoto compression, low-key tone, soft sand-diffused backlight, and cinematic scale emphasis.
+CONTENT LOCKS: do not add sky or horizon where source shows none, do not add vegetation or civilization traces, do not complete the sandworm body beyond what is shown, preserve the massive scale contrast.`;
 
 describe("parseImageResponse - natural language format", () => {
   it("解析包含【标签】的自然语言响应", () => {
@@ -139,7 +141,16 @@ describe("parseImageResponse - natural language format", () => {
     expect(result.sections["SPATIAL LAYERS"]).toContain("Foreground");
     expect(result.sections["LIGHTING"]).toContain("Main light");
     expect(result.sections["LOOK PIPELINE"]).toContain("Color palette");
-    expect(result.sections["CONSTRAINTS"]).toContain("Do not add sky");
+    expect(result.sections["CONSTRAINTS"]).toContain("STYLE LOCKS:");
+    expect(result.sections["CONSTRAINTS"]).toContain("CONTENT LOCKS:");
+  });
+
+  it("将 CONSTRAINTS 中的 STYLE LOCKS 和 CONTENT LOCKS 分别拆入 styleText 与 contentText", () => {
+    const result = parseImageResponse(SAMPLE_NL_RESPONSE);
+    expect(result.styleText).toContain("[CONSTRAINTS - STYLE]");
+    expect(result.styleText).toContain("telephoto compression");
+    expect(result.contentText).toContain("[CONSTRAINTS - CONTENT]");
+    expect(result.contentText).toContain("do not add sky or horizon");
   });
 
   it("提取 negativePrompt 从 NEGATIVE PROMPT 标签", () => {
@@ -152,7 +163,7 @@ describe("parseImageResponse - natural language format", () => {
   it("无 NEGATIVE PROMPT 时回退到 CONSTRAINTS", () => {
     const withoutNeg = SAMPLE_NL_RESPONSE.replace(/\[NEGATIVE PROMPT\]\n[\s\S]*?(?=\n\[)/, "");
     const result = parseImageResponse(withoutNeg);
-    expect(result.negativePrompt).toContain("Do not add sky");
+    expect(result.negativePrompt).toContain("STYLE LOCKS:");
   });
 
   it("detailedPrompt 等于原始文本", () => {
