@@ -115,7 +115,7 @@ function onDragEnd(): void {
 
 function getFloatingDefaultPosition(): { x: number; y: number } {
   return {
-    x: Math.max(16, window.innerWidth - FLOATING_W - 16),
+    x: window.innerWidth - FLOATING_W,
     y: Math.max(16, Math.round((window.innerHeight - FLOATING_H) / 2)),
   };
 }
@@ -133,14 +133,12 @@ function onFloatingDragStart(e: MouseEvent): void {
 
 function onFloatingDragMove(e: MouseEvent): void {
   if (!isFloatingDragging || !floatingBtn) return;
-  const dx = Math.abs(e.clientX - floatingDragOffsetX - floatingX);
   const dy = Math.abs(e.clientY - floatingDragOffsetY - floatingY);
-  if (dx > 2 || dy > 2) floatingDragMoved = true;
-  const pos = clampPosition(e.clientX - floatingDragOffsetX, e.clientY - floatingDragOffsetY);
-  floatingBtn.style.left = pos.x + "px";
-  floatingBtn.style.top = pos.y + "px";
-  floatingX = pos.x;
-  floatingY = pos.y;
+  if (dy > 2) floatingDragMoved = true;
+  const y = Math.min(Math.max(0, e.clientY - floatingDragOffsetY), window.innerHeight - FLOATING_H);
+  floatingBtn.style.top = y + "px";
+  floatingBtn.style.transform = "none";
+  floatingY = y;
 }
 
 function onFloatingDragEnd(): void {
@@ -374,8 +372,6 @@ function render(): void {
     }
 
     // Show floating button IMMEDIATELY and synchronously
-    floatingBtn.style.left = floatingX + "px";
-    floatingBtn.style.top = floatingY + "px";
     floatingBtn.style.display = "flex";
     floatingBtn.classList.add("_visible");
     floatingBtn.style.opacity = "1";

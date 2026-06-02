@@ -6,7 +6,7 @@ import { useHistory } from "./useHistory";
 import { useUI } from "./useUI";
 import { useIVTabs } from "./useIVTabs";
 import { useEnhancer } from "./useEnhancer";
-import { safeRuntimeSendMessage, isExtensionContextValid } from "../lib/error-utils";
+import { safeRuntimeSendMessage, isExtensionContextValid, logError } from "../lib/error-utils";
 
 export function useAppState() {
   // ── Compose hooks ──────────────────────────────────────────────
@@ -79,12 +79,16 @@ export function useAppState() {
       }
     };
 
-    chrome.runtime.onMessage.addListener(handleMessage);
-    chrome.storage.onChanged.addListener(handleStorageChanged);
+    if (isExtensionContextValid()) {
+      try { chrome.runtime.onMessage.addListener(handleMessage); } catch (error) { logError("add onMessage listener", error); }
+      try { chrome.storage.onChanged.addListener(handleStorageChanged); } catch (error) { logError("add onChanged listener", error); }
+    }
 
     return () => {
-      chrome.runtime.onMessage.removeListener(handleMessage);
-      chrome.storage.onChanged.removeListener(handleStorageChanged);
+      if (isExtensionContextValid()) {
+        try { chrome.runtime.onMessage.removeListener(handleMessage); } catch (error) { logError("remove onMessage listener", error); }
+        try { chrome.storage.onChanged.removeListener(handleStorageChanged); } catch (error) { logError("remove onChanged listener", error); }
+      }
       for (const tab of ["image", "video"] as const) {
         if (ivTabsHook.localObjectUrlRefs.current[tab]) {
           URL.revokeObjectURL(ivTabsHook.localObjectUrlRefs.current[tab]!);
@@ -130,6 +134,7 @@ export function useAppState() {
       displayResultText: ivTabsHook.displayResultText,
       displayStyleText: ivTabsHook.displayStyleText,
       displayContentText: ivTabsHook.displayContentText,
+      displayBoundText: ivTabsHook.displayBoundText,
       currentMediaPreview: ivTabsHook.currentMediaPreview,
       currentMediaAspectRatio: ivTabsHook.currentMediaAspectRatio,
       panelSizeMode: ui.panelSizeMode,

@@ -1,0 +1,155 @@
+[ARCHETYPE]
+photograph
+
+[STYLE FINGERPRINT]
+outdoor portrait, dappled sunlight with strong backlight rim, 50mm moderate DOF, warm golden hour grade with lifted mids, lush green foliage + pale skin + white lace fabric + red fruit accents, candid raw register.
+
+[AESTHETIC HOOK]
+A sun-drenched outdoor portrait characterized by high-contrast natural lighting where dappled shadows dance across the subject and background. The image possesses a warm, nostalgic film-like quality with soft highlight rolloff and a slightly hazy atmosphere typical of golden hour photography. The aesthetic is candid and intimate, prioritizing the interaction between harsh sunlight and soft skin texture over studio perfection, resulting in a dreamy, ethereal visual tone.
+
+[VISUAL PRIORITY]
+1. Dappled sunlight pattern on subject and background
+2. Strong warm backlight/rim light creating hair halo
+3. Lifted black point with soft, milky midtones
+4. Moderate depth of field separating subject from foliage
+5. Warm color temperature with golden hour cast
+6. Natural skin texture with visible pores and flush
+
+[LIGHTING]
+L0 Ambient Base: Bright, warm daylight filtering through dense tree canopy, creating a high-intensity but scattered base layer.
+L1 Key: Direct, hard sunlight breaking through leaves (dappled light), hitting the subject's face and torso from viewer-left upper quadrant, creating sharp patches of light and shadow.
+L2 Fill: Soft ambient bounce from the surrounding greenery and ground, filling shadows with a slightly green/warm tint, ratio approx 1:3 against key.
+L3 Rim/Back: Strong, warm golden backlight originating from behind the subject (viewer-right rear), creating a pronounced glowing halo on the hair and outlining the shoulder and arm edges.
+L4 Practicals: None contributing directly to subject; the environment itself acts as the practical source.
+Light Stack Signature: Hard dappled key mixed with strong warm rim and soft green ambient fill.
+Exposure Behavior: Subject is well-exposed with some blown highlights on the skin where direct sun hits; background foliage is bright but retains texture, not crushed to black.
+Atmospheric Scatter: Visible atmospheric haze/bloom around the rim-lit areas, softening the transition between light and shadow.
+
+[SHADOW GEOMETRY]
+Shadows are complex and fragmented due to the dappled light source. Hard, irregular shadow shapes fall across the subject's legs, torso, and the bamboo surface, mimicking the leaf patterns above. Contact shadows under the knees and hands are soft but distinct. The backlight creates a separation shadow on the front of the body, while the rim light eliminates edge shadows on the hair and shoulders. Shadows feel organic and chaotic rather than structured or graphic.
+
+[LOOK PIPELINE]
+Capture Character: Digital camera capture with a warm, film-emulation processing style.
+Filter/Post-processing: Warm color grading emphasizing golds and greens; slight matte fade applied to shadows (lifted blacks); subtle bloom/glow effect on highlights.
+Deliberate Softness: Global softness suggests either a vintage lens characteristic or intentional diffusion, reducing micro-contrast for a dreamy feel.
+Tone Curve: S-curve with lifted blacks (matte look) and compressed highlights to prevent pure white clipping, maintaining a soft, airy feel.
+Grey Balance: Warm-shifted greys, leaning towards amber/yellow in midtones.
+Split Toning: Warm amber/gold in highlights, slightly desaturated olive-green in shadows.
+Highlight Rolloff: Smooth and compressed, avoiding harsh digital clipping despite bright sun.
+Subject-vs-Environment: Subject is integrated into the bright environment, not isolated against a dark backdrop; both share the same high-key brightness level.
+Color Palette: Dominant colors are lush emerald green (foliage), warm amber/gold (sunlight), pale ivory/cream (skin and dress), and accent crimson (fruit). Saturation is natural but enhanced in the greens and warmth.
+Texture-Processing: Low sharpening, slight grain or noise reduction smoothing out fine details, contributing to the soft aesthetic.
+
+[TONAL DISTRIBUTION]
+Highlight/Midtone/Shadow Occupancy: Highlights ~30% (sun patches), Midtones ~50% (skin, lit foliage), Shadows ~20% (deep leaf shadows).
+Key: High-key / Mid-key hybrid.
+Tonal Separation: Balanced but soft; transitions between light and dark are gradual due to haze and diffusion.
+Contrast Shaping: Relies on the contrast between bright sun patches and deep leaf shadows, but overall image contrast is moderated by the lifted blacks and haze.
+Depth Effect: Tonal layering creates a sense of depth through the interplay of light patches, pushing the background back while keeping the subject forward.
+Background Retention: Background is bright and detailed, filled with varying shades of green and sun spots, maintaining an airy, open feeling.
+
+[OPTICAL DEPTH]
+Focal Length Feel: Approx 50mm equivalent, providing a natural perspective without significant distortion.
+Depth of Field: Moderate shallow DOF; subject is sharp, while background foliage blurs into a soft bokeh, though not extremely creamy.
+Bokeh: Circular to slightly oval shape, busy but soft, blending leaf shapes into green washes.
+Edge Behavior: Edges are slightly soft, lacking razor-sharp definition, contributing to the dreamy quality.
+Subject Isolation: Achieved through a combination of focus falloff and the contrast of the subject's pale tones against the darker green background.
+Perspective Signature: Eye-level perspective, intimate and engaging, with slight foreshortening of the legs due to the seated pose.
+Camera Angle: Slightly low angle looking up at the subject, enhancing the presence of the figure against the foliage.
+
+[STYLE & TEXTURE]
+Style: Ethereal summer portrait, soft-focus romanticism, golden hour aesthetic.
+Capture Device: Likely a DSLR or Mirrorless camera with a prime lens, possibly with a diffusion filter or post-processed to mimic one.
+Medium Texture: Digital photo with a matte, slightly grainy finish reminiscent of faded film stock.
+Realism Character: Stylized-real; recognizable as a real photograph but treated with artistic softness and color grading to enhance mood.
+Beauty Processing: Light skin smoothing and color grading evident, but natural texture (pores, flush) remains visible.
+Snapshot-vs-Editorial: Leans towards a styled lifestyle editorial or high-quality social media portrait, posed but with a candid feel.
+
+[SKIN & FACE]
+Skin Render Tier: Natural to soft-smooth; visible texture but softened by light and processing.
+Skin Finish: Dewy/Satin; skin appears luminous and slightly flushed from the sun/heat.
+Undertone: Warm peach/golden undertones dominant due to the sunlight.
+Face Topography: Key light hits the left cheekbone and forehead, casting soft shadows under the nose and chin; rim light outlines the jaw and neck.
+Catchlights: Soft, diffuse reflections in the eyes, likely from the sky or surrounding foliage.
+Micro-detail: Visible peach fuzz on cheeks and arms, natural skin pores, slight redness/flush on cheeks and nose.
+
+[FRAME]
+Aspect Ratio: 4:5.
+Shot Type: Three-quarter body portrait (knees to head).
+Subject Position: Centered horizontally, slightly lower vertically to accommodate the seated pose and headroom.
+Subject Scale: Subject occupies approximately 60% of the frame height and 50% of the width.
+Subject-to-Environment Ratio: Subject 60%, Environment 40%.
+Anchor Map: Bamboo platform (bottom), dense foliage (background/top/sides).
+Lens Character: 50mm feel, minimal distortion, natural proportions.
+Perspective: Eye-level, slightly low angle.
+Camera Angle: Frontal three-quarter view, capturing the subject looking back over the shoulder.
+Pose Framing: Crop cuts off just below the knees and above the head, framing the seated figure comfortably.
+Motion Rendering: Frozen action, static pose.
+Quality Tier: Polished but retaining a raw, organic feel.
+
+[COMPOSITION]
+Grid: Rule of thirds (eyes on upper third line).
+Visual Weight: Heavily centered on the subject's face and upper body.
+Focal Hierarchy: Primary anchor is the face/eyes; secondary is the hand holding the fruit basket; tertiary is the hair halo.
+Negative Space: Minimal negative space, filled with textured foliage.
+Balance: Asymmetrical balance due to the pose twist and lighting direction.
+Leading Lines: The curve of the spine and the line of the arm lead the eye to the face.
+Information Density: Dense texture from foliage contrasts with the smoother subject.
+Environment Retention: Essential; the greenery provides context and color contrast.
+
+[ATMOSPHERE]
+Emotional Tone: Dreamy, nostalgic, warm, serene, slightly melancholic.
+Spatial Feeling: Enclosed yet open to the sky, intimate garden setting.
+Temporal Quality: Golden hour, fleeting summer moment.
+
+[SNAPSHOT FEEL]
+Candid energy markers: The glance back over the shoulder, the relaxed seated posture, the natural imperfections of the lighting.
+Authenticity note: The dappled light and slight overexposure contribute to a genuine, un-staged summer vibe.
+
+[ERA SIGNALS]
+Technology markers: Modern digital clarity softened by film-style grading; contemporary fashion styling.
+Internet-era aesthetics: "Soft girl" aesthetic, cottagecore influences, Instagram-ready composition.
+
+[PROMPT TAGS]
+photograph, portrait photography, outdoor portrait, candid shot, golden hour, natural light, dappled sunlight, soft focus, dreamy aesthetic, film look, warm tones, summer vibe, lifestyle photography, beauty portrait, raw photo, 50mm lens, shallow depth of field, bokeh, ethereal, nostalgic.
+
+[GENERATION CUES]
+dappled sunlight, strong warm rim light, golden hour glow, lifted blacks, matte finish, soft focus, dreamy atmosphere, lush green background, pale skin, dewy skin texture, visible peach fuzz, flushed cheeks, seated pose, looking over shoulder, holding basket of red fruit, bamboo platform, 50mm lens, moderate depth of field, circular bokeh, warm color grading, amber highlights, olive green shadows, natural skin texture, no plastic skin, no heavy retouching, candid expression, summer garden setting.
+
+[NEGATIVE PROMPT]
+watermark, signature, text, logo, username, cropped, worst quality, low quality, jpeg artifacts, duplicate, morbid, mutilated, extra fingers, poorly drawn hands, poorly drawn face, mutation, deformed, ugly, blurry, bad anatomy, bad proportions, extra limbs, missing limbs, fused fingers, too many fingers, long neck, plastic skin, airbrushed, overly smooth, CGI appearance, unrealistic, oversaturated, doll-like, unnatural skin texture, porcelain skin, waxy skin, cartoon eyes, anime eyes, stylized features, heavy makeup look, Instagram filter, over-processed, studio lighting, softbox, side key light, flat lighting, harsh shadows, cold tones, blue tint, desaturated, grey, muddy, messy composition, standing, walking, running, indoor setting, night time, winter, snow, rain.
+
+[CONSTRAINTS - STYLE]
+dappled sunlight pattern, strong warm rim light, lifted blacks/matte finish, soft focus/dreamy atmosphere, warm golden hour color grading, moderate depth of field, natural skin texture with visible pores/peach fuzz, dewy skin finish, flushed cheeks, no plastic skin, no heavy retouching, lush green background, bamboo platform texture.
+
+[SUBJECT 1]
+Young woman with fair skin and dark brown hair.
+Identity and Appearance: Female, young adult (late teens to early twenties), East Asian appearance. Hair is dark brown, medium length, styled in a messy updo with loose strands framing the face and two small white bows clipped on either side. Face shape is oval with soft features. Eyebrows are straight and dark. Eyes are almond-shaped, dark brown, looking directly at the camera with a soft, slightly pouty expression. Nose is small and straight. Lips are full, painted with a reddish-pink tint. Cheeks are flushed pink. Distinctive features include visible peach fuzz on the cheeks and arms, and a natural, unretouched skin texture with slight redness on the nose and cheeks.
+Body & Build: Slim to average build, petite frame. Shoulders are narrow, waist is defined but soft. Legs are slender with visible knee joints.
+Expression and Demeanor: Soft, dreamy gaze, lips slightly parted, head turned to look back over the left shoulder towards the camera. Expression is calm and slightly alluring.
+Pose and Posture: Seated on a bamboo platform in a kneeling/sitting position (seiza-style but relaxed). Body is twisted to the left, facing away from the camera, while the head turns back to face the viewer. Left arm rests on the left thigh, hand holding a small woven basket containing red fruits (likely cherries or strawberries). Right arm is bent, hand resting near the right hip/thigh area. Legs are folded beneath the body, with knees visible in the foreground. Spine is curved slightly, creating an S-shape silhouette.
+Makeup: Natural look with emphasis on flushed cheeks and glossy, reddish-pink lips. Eyebrows are groomed but natural. No heavy contouring.
+Clothing & Accessories: Wearing a white, floral-patterned two-piece set (crop top and shorts/skirt) made of lightweight fabric with lace trim. The top has thin spaghetti straps. Two small white ribbon bows are accessories in her hair. She is barefoot.
+
+[MATERIAL RESPONSE]
+Fabric Behavior: Lightweight cotton or linen blend, appearing soft and slightly sheer in the sunlight. Lace trim adds delicate texture.
+Skin Behavior: Dewy and luminous under the sunlight, showing natural oiliness and texture.
+Cross-material Interaction: The red fruit in the basket provides a strong color pop against the white fabric and pale skin. The bamboo platform adds a natural, textured element beneath the subject.
+
+[SPATIAL LAYERS]
+Foreground: The subject's legs and the bamboo platform edge.
+Midground: The subject's torso, head, and the immediate surrounding foliage.
+Background: Dense green trees and bushes, blurred by depth of field, with patches of sunlight filtering through.
+Occlusion Chain: Subject occludes the background foliage; the basket occludes part of the left hand/thigh.
+
+[ENVIRONMENT]
+Outdoor garden or wooded area. Lush green vegetation surrounds the subject. Ground is covered in grass and dirt patches visible through the foliage. Time of day is late afternoon (golden hour), indicated by the warm, angled sunlight. Weather appears sunny and clear.
+
+[IMPERFECTIONS & PHYSICS]
+Resolution Artifacts: Slight softness throughout the image, likely intentional or due to lens characteristics.
+Noise: Low-level digital noise or simulated film grain.
+Optical Flaws: Mild chromatic aberration on high-contrast edges (hair against bright sky), slight lens flare/bloom in bright areas.
+Processing Artifacts: Lifted blacks creating a matte look, slight color bleeding in the red fruit area.
+
+[CONSTRAINTS - CONTENT]
+young woman, East Asian appearance, dark brown messy updo with white bows, oval face, almond eyes, reddish-pink lips, flushed cheeks, slim/petite build, seated kneeling pose, looking over left shoulder, holding woven basket with red fruit, white floral two-piece outfit with lace, barefoot, outdoor garden setting, golden hour lighting.

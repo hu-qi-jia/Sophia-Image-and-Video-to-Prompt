@@ -327,6 +327,7 @@ describe("formatImagePrompt", () => {
       negativePrompt: "test",
       styleText: "",
       contentText: "",
+      boundText: "",
       warnings: [],
     };
     expect(formatImagePrompt(promptResult)).toBe(SAMPLE_NL_RESPONSE);
@@ -362,6 +363,7 @@ describe("formatImageAnalysis", () => {
       negativePrompt: "test",
       styleText: "",
       contentText: "",
+      boundText: "",
       warnings: [],
     };
     expect(formatImageAnalysis(promptResult)).toBe(SAMPLE_NL_RESPONSE);
@@ -388,5 +390,341 @@ describe("formatLegacyImageAnalysis", () => {
     const promptResult = makeLegacyResponse();
     const result = formatLegacyImageAnalysis(promptResult);
     expect(() => JSON.parse(result)).not.toThrow();
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════════════
+//  BOUND FEATURES bridge module — new in 2026-06-02 refactor
+// ═══════════════════════════════════════════════════════════════════════
+
+const SAMPLE_FULL_RESPONSE = SAMPLE_NL_RESPONSE + `
+
+[BOUND FEATURES]
+- warm 2700K rim on subject's hair outline: full halo coverage on upper hair and crown
+- cool 5500K specular on silk dress shoulder: elongated highlight along left collarbone
+- round window catchlight in both eyes: top-left clock position, sharp dot character`;
+
+const SAMPLE_BRIDGE_EMPTY = SAMPLE_NL_RESPONSE.replace(
+  /\[IMPERFECTIONS & PHYSICS\][\s\S]*?(?=\n\[|$)/,
+  `[IMPERFECTIONS & PHYSICS]\nGrain: subtle film-like grain in shadow areas. No visible compression artifacts or physical damage.\n\n[BOUND FEATURES]\nnone — no subject-bound style features observed in this image`
+);
+
+describe("parseImageResponse - BOUND FEATURES bridge module", () => {
+  it("substantive BOUND FEATURES appears in detailedPrompt and sections", () => {
+    const result = parseImageResponse(SAMPLE_FULL_RESPONSE);
+    expect(result.sections["BOUND FEATURES"]).toBeDefined();
+    expect(result.sections["BOUND FEATURES"]).toContain("2700K rim");
+    expect(result.detailedPrompt).toContain("[BOUND FEATURES]");
+  });
+
+  it("BOUND FEATURES is excluded from styleText (bridge, not style)", () => {
+    const result = parseImageResponse(SAMPLE_FULL_RESPONSE);
+    expect(result.styleText).not.toContain("[BOUND FEATURES]");
+  });
+
+  it("BOUND FEATURES is excluded from contentText (bridge, not content)", () => {
+    const result = parseImageResponse(SAMPLE_FULL_RESPONSE);
+    expect(result.contentText).not.toContain("[BOUND FEATURES]");
+  });
+
+  it("substantive BOUND FEATURES is routed into boundText (bridge module)", () => {
+    const result = parseImageResponse(SAMPLE_FULL_RESPONSE);
+    expect(result.boundText).toBeDefined();
+    expect(result.boundText).toContain("[BOUND FEATURES]");
+    expect(result.boundText).toContain("2700K rim");
+  });
+
+  it("explicit empty-state BOUND FEATURES is routed into boundText verbatim", () => {
+    const result = parseImageResponse(SAMPLE_BRIDGE_EMPTY);
+    expect(result.boundText).toContain("[BOUND FEATURES]");
+    expect(result.boundText).toMatch(/^none\s*[—–-]/im);
+  });
+
+  it("missing BOUND FEATURES leaves boundText empty (not present in sections)", () => {
+    const result = parseImageResponse(SAMPLE_NL_RESPONSE);
+    expect(result.boundText).toBe("");
+  });
+
+  it("BOUND FEATURES with explicit empty state is accepted as valid (no warning)", () => {
+    const result = parseImageResponse(SAMPLE_BRIDGE_EMPTY);
+    expect(result.sections["BOUND FEATURES"]).toMatch(/^none\s*[—–-]/i);
+    const bridgeWarnings = result.warnings.filter((w) => w.includes("[BOUND FEATURES]"));
+    expect(bridgeWarnings).toEqual([]);
+  });
+
+  it("missing BOUND FEATURES entirely triggers a warning", () => {
+    const result = parseImageResponse(SAMPLE_NL_RESPONSE);
+    expect(
+      result.warnings.some((w) => w.includes("[BOUND FEATURES]") && w.includes("缺少必填模块"))
+    ).toBe(true);
+  });
+
+  it("BOUND FEATURES too short without explicit empty state triggers a warning", () => {
+    const broken = SAMPLE_NL_RESPONSE + `\n\n[BOUND FEATURES]\nrim`;
+    const result = parseImageResponse(broken);
+    expect(
+      result.warnings.some(
+        (w) => w.includes("[BOUND FEATURES]") && w.includes("explicit empty state")
+      )
+    ).toBe(true);
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════════════
+//  Required tags validation
+// ═══════════════════════════════════════════════════════════════════════
+
+describe("parseImageResponse - required tags validation", () => {
+  it("missing required style tag triggers a '缺少必填模块' warning", () => {
+    const broken = SAMPLE_FULL_RESPONSE.replace(/\[NEGATIVE PROMPT\][\s\S]*?(?=\n\[)/, "");
+    const result = parseImageResponse(broken);
+    expect(
+      result.warnings.some(
+        (w) => w.includes("[NEGATIVE PROMPT]") && w.includes("缺少必填模块")
+      )
+    ).toBe(true);
+  });
+
+  it("tag with content too short triggers a length warning", () => {
+    const broken = SAMPLE_FULL_RESPONSE.replace(
+      /(\[AESTHETIC HOOK\]\n)[\s\S]*?(?=\n\[)/,
+      `$1too short`
+    );
+    const result = parseImageResponse(broken);
+    expect(
+      result.warnings.some(
+        (w) => w.includes("[AESTHETIC HOOK]") && w.includes("内容过短")
+      )
+    ).toBe(true);
+  });
+
+  it("ARCHETYPE with 3+ chars is accepted (TAG_MIN_LENGTH override)", () => {
+    const broken = SAMPLE_FULL_RESPONSE.replace(/(\[ARCHETYPE\]\n)[\s\S]*?(?=\n\[)/, `$1abc`);
+    const result = parseImageResponse(broken);
+    expect(result.warnings.some((w) => w.includes("[ARCHETYPE]") && w.includes("内容过短"))).toBe(
+      false
+    );
+  });
+
+  it("STYLE FINGERPRINT with 15+ chars is accepted (TAG_MIN_LENGTH override)", () => {
+    const ok = "a fifteen-char fingerprint style description";
+    const broken = SAMPLE_FULL_RESPONSE.replace(
+      /(\[STYLE FINGERPRINT\]\n)[\s\S]*?(?=\n\[)/,
+      `$1${ok}`
+    );
+    const result = parseImageResponse(broken);
+    expect(
+      result.warnings.some((w) => w.includes("[STYLE FINGERPRINT]") && w.includes("内容过短"))
+    ).toBe(false);
+  });
+
+  it("SUBJECT 1 with content too short triggers a warning", () => {
+    const broken = SAMPLE_FULL_RESPONSE.replace(/(\[SUBJECT 1\]\n)[\s\S]*?(?=\n\[)/, `$1cat`);
+    const result = parseImageResponse(broken);
+    expect(result.warnings.some((w) => w.includes("[SUBJECT 1]") && w.includes("内容过短"))).toBe(
+      true
+    );
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════════════
+//  styleText / contentText split rules
+// ═══════════════════════════════════════════════════════════════════════
+
+describe("parseImageResponse - styleText / contentText split", () => {
+  it("STYLE tags land in styleText", () => {
+    const result = parseImageResponse(SAMPLE_FULL_RESPONSE);
+    expect(result.styleText).toContain("[LIGHTING]");
+    expect(result.styleText).toContain("[FRAME]");
+    expect(result.styleText).toContain("[NEGATIVE PROMPT]");
+  });
+
+  it("CONTENT tags land in contentText", () => {
+    const result = parseImageResponse(SAMPLE_FULL_RESPONSE);
+    expect(result.contentText).toContain("[SUBJECT 1]");
+    expect(result.contentText).toContain("[SUBJECT 2]");
+    expect(result.contentText).toContain("[SPATIAL LAYERS]");
+    expect(result.contentText).toContain("[ENVIRONMENT]");
+    expect(result.contentText).toContain("[IMPERFECTIONS & PHYSICS]");
+  });
+
+  it("CONSTRAINTS sub-splits STYLE LOCKS into styleText and CONTENT LOCKS into contentText", () => {
+    const result = parseImageResponse(SAMPLE_FULL_RESPONSE);
+    expect(result.styleText).toContain("[CONSTRAINTS - STYLE]");
+    expect(result.contentText).toContain("[CONSTRAINTS - CONTENT]");
+  });
+
+  it("CONSTRAINTS without STYLE/CONTENT LOCKS falls back to contentText (CONSTRAINTS is in CONTENT_TAG_PREFIXES)", () => {
+    const broken = SAMPLE_FULL_RESPONSE.replace(
+      /(\[CONSTRAINTS\]\n)[\s\S]*?(?=\n\[BOUND|$)/,
+      `$1aspect ratio must be 1:1`
+    );
+    const result = parseImageResponse(broken);
+    expect(result.styleText).not.toContain("aspect ratio must be 1:1");
+    expect(result.contentText).toContain("[CONSTRAINTS]");
+    expect(result.contentText).toContain("1:1");
+  });
+
+  it("CONSTRAINTS without STYLE/CONTENT LOCKS still appears in detailedPrompt and sections", () => {
+    const broken = SAMPLE_FULL_RESPONSE.replace(
+      /(\[CONSTRAINTS\]\n)[\s\S]*?(?=\n\[BOUND|$)/,
+      `$1aspect ratio must be 1:1`
+    );
+    const result = parseImageResponse(broken);
+    expect(result.sections["CONSTRAINTS"]).toContain("1:1");
+    expect(result.detailedPrompt).toContain("aspect ratio must be 1:1");
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════════════
+//  Multi-subject handling
+// ═══════════════════════════════════════════════════════════════════════
+
+describe("parseImageResponse - multi-subject handling", () => {
+  it("SUBJECT 1..N (multiple subjects) all land in contentText", () => {
+    const result = parseImageResponse(SAMPLE_FULL_RESPONSE);
+    expect(result.contentText).toContain("[SUBJECT 1]");
+    expect(result.contentText).toContain("[SUBJECT 2]");
+  });
+
+  it("SUBJECT prefix matches in REQUIRED_CONTENT_PREFIXES", () => {
+    const synthetic = `[ARCHETYPE]
+photo
+
+[STYLE FINGERPRINT]
+cinematic desert scene with two subjects
+
+[AESTHETIC HOOK]
+epic contrast
+
+[VISUAL PRIORITY]
+1. scale
+
+[LIGHTING]
+strong directional backlight from upper-right of frame, hard sun scattered through sand particles
+
+[SHADOW GEOMETRY]
+deep cavity shadows
+
+[LOOK PIPELINE]
+desaturated warm
+
+[TONAL DISTRIBUTION]
+low-key
+
+[OPTICAL DEPTH]
+telephoto compression
+
+[STYLE & TEXTURE]
+epic sci-fi cinematography
+
+[FRAME]
+low angle
+
+[COMPOSITION]
+centered
+
+[GENERATION CUES]
+telephoto
+
+[NEGATIVE PROMPT]
+watermark
+
+[SUBJECT 1]
+first subject fully described with sufficient length to clear minimum threshold comfortably
+
+[SUBJECT 2]
+second subject fully described with sufficient length to clear minimum threshold comfortably
+
+[SUBJECT 3]
+third subject fully described with sufficient length to clear minimum threshold comfortably
+
+[IMPERFECTIONS & PHYSICS]
+subtle grain
+
+[CONSTRAINTS]
+STYLE LOCKS: keep palette
+CONTENT LOCKS: do not change subjects
+
+[BOUND FEATURES]
+warm rim on subject 1 hair outline, cool catchlight in subject 2 eyes`;
+    const result = parseImageResponse(synthetic);
+    expect(result.contentText).toContain("[SUBJECT 1]");
+    expect(result.contentText).toContain("[SUBJECT 2]");
+    expect(result.contentText).toContain("[SUBJECT 3]");
+    expect(
+      result.warnings.some((w) => w.includes("缺少必填模块") && w.includes("SUBJECT"))
+    ).toBe(false);
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════════════
+//  shortPrompt extraction edge cases
+// ═══════════════════════════════════════════════════════════════════════
+
+describe("parseImageResponse - shortPrompt extraction", () => {
+  it("combines first sentence of FRAME with first line of SUBJECT", () => {
+    const result = parseImageResponse(SAMPLE_FULL_RESPONSE);
+    expect(result.shortPrompt).toContain("Low angle");
+    expect(result.shortPrompt).toContain("sandworm");
+  });
+
+  it("falls back to 'Image analysis' when SUBJECT and FRAME are both empty", () => {
+    const minimal = `[ARCHETYPE]
+photo
+
+[STYLE FINGERPRINT]
+fifteen-char fingerprint
+
+[AESTHETIC HOOK]
+aesthetic hook filler text here
+
+[VISUAL PRIORITY]
+1. one
+
+[LIGHTING]
+strong directional backlight from upper-right of frame, hard sun scattered through sand particles
+
+[SHADOW GEOMETRY]
+deep cavity shadows
+
+[LOOK PIPELINE]
+desaturated
+
+[TONAL DISTRIBUTION]
+low-key
+
+[OPTICAL DEPTH]
+telephoto
+
+[STYLE & TEXTURE]
+cinematic
+
+[FRAME]
+.
+
+[COMPOSITION]
+centered
+
+[GENERATION CUES]
+telephoto
+
+[NEGATIVE PROMPT]
+watermark
+
+[SUBJECT 1]
+cat
+
+[IMPERFECTIONS & PHYSICS]
+grain
+
+[CONSTRAINTS]
+STYLE LOCKS: keep
+CONTENT LOCKS: do not change
+
+[BOUND FEATURES]
+none — no subject-bound style features observed in this image`;
+    const result = parseImageResponse(minimal);
+    expect(typeof result.shortPrompt).toBe("string");
   });
 });

@@ -4,8 +4,8 @@ const STANDARD_W = 720;
 const STANDARD_H = 640;
 const COMPACT_W = 400;
 const COMPACT_H = 640;
-const FLOATING_W = 120;
-const FLOATING_H = 72;
+const FLOATING_W = 56;
+const FLOATING_H = 240;
 
 const PANEL_CSS = `
 :host{all:initial;display:block;position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:2147483646;pointer-events:none;font-family:"PingFang SC","Inter",-apple-system,"Microsoft YaHei",sans-serif}
@@ -232,7 +232,7 @@ const PANEL_CSS = `
   position:fixed;
   width:${FLOATING_W}px;
   height:${FLOATING_H}px;
-  border-radius:20px;
+  border-radius:20px 0 0 20px;
   user-select:none;
   -webkit-user-select:none;
   background:
@@ -254,6 +254,9 @@ const PANEL_CSS = `
   will-change:transform,left,top,box-shadow;
   opacity:0;
   z-index:1;
+  right:0;
+  top:50%;
+  transform:translateY(-50%);
 }
 ._floating-btn._visible{opacity:1}
 ._floating-btn::before{
@@ -270,13 +273,14 @@ const PANEL_CSS = `
     0 8px 32px rgba(0,0,0,.12),
     0 4px 12px rgba(0,0,0,.06);
 }
-._floating-btn:active{cursor:grabbing;transform:scale(.95)}
+._floating-btn:active{cursor:grabbing;transform:translateY(-50%) scale(.95)}
 ._floating-btn img{
-  width:80px;
-  height:40px;
+  width:auto;
+  height:56px;
   opacity:.9;
   transition:opacity .2s;
   pointer-events:none;
+  transform:rotate(90deg);
 }
 ._floating-btn:hover img{opacity:1}
 
@@ -304,11 +308,11 @@ const PANEL_CSS = `
   ._panel::before{opacity:0}
   ._panel::after{display:none}
   ._tab-nav{background:rgba(255,255,255,.06)}
-  ._tab-btn img{filter:invert(80%) sepia(5%) saturate(150%) hue-rotate(180deg) brightness(110%) contrast(85%)}
+  ._tab-btn img{filter:invert(100%) brightness(0.17)}
   ._tab-btn:hover{background:rgba(255,255,255,.08)}
-  ._tab-btn:hover img{filter:invert(90%) sepia(5%) saturate(150%) hue-rotate(180deg) brightness(115%) contrast(90%)}
+  ._tab-btn:hover img{filter:invert(100%) brightness(0.25)}
   ._tab-btn--active{background:rgba(255,255,255,.14);border-color:var(--glass-border-subtle);box-shadow:0 1px 4px rgba(0,0,0,.15),inset 0 1px 0 rgba(255,255,255,.08);border-radius:50%}
-  ._tab-btn--active img{filter:invert(100%) brightness(100%) contrast(100%)}
+  ._tab-btn--active img{filter:invert(100%) brightness(0.17)}
   ._btn-icon{color:var(--text-on-dark-secondary)}
   ._btn-icon:hover{background:var(--accent-soft);color:var(--text-on-dark)}
   #sophia-root::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15)}

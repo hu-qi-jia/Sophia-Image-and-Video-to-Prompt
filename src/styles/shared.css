@@ -608,9 +608,9 @@ select:focus-visible,
   position: absolute; top: calc(100% + 6px); right: 0; left: auto;
   min-width: 200px;
   z-index: 100;
-  background: var(--glass-bg);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
+  background: var(--glass-bg-solid);
+  -webkit-backdrop-filter: blur(40px) saturate(200%);
+  backdrop-filter: blur(40px) saturate(200%);
   border: 0.5px solid var(--glass-border);
   border-radius: var(--radius-lg);
   box-shadow: var(--glass-shadow-elevated), var(--glass-inner-shadow), var(--glass-edge-light);
@@ -621,9 +621,9 @@ select:focus-visible,
 .add-model-menu--fixed {
   z-index: 9999;
   min-width: 220px;
-  background: var(--glass-bg);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
+  background: var(--glass-bg-solid);
+  -webkit-backdrop-filter: blur(40px) saturate(200%);
+  backdrop-filter: blur(40px) saturate(200%);
   border: 0.5px solid var(--glass-border);
   border-radius: var(--radius-lg);
   box-shadow: var(--glass-shadow-elevated), var(--glass-inner-shadow), var(--glass-edge-light);

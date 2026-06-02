@@ -82,6 +82,13 @@ export function useIVTabs(
     return "";
   }, [currentData.resultMode, currentData.promptResult, currentData.editedContentText]);
 
+  const displayBoundText = useMemo(() => {
+    if (currentData.resultMode !== "text" || !currentData.promptResult) return "";
+    const pr = currentData.promptResult;
+    if ("boundText" in pr && typeof pr.boundText === "string") return pr.boundText;
+    return "";
+  }, [currentData.resultMode, currentData.promptResult]);
+
   const showStyleCopy = displayStyleText.trim().length > 0;
   const showContentCopy = displayContentText.trim().length > 0;
 
@@ -323,7 +330,7 @@ export function useIVTabs(
   }
 
   async function handleCopyAll() {
-    const combined = [displayStyleText, displayContentText].filter(Boolean).join("\n\n");
+    const combined = [displayStyleText, displayContentText, displayBoundText].filter(Boolean).join("\n\n");
     if (!combined.trim()) return;
     try { await navigator.clipboard.writeText(combined); updateIVTab(currentIVTab, { copyAllLabel: "已复制" }); window.setTimeout(() => updateIVTab(currentIVTab, { copyAllLabel: "复制全部" }), COPY_FEEDBACK_DURATION_MS); } catch (error) { logError("handleCopyAll", error); }
   }
@@ -345,7 +352,8 @@ export function useIVTabs(
     activeTabId, setActiveTabId, ivTabData, activeTab, setActiveTab, currentIVTab, currentData,
     imageFileRef, videoFileRef, localObjectUrlRefs, abortControllerRefs,
     hasMedia, isAnalyzing, canAnalyze, showCopy,
-    displayResultText, displayStyleText, displayContentText, showStyleCopy, showContentCopy,
+    displayResultText, displayStyleText, displayContentText, displayBoundText,
+    showStyleCopy, showContentCopy,
     currentMediaPreview, currentMediaAspectRatio,
     updateIVTab, resetIVTabResult, syncFromBackgroundState,
     handleAnalyze, handleClear, handleAbort, handleUploadClick, handleLocalUpload, handleFileDrop,

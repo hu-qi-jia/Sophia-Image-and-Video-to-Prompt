@@ -165,7 +165,7 @@ export function SettingsView({
                       <div>
                         <div className="add-model-menu-item-label">{pt.label}</div>
                         <div className="add-model-menu-item-desc">
-                          {pt.id === "openai" ? "支持任意兼容 OpenAI 接口的模型" : "Google Gemini 原生接口"}
+                          {pt.id === "openai" ? "支持兼容OpenAI接口模型" : "Google Gemini 原生接口"}
                         </div>
                       </div>
                     </button>

@@ -37,6 +37,7 @@ const SECTION_REGEX = /(?:^|\n)\[([^\]]+)\]\s*\n?([\s\S]*?)(?=\n\[[^\]]+\]|$)/g;
 // Required TAGs that must be present in a valid response
 const REQUIRED_TAGS = [
   "ARCHETYPE",
+  "STYLE FINGERPRINT",
   "AESTHETIC HOOK",
   "VISUAL PRIORITY",
   "LIGHTING",
@@ -45,11 +46,13 @@ const REQUIRED_TAGS = [
   "TONAL DISTRIBUTION",
   "OPTICAL DEPTH",
   "STYLE & TEXTURE",
+  "SKIN & FACE",
   "FRAME",
   "COMPOSITION",
   "GENERATION CUES",
   "PROMPT TAGS",
   "NEGATIVE PROMPT",
+  "BOUND FEATURES",
   "CONSTRAINTS",
 ] as const;
 
@@ -62,10 +65,28 @@ const REQUIRED_CONTENT_PREFIXES = [
 // Minimum character count for a TAG's content to be considered substantive
 const MIN_CONTENT_LENGTH = 30;
 
-// ARCHETYPE is a short label (e.g. "photograph", "illustration"), not a paragraph.
+// ARCHETYPE and STYLE FINGERPRINT are short label/sentence tags, not paragraphs.
+// BOUND FEATURES has a documented empty state ("none — no subject-bound style features observed in this image").
 const TAG_MIN_LENGTH: Record<string, number> = {
   ARCHETYPE: 3,
+  "STYLE FINGERPRINT": 15,
+  "BOUND FEATURES": 0,
 };
+
+// Explicit empty-state strings accepted as valid content for specific tags.
+// BOUND FEATURES may write its empty state verbatim when no subject-bound style features are observed.
+const TAG_EXPLICIT_EMPTY_STATES: Record<string, RegExp[]> = {
+  "BOUND FEATURES": [
+    /^none\s*[—–-]\s*no subject-bound style features observed in this image\.?$/i,
+  ],
+};
+
+function isExplicitEmptyState(tag: string, content: string): boolean {
+  const patterns = TAG_EXPLICIT_EMPTY_STATES[tag];
+  if (!patterns) return false;
+  const trimmed = content.trim();
+  return patterns.some((re) => re.test(trimmed));
+}
 
 function validateSections(sections: Record<string, string>): string[] {
   const warnings: string[] = [];
@@ -78,6 +99,11 @@ function validateSections(sections: Record<string, string>): string[] {
       warnings.push(`缺少必填模块 [${tag}]`);
     } else if (sections[tag].length < minLen) {
       warnings.push(`[${tag}] 内容过短（${sections[tag].length} 字符）`);
+    } else if (minLen === 0 && !isExplicitEmptyState(tag, sections[tag])) {
+      // BOUND FEATURES may be the explicit empty state; otherwise it must have at least one substantive line.
+      if (sections[tag].length < 5) {
+        warnings.push(`[${tag}] 内容过短（${sections[tag].length} 字符）或缺少 explicit empty state`);
+      }
     }
   }
 
@@ -128,12 +154,22 @@ function extractNegativePromptFromSections(sections: Record<string, string>): st
 }
 
 const STYLE_TAGS = new Set([
-  "ARCHETYPE", "AESTHETIC HOOK", "VISUAL PRIORITY", "LIGHTING",
+  "ARCHETYPE", "STYLE FINGERPRINT", "AESTHETIC HOOK", "VISUAL PRIORITY", "LIGHTING",
   "SHADOW GEOMETRY", "LOOK PIPELINE", "TONAL DISTRIBUTION", "OPTICAL DEPTH",
-  "STYLE & TEXTURE", "FRAME", "COMPOSITION",
+  "STYLE & TEXTURE", "SKIN & FACE", "FRAME", "COMPOSITION",
   "ATMOSPHERE", "SNAPSHOT FEEL", "ERA SIGNALS",
   "GENERATION CUES", "PROMPT TAGS", "NEGATIVE PROMPT"
 ]);
+
+// Bound features is a STYLE × CONTENT bridge module — intentionally not in STYLE_TAGS or CONTENT_TAG_PREFIXES.
+// It is required in the full output (rawText / detailedPrompt) but excluded from styleText and contentText views.
+const BRIDGE_TAGS = new Set([
+  "BOUND FEATURES"
+]);
+
+function isBridgeTag(tag: string): boolean {
+  return BRIDGE_TAGS.has(tag);
+}
 
 const CONTENT_TAG_PREFIXES = ["SUBJECT", "MATERIAL RESPONSE", "SPATIAL LAYERS", "ENVIRONMENT", "IMPERFECTIONS & PHYSICS", "CONSTRAINTS"];
 
@@ -157,9 +193,11 @@ function splitConstraintLocks(content: string): {
 function splitSectionsByGroup(sections: Record<string, string>): {
   styleText: string;
   contentText: string;
+  boundText: string;
 } {
   const styleParts: string[] = [];
   const contentParts: string[] = [];
+  const boundParts: string[] = [];
 
   for (const [tag, content] of Object.entries(sections)) {
     if (tag === "CONSTRAINTS") {
@@ -173,6 +211,11 @@ function splitSectionsByGroup(sections: Record<string, string>): {
         }
         continue;
       }
+    }
+
+    if (isBridgeTag(tag)) {
+      boundParts.push(`[${tag}]\n${content}`);
+      continue;
     }
 
     const entry = `[${tag}]\n${content}`;
@@ -189,6 +232,7 @@ function splitSectionsByGroup(sections: Record<string, string>): {
   return {
     styleText: styleParts.join("\n\n"),
     contentText: contentParts.join("\n\n"),
+    boundText: boundParts.join("\n\n"),
   };
 }
 
@@ -199,7 +243,7 @@ export function parseImageResponse(rawText: string): ImagePromptResponse {
     throw new Error("无法解析图片分析结果，请重试。(E5)");
   }
 
-  const { styleText, contentText } = splitSectionsByGroup(sections);
+  const { styleText, contentText, boundText } = splitSectionsByGroup(sections);
   const warnings = validateSections(sections);
 
   return {
@@ -210,18 +254,19 @@ export function parseImageResponse(rawText: string): ImagePromptResponse {
     negativePrompt: extractNegativePromptFromSections(sections),
     styleText,
     contentText,
+    boundText,
     warnings,
   };
 }
 
 // ── JSON format parser (legacy) ────────────────────────────────────
 
-function trySplitStyleContent(text: string): { styleText: string; contentText: string } {
+function trySplitStyleContent(text: string): { styleText: string; contentText: string; boundText: string } {
   const sections = parseSectionedText(text);
   if (Object.keys(sections).length > 0) {
     return splitSectionsByGroup(sections);
   }
-  return { styleText: "", contentText: "" };
+  return { styleText: "", contentText: "", boundText: "" };
 }
 
 function normalizeStringArray(value: unknown): string[] {
@@ -302,6 +347,7 @@ function normalizeStructuredImageResponse(
     const { styleText, contentText } = trySplitStyleContent(response.detailedPrompt);
     response.styleText = response.styleText ?? styleText;
     response.contentText = response.contentText ?? contentText;
+    // boundText is intentionally dropped here: StructuredImagePromptResponse does not carry bridge data.
   }
 
   if (

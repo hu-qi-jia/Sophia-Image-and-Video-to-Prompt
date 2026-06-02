@@ -1,9 +1,6 @@
 import {
   buildGeminiImageInstruction
-} from "./image";
-// import {
-//   buildCategoryImageInstruction
-// } from "./imageCategoryPrompts";
+} from "./portrait";
 import {
   GEMINI_VIDEO_RESPONSE_SCHEMA,
   buildGeminiVideoInstruction,
@@ -17,7 +14,7 @@ import {
   formatLegacyImagePrompt,
   formatLegacyImageAnalysis
 } from "../parsers/imageResponse";
-import type { DetectedImageInfo, GeminiVideoPromptResponse, GeminiPromptResponse, /* ImageCategory, */ TargetModelId } from "../types";
+import type { DetectedImageInfo, GeminiVideoPromptResponse, GeminiPromptResponse, TargetModelId } from "../types";
 
 export {
   GEMINI_VIDEO_RESPONSE_SCHEMA,
@@ -34,16 +31,11 @@ export {
 
 /**
  * Build image analysis instruction. Always uses the generic template.
- * Category-specific routing has been disabled — all images use the unified prompt.
  */
 export function buildImageInstruction(
   targetModel: TargetModelId,
-  imageInfo?: DetectedImageInfo,
-  // category?: ImageCategory
+  imageInfo?: DetectedImageInfo
 ): string {
-  // if (category && category !== "auto") {
-  //   return buildCategoryImageInstruction(category, targetModel, imageInfo);
-  // }
   return buildGeminiImageInstruction(targetModel, imageInfo);
 }
 

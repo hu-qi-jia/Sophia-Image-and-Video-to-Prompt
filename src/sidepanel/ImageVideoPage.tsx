@@ -44,6 +44,7 @@ export function ImageVideoPage({
   onFileDrop,
   displayStyleText,
   displayContentText,
+  displayBoundText,
   onEditStyle,
   onEditContent,
   onCopyStyle,
@@ -74,6 +75,7 @@ export function ImageVideoPage({
   onFileDrop?: (file: File) => void;
   displayStyleText: string;
   displayContentText: string;
+  displayBoundText: string;
   styleCopyLabel: string;
   contentCopyLabel: string;
   onEditStyle: (val: string) => void;
@@ -333,7 +335,7 @@ export function ImageVideoPage({
               </button>
             ) : null}
           </div>
-          {(displayStyleText || displayContentText) ? (
+          {(displayStyleText || displayContentText || displayBoundText) ? (
             <div className="result-tab-bar">
               <button className={`result-tab-pill${resultTab === "all" ? " result-tab-pill--active" : ""}`} onClick={() => setResultTab("all")}>全部</button>
               <button className={`result-tab-pill${resultTab === "style" ? " result-tab-pill--active" : ""}`} onClick={() => setResultTab("style")}>风格描述</button>
@@ -353,13 +355,13 @@ export function ImageVideoPage({
               <div className="result-empty"><SparklePlaceholder /><p>上传媒体后点击生成</p></div>
             ) : null}
             {tabData.resultMode === "error" ? <div className="result-error-state"><p>{tabData.resultText}</p></div> : null}
-            {tabData.resultMode === "text" && (displayStyleText || displayContentText) ? (
+            {tabData.resultMode === "text" && (displayStyleText || displayContentText || displayBoundText) ? (
               <div className="result-dual-modules">
                 {resultTab === "all" ? (
                   <div className="result-module">
                     <textarea
                       className="result-edit-area result-module-area"
-                      value={displayResultText || [displayStyleText, displayContentText].filter(Boolean).join("\n\n")}
+                      value={[displayStyleText, displayContentText, displayBoundText].filter(Boolean).join("\n\n")}
                       onChange={(e) => onEditResult(e.target.value)}
                       spellCheck={false}
                       placeholder="识别结果..."

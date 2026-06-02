@@ -24,22 +24,6 @@ export type TargetModelId = (typeof TARGET_MODELS)[number]["id"];
 export const DEFAULT_TARGET_MODEL: TargetModelId = "seedance-2.0";
 export const GEMINI_ANALYSIS_MODEL = "gemini-2.5-flash";
 
-// ── Image category types (disabled — all images use generic prompt) ──
-
-// export const IMAGE_CATEGORIES = [
-//   { id: "auto", label: "自动识别", icon: "✨", description: "自动分析图片类型，使用通用提取规则" },
-//   { id: "portrait", label: "人物", icon: "👤", description: "真人写真、街拍、时尚、角色扮演、形体" },
-//   { id: "anime", label: "二次元", icon: "🎨", description: "日系动漫、厚涂、概念设定、漫画、像素风" },
-//   { id: "landscape", label: "风景", icon: "🏔", description: "自然风光、城市街景、夜景、室内空间、微距" },
-//   { id: "product", label: "产品", icon: "📦", description: "商品棚拍、美食、美妆、服饰、数码产品" },
-//   { id: "design", label: "设计", icon: "🎬", description: "平面海报、品牌LOGO、UI界面、信息图表" },
-//   { id: "art", label: "艺术", icon: "🖼", description: "油画水彩、雕塑3D、抽象艺术、超现实" },
-//   { id: "fantasy", label: "奇幻", icon: "⚔", description: "科幻、魔法奇幻、暗黑哥特、蒸汽/赛博朋克" },
-// ] as const;
-
-// export type ImageCategory = (typeof IMAGE_CATEGORIES)[number]["id"];
-
-// export const DEFAULT_IMAGE_CATEGORY: ImageCategory = "auto";
 export const FRAME_SAMPLING_MODES = ["fast", "standard", "detailed"] as const;
 export const DEFAULT_FRAME_SAMPLING_MODE = "standard";
 
@@ -309,6 +293,7 @@ export type ImagePromptResponse = {
   negativePrompt: string;
   styleText: string;
   contentText: string;
+  boundText: string;
   warnings: string[];
 };
 

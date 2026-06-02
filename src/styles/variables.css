@@ -17,6 +17,7 @@
 
   /* ══ Layer 2: Liquid Glass ══ */
   --glass-bg: rgba(255, 255, 255, 0.25);
+  --glass-bg-solid: rgba(255, 255, 255, 0.82);
   --glass-bg-hover: rgba(255, 255, 255, 0.46);
   --glass-bg-active: rgba(255, 255, 255, 0.58);
   --glass-border: rgba(255, 255, 255, 0.40);
@@ -228,6 +229,7 @@
     --bg-dark-elevated: #2C2C2E;
 
     --glass-bg: rgba(44, 44, 46, 0.25);
+    --glass-bg-solid: rgba(44, 44, 46, 0.82);
     --glass-bg-hover: rgba(58, 58, 60, 0.46);
     --glass-bg-active: rgba(72, 72, 74, 0.58);
     --glass-border: rgba(255, 255, 255, 0.08);
@@ -255,7 +257,7 @@
     --glass-refraction: linear-gradient(160deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 40%, rgba(120, 120, 200, 0.03) 70%, rgba(255, 255, 255, 0) 100%);
 
     --text-primary: #F5F5F7;
-    --text-secondary: #A1A1A6;
+    --text-secondary: #FFFFFF;
     --text-tertiary: #636366;
     --text-placeholder: #48484A;
     --text-on-dark: #FFFFFF;
@@ -290,9 +292,9 @@
     --tab-btn-hover-bg: rgba(255, 255, 255, 0.08);
     --tab-btn-active-bg: rgba(255, 255, 255, 0.14);
     --tab-btn-active-border: rgba(255, 255, 255, 0.12);
-    --tab-icon-filter: invert(80%) sepia(5%) saturate(150%) hue-rotate(180deg) brightness(110%) contrast(85%);
-    --tab-icon-hover-filter: invert(90%) sepia(5%) saturate(150%) hue-rotate(180deg) brightness(115%) contrast(90%);
-    --tab-icon-active-filter: invert(100%) brightness(100%) contrast(100%);
+    --tab-icon-filter: invert(100%) brightness(0.17);
+    --tab-icon-hover-filter: invert(100%) brightness(0.25);
+    --tab-icon-active-filter: invert(100%) brightness(0.17);
 
     --header-action-color: rgba(255, 255, 255, 0.70);
     --header-action-hover-bg: rgba(255, 255, 255, 0.10);
@@ -323,8 +325,8 @@
     --settings-icon-box-bg: rgba(48, 209, 88, 0.10);
     --settings-icon-box-border: rgba(48, 209, 88, 0.18);
 
-    --btn-dark-bg: rgba(255, 255, 255, 0.85);
-    --btn-dark-hover-bg: #FFFFFF;
+    --btn-dark-bg: #2b2b2b;
+    --btn-dark-hover-bg: #3a3a3a;
     --btn-dark-shadow: 0 1px 3px rgba(0, 0, 0, 0.30), inset 0 1px 0 rgba(255, 255, 255, 0.15);
     --btn-dark-hover-shadow: 0 4px 16px rgba(0, 0, 0, 0.40), inset 0 1px 0 rgba(255, 255, 255, 0.20);
 
@@ -366,6 +368,7 @@
   --bg-dark-elevated: #2C2C2E;
 
   --glass-bg: rgba(44, 44, 46, 0.30);
+  --glass-bg-solid: rgba(44, 44, 46, 0.82);
   --glass-bg-hover: rgba(58, 58, 60, 0.46);
   --glass-bg-active: rgba(72, 72, 74, 0.58);
   --glass-border: rgba(255, 255, 255, 0.08);
@@ -393,7 +396,7 @@
   --glass-refraction: linear-gradient(160deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 40%, rgba(120, 120, 200, 0.03) 70%, rgba(255, 255, 255, 0) 100%);
 
   --text-primary: #F5F5F7;
-  --text-secondary: #A1A1A6;
+  --text-secondary: #FFFFFF;
   --text-tertiary: #636366;
   --text-placeholder: #48484A;
   --text-on-dark: #FFFFFF;
@@ -428,9 +431,9 @@
   --tab-btn-hover-bg: rgba(255, 255, 255, 0.08);
   --tab-btn-active-bg: rgba(255, 255, 255, 0.14);
   --tab-btn-active-border: rgba(255, 255, 255, 0.12);
-  --tab-icon-filter: invert(80%) sepia(5%) saturate(150%) hue-rotate(180deg) brightness(110%) contrast(85%);
-  --tab-icon-hover-filter: invert(90%) sepia(5%) saturate(150%) hue-rotate(180deg) brightness(115%) contrast(90%);
-  --tab-icon-active-filter: invert(100%) brightness(100%) contrast(100%);
+  --tab-icon-filter: invert(100%) brightness(0.17);
+  --tab-icon-hover-filter: invert(100%) brightness(0.25);
+  --tab-icon-active-filter: invert(100%) brightness(0.17);
 
   --header-action-color: rgba(255, 255, 255, 0.70);
   --header-action-hover-bg: rgba(255, 255, 255, 0.10);
@@ -461,8 +464,8 @@
   --settings-icon-box-bg: rgba(48, 209, 88, 0.10);
   --settings-icon-box-border: rgba(48, 209, 88, 0.18);
 
-  --btn-dark-bg: rgba(255, 255, 255, 0.85);
-  --btn-dark-hover-bg: #FFFFFF;
+  --btn-dark-bg: #2b2b2b;
+  --btn-dark-hover-bg: #3a3a3a;
   --btn-dark-shadow: 0 1px 3px rgba(0, 0, 0, 0.30), inset 0 1px 0 rgba(255, 255, 255, 0.15);
   --btn-dark-hover-shadow: 0 4px 16px rgba(0, 0, 0, 0.40), inset 0 1px 0 rgba(255, 255, 255, 0.20);
 
