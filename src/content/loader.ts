@@ -422,7 +422,14 @@ function inject(): void {
 
   const host = document.createElement("div");
   host.id = HOST_ID;
+  const darkScheme = window.matchMedia?.("(prefers-color-scheme: dark)")?.matches;
+  host.setAttribute("data-theme", darkScheme ? "dark" : "light");
   document.body.appendChild(host);
+
+  // Sync data-theme when system color scheme changes
+  window.matchMedia?.("(prefers-color-scheme: dark)")?.addEventListener?.("change", (e) => {
+    host.setAttribute("data-theme", e.matches ? "dark" : "light");
+  });
 
   shadow = host.attachShadow({ mode: "closed" });
 

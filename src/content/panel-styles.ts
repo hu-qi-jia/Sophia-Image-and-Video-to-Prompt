@@ -298,7 +298,7 @@ const PANEL_CSS = `
   ._panel{
     background:
       linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02)),
-      rgba(28,28,30,.16);
+      rgba(28,28,30,.38);
     border-color:var(--glass-border);
     box-shadow:
       var(--glass-inner-shadow-dark),
@@ -307,13 +307,13 @@ const PANEL_CSS = `
   }
   ._panel::before{opacity:0}
   ._panel::after{display:none}
-  ._tab-nav{background:rgba(255,255,255,.06)}
-  ._tab-btn img{filter:invert(100%) brightness(0.17)}
+  ._tab-nav{background:rgba(28,28,30,.55);-webkit-backdrop-filter:blur(12px) saturate(160%);backdrop-filter:blur(12px) saturate(160%)}
+  ._tab-btn img{filter:invert(100%) brightness(0.7)}
   ._tab-btn:hover{background:rgba(255,255,255,.08)}
-  ._tab-btn:hover img{filter:invert(100%) brightness(0.25)}
+  ._tab-btn:hover img{filter:invert(100%) brightness(0.85)}
   ._tab-btn--active{background:rgba(255,255,255,.14);border-color:var(--glass-border-subtle);box-shadow:0 1px 4px rgba(0,0,0,.15),inset 0 1px 0 rgba(255,255,255,.08);border-radius:50%}
-  ._tab-btn--active img{filter:invert(100%) brightness(0.17)}
-  ._btn-icon{color:var(--text-on-dark-secondary)}
+  ._tab-btn--active img{filter:invert(100%) brightness(1)}
+  ._btn-icon{color:rgba(255,255,255,0.85)}
   ._btn-icon:hover{background:var(--accent-soft);color:var(--text-on-dark)}
   #sophia-root::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15)}
   ._loading{color:var(--text-on-dark-muted)}

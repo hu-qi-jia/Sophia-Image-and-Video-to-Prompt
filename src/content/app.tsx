@@ -15,7 +15,9 @@ const shadowRoot = getShadowRoot();
 const mountPoint = getMountPoint();
 
 if (shadowRoot && mountPoint) {
-  const fixedCss = (sharedCss + "\n" + sidepanelCss).replace(/:root\s*\{/g, ":host {");
+  const fixedCss = (sharedCss + "\n" + sidepanelCss)
+    .replace(/:root\s*\{/g, ":host {")
+    .replace(/\[data-theme="dark"\]\s+/g, ":host([data-theme=\"dark\"]) ");
 
   const styleEl = document.createElement("style");
   styleEl.textContent = fixedCss;

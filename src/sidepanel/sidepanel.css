@@ -983,6 +983,174 @@
   font-weight: var(--font-medium);
 }
 
+/* ═════════════════════════════════════════
+   Model Table — Table-style List
+   ═════════════════════════════════════════ */
+.settings-hero-card .model-table {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-width: 0;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+.model-table-header {
+  display: grid;
+  grid-template-columns: 36px 1fr 90px 50px;
+  align-items: center;
+  padding: var(--space-2) 0;
+  border-bottom: 0.5px solid var(--glass-border);
+  flex-shrink: 0;
+}
+.model-th {
+  font-size: var(--text-xxs);
+  font-weight: var(--font-normal);
+  color: #1d1d1f;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  text-align: left;
+}
+.model-th--check { text-align: center; }
+.model-th--provider { text-align: left; }
+.model-th--action { text-align: center; }
+
+/* Group */
+.model-group { display: flex; flex-direction: column; }
+.model-group-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: var(--space-2) var(--space-3);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.15s ease;
+}
+.model-group-header:hover { background: rgba(255,255,255,0.04); }
+.model-group-chevron {
+  color: var(--text-tertiary);
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+.model-group-label {
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--text-primary);
+}
+.model-group-body { display: flex; flex-direction: column; }
+
+/* Row */
+.model-row {
+  display: grid;
+  grid-template-columns: 36px 1fr 90px 50px;
+  align-items: center;
+  padding: var(--space-2) 0;
+  border-bottom: 0.5px solid rgba(128,128,128,0.15);
+  gap: 0;
+  position: relative;
+  transition: background 0.15s ease;
+  min-height: 40px;
+}
+.model-row:hover { background: rgba(255,255,255,0.04); }
+.model-row:last-child { border-bottom: none; }
+.model-row.is-active { background: rgba(255,255,255,0.06); }
+
+/* Row - Checkbox */
+.model-row-check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.model-row-check input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: 1.5px solid #c7c7cc;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  position: relative;
+}
+.model-row-check input[type="checkbox"]:hover {
+  border-color: #8e8e93;
+}
+.model-row-check input[type="checkbox"]:checked {
+  border-color: #007aff;
+  background: #007aff;
+}
+.model-row-check input[type="checkbox"]:checked::after {
+  content: '';
+  position: absolute;
+  top: 2px; left: 5px;
+  width: 4px; height: 8px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Row - Info (icon + name) */
+.model-row-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  min-width: 0;
+}
+.model-row-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--text-secondary);
+}
+.model-row-name {
+  font-size: var(--text-sm);
+  font-weight: var(--font-normal);
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Row - Provider */
+.model-row-provider {
+  font-size: var(--text-xxs);
+  font-weight: var(--font-medium);
+  color: #3c3c43;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Row - Actions */
+.model-row-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.model-row-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  cursor: pointer;
+  color: #1d1d1f;
+  transition: all 0.15s ease;
+}
+.model-row-btn:hover { background: rgba(0,0,0,0.06); }
+.model-row-btn--delete:hover { color: #ff3b30; background: rgba(255,59,48,0.08); }
+
 /* Model Edit Form — Glass */
 .model-edit-title {
   font-size: var(--text-base);
@@ -1011,6 +1179,7 @@
 }
 .model-edit-form-wrapper.is-open {
   margin-top: var(--space-2);
+  grid-column: 1 / -1;
 }
 
 /* Model Edit Form — Glass */
@@ -1220,7 +1389,9 @@
 .add-model-menu-item:hover { background: var(--bg-hover); }
 .add-model-menu-item > div { flex: 1; min-width: 0; }
 .add-model-menu-item-label {
-  font-weight: var(--font-medium); line-height: 1.3;
+  font-size: var(--text-sm);
+  font-weight: var(--font-normal);
+  line-height: 1.3;
 }
 .add-model-menu-item-desc {
   font-size: var(--text-xs); color: var(--text-secondary); line-height: 1.3;
@@ -1817,4 +1988,71 @@
 .settings-stack--compact .settings-privacy-card {
   width: 100%;
   flex-shrink: 0;
+}
+
+/* ═════════════════════════════════════════
+   Dark Mode Overrides
+   ═════════════════════════════════════════ */
+[data-theme="dark"] .result-tab-bar {
+  border-bottom-color: rgba(255, 255, 255, 0.25);
+}
+[data-theme="dark"] .result-tab-pill {
+  color: rgba(255, 255, 255, 0.75);
+}
+[data-theme="dark"] .result-tab-pill:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+[data-theme="dark"] .result-tab-pill--active {
+  color: #FFFFFF;
+  border-bottom-color: #FFFFFF;
+}
+[data-theme="dark"] .result-empty p {
+  color: rgba(255, 255, 255, 0.85);
+}
+[data-theme="dark"] .history-empty-state p {
+  color: rgba(255, 255, 255, 0.85);
+}
+[data-theme="dark"] .history-card-back .history-card-prompt {
+  color: rgba(255, 255, 255, 0.9);
+}
+[data-theme="dark"] .history-card-back .history-card-date {
+  color: rgba(255, 255, 255, 0.65);
+}
+[data-theme="dark"] .history-card-back .history-card-type-badge {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* Model Table Dark Mode */
+[data-theme="dark"] .model-th {
+  color: #FFFFFF;
+}
+[data-theme="dark"] .model-row-name {
+  color: #FFFFFF;
+}
+[data-theme="dark"] .model-row-provider {
+  color: #FFFFFF;
+}
+[data-theme="dark"] .model-row-check input[type="checkbox"] {
+  border-color: rgba(255, 255, 255, 0.5);
+  background: transparent;
+}
+[data-theme="dark"] .model-row-check input[type="checkbox"]:hover {
+  border-color: rgba(255, 255, 255, 0.75);
+}
+[data-theme="dark"] .model-row-check input[type="checkbox"]:checked {
+  border-color: #FFFFFF;
+  background: #FFFFFF;
+}
+[data-theme="dark"] .model-row-check input[type="checkbox"]:checked::after {
+  border-color: #1d1d1f;
+}
+[data-theme="dark"] .model-row-btn {
+  color: #FFFFFF;
+}
+[data-theme="dark"] .model-row-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+[data-theme="dark"] .model-row-btn--delete:hover {
+  color: #ff453a;
+  background: rgba(255, 69, 58, 0.12);
 }
