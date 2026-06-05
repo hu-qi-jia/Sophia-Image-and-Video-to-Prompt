@@ -224,90 +224,31 @@ export function SettingsView({
           {/* Model list */}
           {settings.models.length > 0 ? (
             <div className="model-table">
-              <div className="model-table-header">
-                <span className="model-th model-th--check" />
-                <span className="model-th model-th--name">模型</span>
-                <span className="model-th model-th--provider">服务商</span>
-                <span className="model-th model-th--action">操作</span>
-              </div>
               {PROVIDER_TYPES.map((pt) => {
                 const groupModels = settings.models.filter(m => m.providerType === pt.id);
                 if (groupModels.length === 0) return null;
                 return (
-                  <div key={pt.id} className="model-group">
-                    <button className="model-group-header">
-                      <svg className="model-group-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-                      <span className="model-group-label">{pt.label}</span>
-                    </button>
-                    <div className="model-group-body">
-                      {groupModels.map((model) => (
-                        <div key={model.id} className={`model-row${model.id === settings.activeModelId ? " is-active" : ""}`}>
-                          <label className="model-row-check" onClick={(e) => e.stopPropagation()}>
-                            <input type="checkbox"
-                              checked={model.id === settings.activeModelId}
-                              onChange={() => onSelectModel(model.id)}
-                            />
-                          </label>
-                          <div className="model-row-info" onClick={() => onSelectModel(model.id)}>
-                            <span className="model-row-name">{model.name || "未命名"}</span>
-                          </div>
-                          <span className="model-row-provider">{pt.label}</span>
-                          <div className="model-row-actions">
-                            <button className="model-row-btn model-row-btn--edit" title="编辑" onClick={(e) => { e.stopPropagation(); openEditForm(model); }}>
-                              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                            </button>
-                            <button className="model-row-btn model-row-btn--delete" title="删除" onClick={(e) => { e.stopPropagation(); onDeleteModel(model.id); }}>
-                              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                            </button>
-                          </div>
-                          {editingId === model.id ? (
-                            <div className="model-edit-form-wrapper is-open">
-                              <div className="model-edit-form">
-                                <div className="model-edit-title">编辑模型</div>
-
-                                <label className="settings-field">
-                                  <span>模型名称</span>
-                                  <input type="text" value={editFormModel} onChange={(e) => setEditFormModel(e.target.value)}
-                                    placeholder={model.providerType === "gemini" ? "例如 gemini-2.5-flash" : "例如 gpt-4o、deepseek-chat"} autoComplete="off" />
-                                </label>
-
-                                {model.providerType === "openai" ? (
-                                  <label className="settings-field">
-                                    <span>接口地址</span>
-                                    <input type="text" value={editFormBaseUrl} onChange={(e) => setEditFormBaseUrl(e.target.value)}
-                                      placeholder="https://api.openai.com/v1" autoComplete="off" />
-                                  </label>
-                                ) : null}
-
-                                <label className="settings-field">
-                                  <span>API 密钥</span>
-                                  <div className="settings-input-wrap">
-                                    <input type={showEditKey ? "text" : "password"} value={editFormKey} onChange={(e) => setEditFormKey(e.target.value)}
-                                      placeholder={model.providerType === "gemini" ? "输入 Gemini API 密钥" : "输入 API 密钥"} autoComplete="off" />
-                                    <button type="button" className="input-icon-button" onClick={() => setShowEditKey(!showEditKey)}>
-                                      {showEditKey ? (
-                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
-                                      ) : (
-                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                                      )}
-                                    </button>
-                                  </div>
-                                </label>
-
-                                {editErrorMsg ? (
-                                  <div className="model-edit-error">{editErrorMsg}</div>
-                                ) : null}
-                                <div className="model-edit-actions">
-                                  <button className="btn-secondary" onClick={cancelEditForm}>取消</button>
-                                  <button className="btn-primary btn-dark" onClick={handleEditSave} style={{ flex: 1 }}>保存修改</button>
-                                </div>
-                              </div>
-                            </div>
-                          ) : null}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                  <ModelGroup
+                    key={pt.id}
+                    label={pt.label}
+                    models={groupModels}
+                    activeModelId={settings.activeModelId}
+                    editingId={editingId}
+                    editFormModel={editFormModel}
+                    editFormKey={editFormKey}
+                    editFormBaseUrl={editFormBaseUrl}
+                    showEditKey={showEditKey}
+                    editErrorMsg={editErrorMsg}
+                    onSelectModel={onSelectModel}
+                    onDeleteModel={onDeleteModel}
+                    onOpenEditForm={openEditForm}
+                    onCancelEditForm={cancelEditForm}
+                    onEditFormModelChange={setEditFormModel}
+                    onEditFormKeyChange={setEditFormKey}
+                    onEditFormBaseUrlChange={setEditFormBaseUrl}
+                    onShowEditKeyChange={setShowEditKey}
+                    onEditSave={handleEditSave}
+                  />
                 );
               })}
             </div>
@@ -359,5 +300,126 @@ export function SettingsView({
         </div>
       </section>
     </section>
+  );
+}
+
+interface ModelGroupProps {
+  label: string;
+  models: ModelProvider[];
+  activeModelId: string;
+  editingId: string | null;
+  editFormModel: string;
+  editFormKey: string;
+  editFormBaseUrl: string;
+  showEditKey: boolean;
+  editErrorMsg: string | null;
+  onSelectModel: (modelId: string) => void;
+  onDeleteModel: (modelId: string) => void;
+  onOpenEditForm: (model: ModelProvider) => void;
+  onCancelEditForm: () => void;
+  onEditFormModelChange: (val: string) => void;
+  onEditFormKeyChange: (val: string) => void;
+  onEditFormBaseUrlChange: (val: string) => void;
+  onShowEditKeyChange: (val: boolean) => void;
+  onEditSave: () => void;
+}
+
+function ModelGroup({
+  label,
+  models,
+  activeModelId,
+  editingId,
+  editFormModel,
+  editFormKey,
+  editFormBaseUrl,
+  showEditKey,
+  editErrorMsg,
+  onSelectModel,
+  onDeleteModel,
+  onOpenEditForm,
+  onCancelEditForm,
+  onEditFormModelChange,
+  onEditFormKeyChange,
+  onEditFormBaseUrlChange,
+  onShowEditKeyChange,
+  onEditSave,
+}: ModelGroupProps) {
+  const [collapsed, setCollapsed] = useState(false);
+
+  return (
+    <div className={`model-group${collapsed ? " is-collapsed" : ""}`}>
+      <button className="model-group-header" onClick={() => setCollapsed(!collapsed)}>
+        <svg className="model-group-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        <span className="model-group-label">{label}</span>
+      </button>
+      <div className="model-group-body">
+        {models.map((model) => (
+          <div key={model.id} className={`model-row${model.id === activeModelId ? " is-active" : ""}`}>
+            <label className="model-row-check" onClick={(e) => e.stopPropagation()}>
+              <input type="checkbox"
+                checked={model.id === activeModelId}
+                onChange={() => onSelectModel(model.id)}
+              />
+            </label>
+            <div className="model-row-info" onClick={() => onSelectModel(model.id)}>
+              <span className="model-row-name">{model.name || "未命名"}</span>
+            </div>
+            <span className="model-row-provider">{label}</span>
+            <div className="model-row-actions">
+              <button className="model-row-btn model-row-btn--edit" title="编辑" onClick={(e) => { e.stopPropagation(); onOpenEditForm(model); }}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+              </button>
+              <button className="model-row-btn model-row-btn--delete" title="删除" onClick={(e) => { e.stopPropagation(); onDeleteModel(model.id); }}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </button>
+            </div>
+            {editingId === model.id ? (
+              <div className="model-edit-form-wrapper is-open">
+                <div className="model-edit-form">
+                  <div className="model-edit-title">编辑模型</div>
+
+                  <label className="settings-field">
+                    <span>模型名称</span>
+                    <input type="text" value={editFormModel} onChange={(e) => onEditFormModelChange(e.target.value)}
+                      placeholder={model.providerType === "gemini" ? "例如 gemini-2.5-flash" : "例如 gpt-4o、deepseek-chat"} autoComplete="off" />
+                  </label>
+
+                  {model.providerType === "openai" ? (
+                    <label className="settings-field">
+                      <span>接口地址</span>
+                      <input type="text" value={editFormBaseUrl} onChange={(e) => onEditFormBaseUrlChange(e.target.value)}
+                        placeholder="https://api.openai.com/v1" autoComplete="off" />
+                    </label>
+                  ) : null}
+
+                  <label className="settings-field">
+                    <span>API 密钥</span>
+                    <div className="settings-input-wrap">
+                      <input type={showEditKey ? "text" : "password"} value={editFormKey} onChange={(e) => onEditFormKeyChange(e.target.value)}
+                        placeholder={model.providerType === "gemini" ? "输入 Gemini API 密钥" : "输入 API 密钥"} autoComplete="off" />
+                      <button type="button" className="input-icon-button" onClick={() => onShowEditKeyChange(!showEditKey)}>
+                        {showEditKey ? (
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                        ) : (
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                        )}
+                      </button>
+                    </div>
+                  </label>
+
+                  {editErrorMsg ? (
+                    <div className="model-edit-error">{editErrorMsg}</div>
+                  ) : null}
+                  <div className="model-edit-actions">
+                    <button className="btn-secondary" onClick={onCancelEditForm}>取消</button>
+                    <button className="btn-primary btn-dark" onClick={onEditSave} style={{ flex: 1 }}>保存修改</button>
+                  </div>
+                </div>
+              </div>
+            ) : null}
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }

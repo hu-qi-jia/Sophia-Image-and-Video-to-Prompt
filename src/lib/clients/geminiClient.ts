@@ -147,6 +147,7 @@ export async function analyzeVideoFramesWithGemini({
         responseSchema: GEMINI_VIDEO_RESPONSE_SCHEMA,
         temperature: 0.4,
         topP: 0.9,
+        maxOutputTokens: 65536,
       },
     }),
   });
@@ -211,6 +212,7 @@ export async function analyzeImageWithGemini({
       generationConfig: {
         temperature: 0.3,
         topP: 0.85,
+        maxOutputTokens: 65536,
       },
     }),
   });
@@ -262,6 +264,7 @@ export async function enhancePromptWithGemini({
           responseSchema: GEMINI_VIDEO_RESPONSE_SCHEMA,
           temperature: 0.45,
           topP: 0.9,
+          maxOutputTokens: 65536,
         },
       }),
     });
@@ -294,6 +297,7 @@ export async function enhancePromptWithGemini({
       generationConfig: {
         temperature: 0.55,
         topP: 0.9,
+        maxOutputTokens: 65536,
       },
     }),
   });

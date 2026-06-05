@@ -1,0 +1,108 @@
+[ARCHETYPE]
+photograph
+
+[STYLE FINGERPRINT]
+mirror selfie phone photo, soft ambient window light from viewer-left + dim interior fill, 24mm wide-angle with mild barrel distortion, natural color balance with slight cool cast, teal door frame + exposed red brick wall + white crop top + khaki cargo pants + pink phone case, candid raw register.
+
+[AESTHETIC HOOK]
+A candid mirror selfie captured on a smartphone front camera, characterized by soft natural daylight entering from the left and filling the subject's face while leaving the background in gentle shadow. The aesthetic is raw and unpolished, typical of social media lifestyle documentation, featuring natural skin texture without heavy retouching and a slightly cool, neutral color temperature. The image relies on the contrast between the bright window light and the textured, somewhat dilapidated interior environment to create depth, avoiding any studio-grade lighting or artificial glamour filters.
+
+[VISUAL PRIORITY]
+1. Soft directional window light from viewer-left illuminating the face.
+2. Mirror selfie framing with visible phone and arm occlusion.
+3. Natural skin texture with visible pores and minimal smoothing.
+4. Wide-angle lens distortion (24mm equivalent) affecting perspective.
+5. Textured background elements (exposed brick, peeling paint) providing context.
+6. Casual, asymmetric pose with weight shifted to one hip.
+
+[LIGHTING]
+Single dominant soft daylight source from a large window positioned viewer-left, approximately 45 degrees off-axis and slightly above eye level. The light is diffused, creating soft transitions across the subject's face with gentle shadows on the viewer-right cheek and jawline. A secondary, very low-intensity ambient fill comes from the interior room lights, barely lifting the shadows in the background but contributing negligible illumination to the subject's front. No direct flash, no rim light, and no harsh specular highlights are present. Exposure is balanced for the subject's face, resulting in a slightly underexposed background that retains detail in the midtones but falls into soft darkness in the corners.
+
+[SHADOW GEOMETRY]
+Shadows are soft and diffuse, originating from the viewer-left light source. A form shadow falls gently across the subject's viewer-right side of the face, neck, and torso, defining the facial structure without hard edges. Contact shadows are visible where the subject's arms meet the torso and where the phone casts a faint shadow on the hand holding it. Background shadows are deep but not crushed, following the contours of the exposed brick and doorframe, enhancing the texture of the walls. There is no distinct cast shadow on the floor due to the angle and diffusion of the light.
+
+[LOOK PIPELINE]
+Capture character reflects a modern smartphone front-camera sensor with high dynamic range processing that preserves detail in both the bright window area and the darker interior. The look is clean but retains a slight digital noise in the shadow areas, typical of indoor mobile photography. No visible beauty filter, skin smoothing, or heavy saturation boost; colors appear natural with a subtle cool bias likely from the daylight white balance. The tone curve is linear to slightly S-shaped, maintaining contrast without crushing blacks or blowing out highlights. Grey balance is neutral-to-cool, consistent with daylight shooting indoors. Highlight rolloff is smooth, with no clipping on the skin or the window frame. Texture processing is minimal, preserving fabric weave and skin pores.
+
+[TONAL DISTRIBUTION]
+The image operates in a mid-key tonal range. Highlights are concentrated on the subject's face, hair, and the window frame, occupying roughly 20% of the tonal range. Midtones dominate the scene, covering the subject's clothing, skin shadows, and the majority of the background walls (approx. 60%). Shadows make up the remaining 20%, primarily in the deep recesses of the doorway and the far background, but they remain open enough to show texture rather than becoming pure black. Tonal separation is balanced, providing clear definition between the subject and the environment without high-contrast drama. The grey-scale structure is continuous, with no abrupt jumps or banding.
+
+[OPTICAL DEPTH]
+Focal length feel corresponds to a 24mm equivalent wide-angle lens, typical of smartphone front cameras, introducing mild barrel distortion at the frame edges (noticeable in the doorframe lines). Depth of field is moderately deep; the subject is sharp, and the background elements (brick wall, door) are also largely in focus, with only a slight natural falloff in the furthest background corners. Bokeh is minimal and indistinct due to the small sensor and wide aperture limitations of mobile lenses. Edge sharpness is consistent across the frame, with no significant vignetting or corner softness beyond natural lens characteristics. Subject isolation is achieved primarily through brightness contrast (lit subject vs. darker background) rather than optical blur.
+
+[STYLE & TEXTURE]
+Style is contemporary casual street style / lifestyle snapshot. Capture device is a flagship smartphone front camera. Medium texture is digital, clean but with authentic sensor noise in shadows. Realism character is photorealistic, capturing the imperfections of a real environment and a real person without stylization. Beauty processing is non-existent or extremely light; skin texture is natural with visible pores and slight unevenness. Snapshot-vs-editorial judgment confirms this is a casual self-captured image, not a staged commercial shoot. The texture of the environment (peeling paint, rough brick) contrasts with the smoothness of the skin and fabric, grounding the image in reality.
+
+[SKIN & FACE]
+Skin render tier is natural, showing visible pore structure and slight textural variation, particularly on the cheeks and forehead. Skin finish is matte-to-satin, with a natural oil sheen on the T-zone but no excessive gloss. Undertone appears neutral-cool under the daylight. Face topography shows soft highlights on the forehead, nose bridge, and cheekbones, with gentle shadows defining the jawline and under the chin. Catchlights are visible in both eyes, appearing as soft rectangular reflections from the window, positioned at the 10 o'clock position. Micro-details include natural eyebrow hairs, slight asymmetry in eye shape, and natural lip texture without heavy liner or gloss.
+
+[FRAME]
+Output aspect ratio: 2:3. Shot type is a three-quarter body mirror selfie. Subject position is centered horizontally but slightly offset vertically to accommodate the phone and arm. Subject scale occupies approximately 60% of the frame height and 40% of the frame width. Subject-to-environment ratio is roughly 60% subject to 40% environment. Anchor map includes the teal doorframe on the viewer-left, the exposed brick archway behind the subject, and the dark wooden beam on the viewer-right. Lens character shows mild wide-angle distortion. Perspective is eye-level, straight-on to the mirror. Camera viewpoint geometry: Camera height is chest/eye-level; Camera azimuth is frontal (facing the mirror); Camera pitch is level (0°); Camera roll is level (0°). The framing captures the subject from mid-thigh up, including the head, torso, and upper legs, with the phone held centrally in front of the chest.
+
+[COMPOSITION]
+Grid alignment follows a loose rule-of-thirds, with the subject's eyes near the upper third line. Visual weight is heavily centered on the subject due to lighting and placement. Focal hierarchy places the face as the primary anchor, followed by the phone and hands, then the textured background. Negative space is minimal, filled by the architectural details of the room. Balance is asymmetrical, with the heavy teal door on the left counterbalanced by the open space and wooden beam on the right. Leading lines are provided by the doorframe and the arch of the brick wall, directing attention toward the subject. Information density is moderate, with enough background detail to establish context without clutter.
+
+[ATMOSPHERE]
+Emotional tone is casual, confident, and intimate, typical of a personal style check or social media update. Spatial feeling is enclosed yet airy due to the window light, creating a sense of being in a unique, perhaps renovated or industrial-chic space. Temporal quality is contemporary and immediate, capturing a fleeting moment of self-expression.
+
+[SNAPSHOT FEEL]
+Framing includes the inevitable occlusion of the phone and hand, marking it clearly as a self-portrait. The pose is relaxed and slightly contrived for the camera, with a specific head tilt and gaze that feels spontaneous rather than rehearsed. Lighting is opportunistic, using available window light rather than a controlled setup. These elements contribute to an authentic, "in-the-moment" aesthetic.
+
+[ERA SIGNALS]
+Technology markers include the multi-lens smartphone camera module and the specific style of the phone case with charms, placing the image firmly in the 2020s. Fashion markers like the cargo pants, crop top, and baseball cap align with current youth streetwear trends. The setting suggests a modern appreciation for rustic or industrial interiors, common in contemporary cafes or studios.
+
+[PROMPT TAGS]
+photograph, portrait photography, candid photo, street photography, snapshot, selfie, mirror selfie, raw photo, natural light, wide angle, 24mm, casual style, fashion model, young woman, blonde hair, natural skin texture, pore-visible skin, no retouch, real photo, lo-fi aesthetic, indoor portrait
+
+[GENERATION CUES]
+mirror selfie, smartphone front camera, 24mm wide-angle, soft window light from left, natural skin texture, visible pores, matte skin finish, catchlight in eyes, casual pose, standing, holding pink phone, teal door frame, exposed brick wall, khaki cargo pants, white crop top, baseball cap, long blonde hair, natural lighting, no flash, mid-key exposure, realistic shadows, candid expression, asymmetrical composition, centered framing, 2:3 aspect ratio
+
+[NEGATIVE PROMPT]
+watermark, signature, text, logo, username, cropped, worst quality, low quality, jpeg artifacts, duplicate, morbid, mutilated, extra fingers, poorly drawn hands, poorly drawn face, mutation, deformed, ugly, blurry, bad anatomy, bad proportions, extra limbs, missing limbs, fused fingers, too many fingers, long neck, plastic skin, airbrushed, overly smooth, CGI appearance, unrealistic, oversaturated, doll-like, unnatural skin texture, porcelain skin, waxy skin, cartoon eyes, anime eyes, stylized features, heavy makeup look, Instagram filter, over-processed, studio lighting, softbox, side key light, rim light, backlight glow, bright daylight, evenly lit, professional photography, perfect illumination, clean shadows, staged pose, symmetrical composition, polished look, magazine quality, advertising aesthetic, fashion editorial, luxury campaign, ultra-detailed skin pores, perfect fabric simulation, glossy studio retouching, cinematic blockbuster lighting, hyper-clean reflections, wet-look street, premium commercial grading, immaculate styling, frontal pose, facing camera, looking at viewer, looking straight at camera, looking forward, eye contact with camera, front three-quarter, front-3/4, symmetrical pose, symmetrical composition, centered subject, mirror-image pose, both hands visible, both arms visible, both legs visible, full body visible, head-on view, straight back, upright posture, stiff posture, even shoulders, level shoulders, standing, walking, running, model pose, fashion pose, magazine pose, head straight, body straight, generic portrait pose, neutral front-facing pose, full face visible, both eyes visible symmetrically
+
+[CONSTRAINTS - STYLE]
+soft window light from viewer-left, natural skin texture with visible pores, matte-satin skin finish, wide-angle 24mm lens distortion, mid-key exposure with open shadows, casual snapshot aesthetic, no beauty filter, no studio lighting, no rim light, natural color balance with cool cast, realistic fabric textures.
+
+[SUBJECT 1]
+Young woman with long blonde hair taking a mirror selfie.
+- **Identity and appearance**: Human female, appears in her 20s, fair skin tone with neutral-cool undertones. Hair is long, straight, and platinum blonde, falling loosely over shoulders and back. Face shape is oval with a defined jawline and pointed chin. Eyes are almond-shaped with double eyelids, appearing light in color. Nose has a medium bridge and refined tip. Lips are medium-full with a natural bow. Brows are straight and light-colored, matching the hair. Distinctive features include a small mole or mark near the left cheekbone (viewer-right) and natural asymmetry in eye openness.
+- **Body & build**: Slim to athletic silhouette with a moderate frame. Shoulders are narrow, waist is defined, and hips are proportional. Body fat distribution is lean, with visible collarbones and toned arms. Muscle tone is subtle but present in the arms and shoulders.
+- **Expression and demeanor cues**: Eyebrows are relaxed, eyelids are half-open giving a sleepy or sultry look. Gaze is directed at the phone screen/mirror reflection, intense and focused. Mouth is slightly parted, lips relaxed. Expression reads as confident, cool, and candid.
+- **Pose and posture**: Stance is standing, weight shifted primarily to the viewer-right leg, creating a slight hip pop. Camera azimuth is frontal (facing the mirror). Head turn is slight, tilted down and to the viewer-left (subject's right), chin tucked slightly. Body twist is minimal, torso faces forward but hips angle slightly viewer-right. Spine curve is straight with a slight S-curve due to the hip shift. Shoulder heights are slightly uneven, with the viewer-left shoulder (holding the phone arm) raised higher. Limbs: Viewer-left arm is bent at the elbow, holding the phone up at chest level; viewer-right arm hangs loosely by the side, hand resting near the thigh. Hand placement: Left hand grips the phone; right hand is relaxed, fingers slightly curled.
+- **Makeup**: Natural style with light coverage foundation, matte finish. Eye makeup is minimal, possibly just mascara or light liner. Lip color is a natural pink/nude shade. Brows are groomed but natural. Blush is subtle, adding a hint of color to the cheeks.
+- **Clothing & accessories**:
+   1. **Garment inventory**: White sleeveless crop top (tight fit, short length exposing midriff), Khaki cargo pants (loose fit, multiple pockets, low rise), Black underwear waistband visible above pants.
+   2. **Fabric behavior**: Cotton/spandex blend for the top (smooth, stretchy), heavy cotton/canvas for the pants (stiff, structured drape).
+   3. **Construction details**: Crop top has thin straps and a scoop neckline. Cargo pants have large flap pockets on thighs, belt loops, and a button closure.
+   4. **Color & pattern**: Top is solid white. Pants are solid khaki/beige. Underwear waistband is black with white text/logo.
+   5. **Layering**: Crop top over bare skin; pants worn low on hips.
+   6. **Footwear & legwear**: Not visible in frame (cropped at mid-thigh).
+   7. **Accessories**: Dark green/black baseball cap with orange/red text embroidery worn backwards. Multiple silver rings on fingers of both hands. Silver chain bracelet on viewer-left wrist. Beaded bracelet on viewer-right wrist. Phone charm/keychain hanging from the pink phone case.
+   8. **Logo / text / branding**: Text on the cap (partially obscured, appears to say "HEAD" or similar). Text on the underwear waistband (partial letters visible).
+
+[MATERIAL RESPONSE]
+Fabric behavior: The white crop top clings smoothly to the skin, showing slight tension lines. The khaki cargo pants exhibit a stiff, structured drape with sharp creases around the pockets and thighs, contrasting with the soft skin. Metal surfaces (rings, bracelet) show dull, diffuse reflections consistent with indoor lighting. The phone case is glossy pink plastic, reflecting the window light brightly. Skin behaves with a matte-satin finish, absorbing most light but showing natural oil sheen on the T-zone.
+
+[SPATIAL LAYERS]
+Foreground: The subject's hands and phone, closest to the mirror surface.
+Midground: The subject's body (torso, head, legs).
+Background: The teal doorframe on the viewer-left, the exposed brick archway directly behind the subject, and the dark wooden beam and interior room on the viewer-right.
+Occlusion chain: Phone obscures part of the chest; arms obscure parts of the torso; subject obscures the background wall.
+Layer ordering: Mirror surface (implied) -> Phone/Hands -> Subject -> Background Architecture.
+Subject-to-environment positional mapping: Subject stands centered in the frame, positioned directly in front of the broken brick archway. To the viewer-left of the subject is a tall teal door with glass panels. To the viewer-right is a dark vertical wooden beam separating the immediate space from a deeper room area.
+
+[ENVIRONMENT]
+Indoor setting, likely a cafe, studio, or renovated loft with an industrial/rustic aesthetic. Ground/surface is not fully visible but appears to be concrete or tile. Background fixtures include a large teal painted door with glass panes and brass handles on the viewer-left. Behind the subject is a wall with a large, irregular hole revealing red brickwork underneath peeling white plaster, suggesting intentional distress or renovation. To the viewer-right, beyond the wooden beam, is a glimpse of another room with stacked boxes, a yellow container/object, and wooden furniture. Time of day appears to be daytime, indicated by the strong natural light from the window (off-frame viewer-left). Season cues are neutral, though the clothing suggests warm weather.
+
+[IMPERFECTIONS & PHYSICS]
+Resolution artifacts are minimal, consistent with a high-resolution smartphone sensor. Noise is visible in the shadow areas of the background, typical of indoor mobile photography. Compression artifacts are negligible. Optical flaws include mild barrel distortion from the wide-angle lens. Physical damage is present in the environment (peeling paint, exposed brick) but contributes to the aesthetic rather than being a flaw. No dust or scratches on the lens or mirror are apparent.
+
+[CONSTRAINTS - CONTENT]
+young woman with long blonde hair, oval face, fair skin, white crop top, khaki cargo pants, black underwear waistband visible, green baseball cap worn backwards, silver jewelry, pink phone with charms, standing pose with hip shift, holding phone with viewer-left hand, teal door on viewer-left, exposed brick archway behind subject, wooden beam on viewer-right, no additional limbs, no changed facial features, no symmetrized pose, no added background objects.
+
+[BOUND FEATURES]
+soft window light on subject's face: creates gentle gradient from viewer-left to viewer-right, highlighting cheekbones and nose bridge.
+natural skin texture on subject's face: visible pores and slight unevenness preserved, no smoothing filter applied.
+phone reflection in mirror: pink phone case and hand occlude lower center of subject's torso, defining the selfie perspective.
+ambient light on background textures: dim interior light reveals roughness of exposed brick and peeling paint behind subject.
+catchlight reflection in subject's eyes: rectangular window shape reflected in pupils, indicating light source direction and size.

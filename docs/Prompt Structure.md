@@ -1,51 +1,82 @@
 # Prompt Structure
+
 # 提示词结构
 
 > 双语结构规范 — 中英对照
 > Bilingual structure spec — English / Chinese parallel
 
----
+***
 
 <!-- ═══════════════════════════════════════════════════════════════════════ -->
+
 # 1. System Setup / 系统设置
-#    SYSTEM IDENTITY
-#    系统身份
+
+# SYSTEM IDENTITY
+
+# 系统身份
 
 <!-- ═══════════════════════════════════════════════════════════════════════ -->
+
 # 2. Core Rules / 核心规则
-#    CORE RULES (apply to BOTH axes, both phases)
-#    核心规则 (适用于两个轴、两个阶段)
 
-- 0.  **Realism Lock (CANONICAL).** / 写实锁定 (规范) — anti-overclean, source is a REAL imperfect photo
-- 1.  **Reproduction fidelity over description.** / 复现保真度优先于描述
-- 2.  **Match the source honestly.** / 诚实匹配原图
-- 3.  **Style-Content Decoupling (CANONICAL).** / 风格-内容解耦 (规范)
-- 4.  **Style carries the majority weight, with hard word budget (CANONICAL).** / 风格占多数权重，配硬性字数预算 (规范)
-- 5.  **Only state what is visible or strongly implied.** / 只陈述可见或强烈暗示的内容
-- 6.  **Viewer-Relative Direction (CANONICAL).** / 以观察者为基准的方位 (规范)
-- 7.  **Preserve spatial proportion honestly.** / 诚实保留空间比例
-- 8.  **Pose-Anti-Normalization (CANONICAL).** / 姿态反归一化 (规范)
-   - 8.1 Conditional sub-rule. / 条件子规则
-- 9.  **Subject scale and crop pressure lock.** / 主体比例与裁切压力锁定
-- 10. **Light Contribution filter (CANONICAL).** / 光源贡献过滤器 (规范)
+# CORE RULES (apply to BOTH axes, both phases)
+
+# 核心规则 (适用于两个轴、两个阶段)
+
+- <br />
+  1. **Realism Lock (CANONICAL).** / 写实锁定 (规范) — anti-overclean, source is a REAL imperfect photo
+- <br />
+  1. **Reproduction fidelity over description.** / 复现保真度优先于描述
+- <br />
+  1. **Match the source honestly.** / 诚实匹配原图
+- <br />
+  1. **Style-Content Decoupling (CANONICAL).** / 风格-内容解耦 (规范)
+- <br />
+  1. **Style carries the majority weight, with hard word budget (CANONICAL).** / 风格占多数权重，配硬性字数预算 (规范)
+- <br />
+  1. **Only state what is visible or strongly implied.** / 只陈述可见或强烈暗示的内容
+- <br />
+  1. **Viewer-Relative Direction (CANONICAL).** / 以观察者为基准的方位 (规范)
+- <br />
+  1. **Preserve spatial proportion honestly.** / 诚实保留空间比例
+- <br />
+  1. **Pose-Anti-Normalization (CANONICAL).** / 姿态反归一化 (规范)
+  - 8.1 Conditional sub-rule. / 条件子规则
+- <br />
+  1. **Subject scale and crop pressure lock.** / 主体比例与裁切压力锁定
+- <br />
+  1. **Light Contribution filter (CANONICAL).** / 光源贡献过滤器 (规范)
 
 <!-- ═══════════════════════════════════════════════════════════════════════ -->
+
 # 3. Recognition Priority / 识别优先级
-#    PORTRAIT REPRODUCTION PRIORITY
-#    肖像复现优先级
 
-- 0. Camera viewpoint and pose geometry preserved
-- 1. Identity geometry preserved, imperfections kept
-- 2. Skin render tier preserved
-- 3. Asymmetric pose geometry kept
-- 4. Multi-source light stack applied to face
+# PORTRAIT REPRODUCTION PRIORITY
+
+# 肖像复现优先级
+
+- <br />
+  1. Camera viewpoint and pose geometry preserved
+- <br />
+  1. Identity geometry preserved, imperfections kept
+- <br />
+  1. Skin render tier preserved
+- <br />
+  1. Asymmetric pose geometry kept
+- <br />
+  1. Multi-source light stack applied to face
 
 <!-- ═══════════════════════════════════════════════════════════════════════ -->
+
 # 4. Recognition Methodology / 识别方法论
+
 <!-- ─────────────────────────────────────────────────────────────────────── -->
+
 ## 4.1 Style Analysis / 风格分析
-#    §STYLE ANALYSIS (analysis-phase rules for the style axis)
-#    §STYLE ANALYSIS (风格轴的分析阶段规则)
+
+# §STYLE ANALYSIS (analysis-phase rules for the style axis)
+
+# §STYLE ANALYSIS (风格轴的分析阶段规则)
 
 - A. **Image-class fields** (always required) / 图像类别字段 (始终必填)
 - B. **Optical / lens fields** (always required) / 光学 / 镜头字段
@@ -59,8 +90,15 @@
   - C.5 **Low-key / high-key tone lock** (mandatory) / 调性锁定 (规范) — explicitly name the tonal register
 - D. **Color & palette fields** (always required) / 色彩与色板字段
   - D.1 **Surface color rule** (CANONICAL) / 表面色规则 (规范)
-  - D.2 **Saturation preservation rule** (CANONICAL) / 饱和度保留规则 (规范)
+  - D.2 **Saturation analysis** (mandatory) / 饱和度分析 — global register + per-region map + quantification anchors
+  - D.3 **Saturation preservation rule** (CANONICAL) / 饱和度保留规则 (规范)
+  - D.4 **AI saturation drift lock** (mandatory) / AI 饱和度漂移锁定 (规范)
 - E. **Tone & contrast fields** (always required) / 色调与对比度字段
+  - E.1 **Grey density / desaturated midtone lock** (mandatory for muted/film/vintage) / 灰度密度锁定 (规范)
+  - E.2 **Contrast quantification** (mandatory) / 对比度量化 (规范)
+  - E.3 **Micro-contrast / clarity lock** (mandatory, anti-AI-drift) / 微对比度/清晰度锁定 (规范)
+  - E.4 **AI contrast drift lock** (mandatory, paired with D.4) / AI 对比度漂移锁定 (规范)
+  - E.5 **Contrast-saturation coupling rule** (mandatory) / 对比度-饱和度耦合规则 (规范)
 - F. **Filter & post-processing fields** (always required) / 滤镜与后期字段
   - F.0 **Environment light spill / stain on nearby surfaces** (mandatory) / 环境光溢出与染色 (规范) — light spill onto walls/ceiling/furniture is the real-photo signature
   - F.1 Deliberate softness signature / 刻意柔化签名
@@ -79,11 +117,16 @@
 - K. **Mood / atmosphere fields** / 氛围 / 情绪字段
 
 <!-- ─────────────────────────────────────────────────────────────────────── -->
+
 ## 4.2 Content Analysis / 内容分析
-#    §CONTENT ANALYSIS (analysis-phase rules for the content axis)
-#    §CONTENT ANALYSIS (内容轴的分析阶段规则)
+
+# §CONTENT ANALYSIS (analysis-phase rules for the content axis)
+
+# §CONTENT ANALYSIS (内容轴的分析阶段规则)
 
 - A. **Subject identity** (always required when human subject present) / 主体身份
+  - A.0 **Skin tone description** (mandatory) / 肤色描述 — brightness tier + undertone + saturation
+  - A.0b **Skin-tone shift / whitening detection** (mandatory for face photos) / 肤色漂移/美白检测
   - A.1 **Ethnicity / regional appearance cues** (CANONICAL) / 种族 / 区域特征 (规范)
   - A.2 Hair / 头发
   - A.3 Face geometry (6 core dimensions) / 面部几何 (6 核心维度)
@@ -109,9 +152,12 @@
 - K. **Imperfections** (always required when imperfections contribute to content) / 不完美
 
 <!-- ─────────────────────────────────────────────────────────────────────── -->
+
 ## 4.3 Bound Features Note / 绑定特征说明
-#    §BOUND ANALYSIS (analysis-phase rules for the style × content bridge)
-#    §BOUND ANALYSIS (风格 × 内容桥接的分析阶段规则)
+
+# §BOUND ANALYSIS (analysis-phase rules for the style × content bridge)
+
+# §BOUND ANALYSIS (风格 × 内容桥接的分析阶段规则)
 
 - BOUND FEATURES / 绑定特征
   - Bridge module between STYLE and CONTENT / 风格与内容之间的桥接模块
@@ -128,35 +174,44 @@
     - Subject-to-adjacent-object color bleed / contamination / 人物与相邻物体的颜色溢出
 
 <!-- ═══════════════════════════════════════════════════════════════════════ -->
+
 # 5. Output Format Specification / 输出格式规范
+
 <!-- ─────────────────────────────────────────────────────────────────────── -->
+
 ## 5.1 General Rules / 通用规则
-#    §OUTPUT FORMAT + §OUTPUT RULES
-#    §OUTPUT FORMAT + §OUTPUT RULES
+
+# §OUTPUT FORMAT + §OUTPUT RULES
+
+# §OUTPUT FORMAT + §OUTPUT RULES
 
 - All output in English only / 全英文输出
-- Each [TAG] on its own line / 每个 [TAG] 单独一行
+- Each \[TAG] on its own line / 每个 \[TAG] 单独一行
 - Be concrete and specific / 具体且精确
 - Use negation to prevent errors / 用否定句预防错误
 - Only skip CONDITIONAL / OPTIONAL tags when not applicable / 不适用时才跳过条件 / 可选 TAG
 - Output is a single continuous text / 输出为单段连续文本
 
 <!-- ─────────────────────────────────────────────────────────────────────── -->
+
 ## 5.2 Style Description Module / 风格描述模块
-#    §STYLE OUTPUT (output-phase specs for the 19 style-axis [TAG]s)
-#    §STYLE OUTPUT (风格轴 19 个 [TAG] 的输出阶段规范)
-#    Refs: §STYLE ANALYSIS
+
+# §STYLE OUTPUT (output-phase specs for the 19 style-axis \[TAG]s)
+
+# §STYLE OUTPUT (风格轴 19 个 \[TAG] 的输出阶段规范)
+
+# Refs: §STYLE ANALYSIS
 
 1. `[ARCHETYPE]` / 图像原型
-2. `[STYLE FINGERPRINT]` (30-45 words, hard cap 50) / 风格指纹
-3. `[AESTHETIC HOOK]` / 美学钩子
-4. `[VISUAL PRIORITY]` / 视觉优先级
+2. `[STYLE FINGERPRINT]` (30-45 words, hard cap 50) / 风格指纹 — defines archetype, realism register, quality tier
+3. `[AESTHETIC HOOK]` (ref: §STYLE OUTPUT 2) / 美学钩子 — 1-2 most distinctive visual hooks, NO repeat of realism/quality tier
+4. `[VISUAL PRIORITY]` (refs §STYLE OUTPUT 2, §STYLE OUTPUT 3) / 视觉优先级 — first 5 items HARD BAN on content controls
 5. `[LIGHTING]` (ref: §STYLE ANALYSIS C, C.4 color temperature lock, C.2 ambient-interior safeguard) / 光照
 6. `[SHADOW GEOMETRY]` (ref: §STYLE ANALYSIS I + C) / 阴影几何
-7. `[LOOK PIPELINE]` (ref: §STYLE ANALYSIS D, E, F, F.0 environment light spill, F.4 over-cleanup lock) / 视觉管线
-8. `[TONAL DISTRIBUTION]` (ref: §STYLE ANALYSIS E, C.5 low-key/high-key tone lock) / 色调分布
+7. `[LOOK PIPELINE]` (ref: §STYLE ANALYSIS D, D.2 saturation analysis, E, E.4 AI contrast drift lock, E.5 contrast-saturation coupling, F, F.0 environment light spill, F.4 over-cleanup lock) / 视觉管线
+8. `[TONAL DISTRIBUTION]` (ref: §STYLE ANALYSIS E, E.1 grey density, E.2 contrast quantification, E.4 AI contrast drift lock, E.5 contrast-saturation coupling, C.5 low-key/high-key tone lock) / 色调分布
 9. `[OPTICAL DEPTH]` (ref: §STYLE ANALYSIS B) / 光学景深
-10. `[STYLE & TEXTURE]` (ref: §STYLE ANALYSIS G, F.2, F.3, F.4 over-cleanup lock, F.5 over-sharpening lock, H) / 风格与质感
+10. `[STYLE & TEXTURE]` (ref: §STYLE ANALYSIS G, E.3 micro-contrast/clarity lock, E.1 grey density, F.2, F.3, F.4 over-cleanup lock, F.5 over-sharpening lock, H) / 风格与质感
 11. `[SKIN RENDER]` (ref: §STYLE ANALYSIS G, §CONTENT OUTPUT 1 identity boundary) / 皮肤渲染
 12. `[FRAME]` (ref: §STYLE ANALYSIS J, J.0 spatial structure lock, B, I) / 框架
 13. `[COMPOSITION]` (ref: §STYLE ANALYSIS J.2, J.3, K) / 构图
@@ -168,12 +223,17 @@
 19. `[NEGATIVE PROMPT]` / 否定提示词
 
 <!-- ─────────────────────────────────────────────────────────────────────── -->
-## 5.3 Content Description Module / 内容描述模块
-#    §CONTENT OUTPUT (output-phase specs for the 6 content-axis [TAG]s)
-#    §CONTENT OUTPUT (内容轴 6 个 [TAG] 的输出阶段规范)
-#    Refs: §CONTENT ANALYSIS
 
-1. `[SUBJECT 1..N]` (ref: §CONTENT ANALYSIS A, B, C, D, E, F, G) / 主体
+## 5.3 Content Description Module / 内容描述模块
+
+# §CONTENT OUTPUT (output-phase specs for the 6 content-axis \[TAG]s)
+
+# §CONTENT OUTPUT (内容轴 6 个 \[TAG] 的输出阶段规范)
+
+# Refs: §CONTENT ANALYSIS
+
+1. `[SUBJECT 1..N]` (ref: §CONTENT ANALYSIS A, A.0 skin tone, A.0b shift, B, C, D, E, F, G) / 主体
+   - Skin tone mandatory: brightness tier + undertone + saturation per §CONTENT ANALYSIS A.0; F.2 whitening shift per A.0b / 肤色必填：亮度档+色温+饱和度
    - Body proportion and volume per §CONTENT ANALYSIS B; for female subjects, body fullness may lean slightly fuller / 身体比例与体积；女性身材饱满度可微偏饱满方向
 2. `[MATERIAL RESPONSE]` (OPTIONAL — ref: §CONTENT ANALYSIS H) / 材质反应
 3. `[SPATIAL LAYERS]` (CONDITIONAL — ref: §CONTENT ANALYSIS I; 5-10 anchors + frame coverage) / 空间层
@@ -182,29 +242,44 @@
 6. `[CONSTRAINTS]` (ref: §CONTENT ANALYSIS G.1, §CORE RULE 0, 8, 10, §STYLE ANALYSIS C, J) / 约束
 
 <!-- ─────────────────────────────────────────────────────────────────────── -->
+
 ## 5.4 Bridge Module / 桥接模块
-#    §BOUND OUTPUT (output-phase spec for the 1 bridge [TAG])
-#    §BOUND OUTPUT (1 个桥接 [TAG] 的输出阶段规范)
-#    Refs: §BOUND ANALYSIS
+
+# §BOUND OUTPUT (output-phase spec for the 1 bridge \[TAG])
+
+# §BOUND OUTPUT (1 个桥接 \[TAG] 的输出阶段规范)
+
+# Refs: §BOUND ANALYSIS
 
 1. `[BOUND FEATURES]` (ref: §BOUND ANALYSIS) / 绑定特征
 
 <!-- ═══════════════════════════════════════════════════════════════════════ -->
+
 # 6. Output Self-Check / 输出自检
-#    §OUTPUT QUALITY VALIDATION
-#    §OUTPUT QUALITY VALIDATION
 
-- 1. **Completeness Check** / 完整性检查 — all required tags present, no empty required tags
-- 2. **Consistency Check** / 一致性检查 — no contradictory claims
-- 3. **Decoupling Check** / 解耦检查 — STYLE OUTPUT contains no identity specifics; CONTENT OUTPUT contains no rendering language
-- 4. **Accuracy Check** / 准确性检查 — focal length, lighting direction, shadow direction, DOF match visible evidence
-- 5. **Anti-Hallucination Check** / 反幻觉检查 — no invisible subjects, colors, or equipment
-- 6. **Output Format Check** / 输出格式检查 — each tag on its own line with [BRACKETS]
-- 7. **MODULE OUTPUT ORDER** / 模块输出顺序
+# §OUTPUT QUALITY VALIDATION
 
----
+# §OUTPUT QUALITY VALIDATION
+
+- <br />
+  1. **Completeness Check** / 完整性检查 — all required tags present, no empty required tags
+- <br />
+  1. **Consistency Check** / 一致性检查 — no contradictory claims
+- <br />
+  1. **Decoupling Check** / 解耦检查 — STYLE OUTPUT contains no identity specifics; CONTENT OUTPUT contains no rendering language
+- <br />
+  1. **Accuracy Check** / 准确性检查 — focal length, lighting direction, shadow direction, DOF match visible evidence
+- <br />
+  1. **Anti-Hallucination Check** / 反幻觉检查 — no invisible subjects, colors, or equipment
+- <br />
+  1. **Output Format Check** / 输出格式检查 — each tag on its own line with \[BRACKETS]
+- <br />
+  1. **MODULE OUTPUT ORDER** / 模块输出顺序
+
+***
 
 # Appendix: Layout Map / 附录：结构映射
+
 # 附录：分析端 × 输出端，风格 × 内容 双轴分离
 
 ```
@@ -229,7 +304,8 @@
 # Key Invariants / 关键不变量
 
 - **Single source of truth** / 单一真实来源 — Each rule lives in EXACTLY ONE place (analysis OR output, style OR content). / 每条规则只在一个地方出现
-- **Cross-references via `ref:`** / 跨块引用 — Every [TAG] output spec references analysis rules via `(ref: §STYLE ANALYSIS X)` and does NOT re-state them. / 每个 [TAG] 通过 ref 引用分析规则，不重复
+- **Cross-references via** **`ref:`** / 跨块引用 — Every \[TAG] output spec references analysis rules via `(ref: §STYLE ANALYSIS X)` and does NOT re-state them. / 每个 \[TAG] 通过 ref 引用分析规则，不重复
 - **Style-Content axis split** / 风格-内容轴分离 — STYLE 块 (§STYLE ANALYSIS + §STYLE OUTPUT) 在文件上半部，CONTENT 块 (§CONTENT ANALYSIS + §CONTENT OUTPUT) 在下半部。/ 物理分轴
-- **Triple-lock protocol** / 三处锁定 — 5-axis azimuth + pitch values MUST appear identically in §STYLE OUTPUT [FRAME], §CONTENT OUTPUT [SUBJECT 1] pose, and §STYLE OUTPUT [GENERATION CUES]. / 三处数值一致
-- **Bridge-only crossover** / 桥接唯一切点 — The only allowed style×content crossover is §BOUND OUTPUT [BOUND FEATURES]; all other axes stay pure. / 唯一交叉点在 BOUND
+- **Triple-lock protocol** / 三处锁定 — 5-axis azimuth + pitch values MUST appear identically in §STYLE OUTPUT \[FRAME], §CONTENT OUTPUT \[SUBJECT 1] pose, and §STYLE OUTPUT \[GENERATION CUES]. / 三处数值一致
+- **Bridge-only crossover** / 桥接唯一切点 — The only allowed style×content crossover is §BOUND OUTPUT \[BOUND FEATURES]; all other axes stay pure. / 唯一交叉点在 BOUND
+

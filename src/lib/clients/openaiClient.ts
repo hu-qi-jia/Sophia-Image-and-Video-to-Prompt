@@ -187,7 +187,7 @@ export async function analyzeImage({
       ],
       temperature: 0.5,
       top_p: 0.9,
-      max_tokens: 32768,
+      max_tokens: 65536,
     }),
     signal,
   });
@@ -236,6 +236,49 @@ export async function analyzeImageStream({
   signal?: AbortSignal;
   onProgress?: (text: string) => void;
 }): Promise<ReturnType<typeof parseGeminiImageResponse>> {
+  // Try streaming; fall back to non-streaming if the provider doesn't support it
+  try {
+    return await tryStreaming({
+      apiKey, baseUrl, modelName, targetModel,
+      imageDataUrl, imageInfo, signal, onProgress,
+    });
+  } catch (streamErr) {
+    const msg = streamErr instanceof Error ? streamErr.message : String(streamErr);
+    const isStreamError =
+      msg.toLowerCase().includes("stream") ||
+      msg.toLowerCase().includes("sse");
+    if (isStreamError) {
+      // Fall back to non-streaming
+      const result = await analyzeImage({
+        apiKey, baseUrl, modelName, targetModel,
+        imageDataUrl, imageInfo, signal,
+      });
+      if (onProgress) onProgress(result.generatedPrompt);
+      return result;
+    }
+    throw streamErr;
+  }
+}
+
+async function tryStreaming({
+  apiKey,
+  baseUrl,
+  modelName,
+  targetModel,
+  imageDataUrl,
+  imageInfo,
+  signal,
+  onProgress,
+}: {
+  apiKey: string;
+  baseUrl: string;
+  modelName: string;
+  targetModel: TargetModelId;
+  imageDataUrl: string;
+  imageInfo?: DetectedImageInfo;
+  signal?: AbortSignal;
+  onProgress?: (text: string) => void;
+}): Promise<ReturnType<typeof parseGeminiImageResponse>> {
   const endpoint = `${baseUrl}/chat/completions`;
   const instruction = buildImageInstruction(targetModel, imageInfo);
 
@@ -266,7 +309,7 @@ export async function analyzeImageStream({
       ],
       temperature: 0.5,
       top_p: 0.9,
-      max_tokens: 32768,
+      max_tokens: 65536,
       stream: true,
     }),
     signal,
@@ -275,7 +318,8 @@ export async function analyzeImageStream({
   if (!response.ok) {
     const errorText = await response.text().catch(() => "");
     throw new Error(
-      `API 请求失败 (${response.status}): ${errorText.slice(0, 300)}`
+      errorText.slice(0, 300) ||
+        `API 请求失败 (${response.status})，请检查您的 API 密钥、配额或网络连接。`
     );
   }
 

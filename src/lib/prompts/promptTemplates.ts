@@ -1,6 +1,6 @@
 import {
   buildGeminiImageInstruction
-} from "./portrait";
+} from "./image";
 import {
   GEMINI_VIDEO_RESPONSE_SCHEMA,
   buildGeminiVideoInstruction,
