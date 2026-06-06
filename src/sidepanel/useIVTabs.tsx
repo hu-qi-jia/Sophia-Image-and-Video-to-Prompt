@@ -3,7 +3,8 @@ import { analyzeImageStream, analyzeVideoFrames } from "../lib/clients/aiClient"
 import { extractFrames } from "../lib/media/frameExtractor";
 import { readFileAsDataUrl } from "../lib/media/imageUtils";
 import { createAnalysisState } from "../lib/storage";
-import type { ModelProvider, StoredSettings, RuntimeMessage } from "../lib/types";
+import type { ModelProvider, StoredSettings, RuntimeMessage, ImageAnalysisMode } from "../lib/types";
+import { DEFAULT_IMAGE_ANALYSIS_MODE } from "../lib/types";
 import { logError, safeRuntimeSendMessage } from "../lib/error-utils";
 import { COPY_FEEDBACK_DURATION_MS } from "../lib/constants";
 import {
@@ -38,6 +39,7 @@ export function useIVTabs(
     video: createInitialIVTabData(),
   });
   const [activeTab, setActiveTab] = useState<TabId>("image");
+  const [imageMode, setImageMode] = useState<ImageAnalysisMode | null>(null);
 
   const imageFileRef = useRef<HTMLInputElement | null>(null);
   const videoFileRef = useRef<HTMLInputElement | null>(null);
@@ -160,6 +162,12 @@ export function useIVTabs(
     if (!hasApiKey) { setSubView("settings"); return; }
     if (!hasMedia || isAnalyzing) return;
 
+    // 图片模式必须选择人像或产品
+    if (currentIVTab === "image" && !imageMode) {
+      updateIVTab("image", { uploadError: "请先选择图片类型：人像或产品" });
+      return;
+    }
+
     const tab = currentIVTab;
     const mediaSrc = ivTabData[tab].mediaSource;
     resetIVTabResult(tab);
@@ -227,7 +235,7 @@ export function useIVTabs(
         const result = await analyzeImageStream({
           apiKey: activeModel!.apiKey, baseUrl: activeModel!.baseUrl, modelName: activeModel!.modelName,
           providerType: activeModel!.providerType, targetModel: settings.targetModel, imageDataUrl, imageInfo,
-          signal: controller.signal, onProgress: (text: string) => { updateIVTab(tab, { streamText: text, resultText: text }); },
+          imageMode: imageMode ?? undefined, signal: controller.signal, onProgress: (text: string) => { updateIVTab(tab, { streamText: text, resultText: text }); },
         });
         const generatedState = createAnalysisState(activeTabId, "generated", "识别完成", settings.targetModel, {
           mediaType: "image", sourceType: "local", imageInfo, previewFrameUrl: imageDataUrl,
@@ -266,7 +274,25 @@ export function useIVTabs(
 
   function handleAbort() {
     const tab = currentIVTab;
-    if (abortControllerRefs.current[tab]) { abortControllerRefs.current[tab]!.abort(); abortControllerRefs.current[tab] = null; }
+
+    // Abort local analysis (applies to local-image, local-video)
+    if (abortControllerRefs.current[tab]) {
+      abortControllerRefs.current[tab]!.abort();
+      abortControllerRefs.current[tab] = null;
+    }
+
+    // For web-image analysis, send abort message to background service worker
+    const mediaSrc = ivTabData[tab].mediaSource;
+    if (mediaSrc.kind === "web-image") {
+      void safeRuntimeSendMessage({ type: "VIDEO2PROMPT_ABORT_ANALYSIS" } satisfies RuntimeMessage);
+    }
+
+    // Reset local analysis state so the UI stops showing "识别中"
+    resetIVTabResult(tab);
+    updateIVTab(tab, {
+      isAnalyzingLocal: false,
+      analysisState: createAnalysisState(activeTabId, "idle", "分析已中止。", settings.targetModel),
+    });
   }
 
   function handleUploadClick() {
@@ -358,5 +384,6 @@ export function useIVTabs(
     updateIVTab, resetIVTabResult, syncFromBackgroundState,
     handleAnalyze, handleClear, handleAbort, handleUploadClick, handleLocalUpload, handleFileDrop,
     handleCopy, handleCopyStyle, handleCopyContent, handleCopyAll, handleTabChange,
+    imageMode, setImageMode,
   };
 }

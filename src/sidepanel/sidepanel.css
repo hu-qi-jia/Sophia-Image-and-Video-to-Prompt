@@ -39,6 +39,154 @@
 }
 
 /* ═════════════════════════════════════════
+   Image Mode Selector — Portrait / Product
+   ═════════════════════════════════════════ */
+.image-mode-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  width: 100%;
+  overflow: visible;
+  position: relative;
+  z-index: 30;
+}
+.image-mode-header {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  position: relative;
+  flex-shrink: 0;
+}
+.image-mode-title {
+  font-size: var(--text-sm);
+  font-weight: var(--font-normal);
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+.image-mode-dropdown {
+  position: relative;
+  flex: 1;
+}
+.image-mode-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+  backdrop-filter: var(--glass-blur-sm);
+  border: 0.5px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: var(--btn-padding-lg);
+  font-size: var(--text-sm);
+  font-weight: var(--font-normal);
+  color: var(--text-primary);
+  cursor: pointer;
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.2s var(--ease-out);
+  box-shadow: var(--glass-inner-shadow);
+}
+.image-mode-trigger:hover {
+  border-color: var(--glass-border-hover);
+  background: var(--glass-bg-hover);
+}
+.image-mode-trigger.is-open {
+  border-color: var(--glass-border-hover);
+}
+.image-mode-trigger.is-placeholder .image-mode-label {
+  color: var(--text-tertiary);
+}
+.image-mode-trigger.is-open .image-mode-chevron { transform: rotate(180deg); }
+.image-mode-label { flex: 1; text-align: left; }
+.image-mode-chevron {
+  width: 15px; height: 15px;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+  color: var(--text-primary);
+}
+.image-mode-menu {
+  position: absolute;
+  bottom: calc(100% + 6px); left: 0; right: 0;
+  background: var(--glass-bg-solid);
+  -webkit-backdrop-filter: blur(40px) saturate(200%);
+  backdrop-filter: blur(40px) saturate(200%);
+  border: 0.5px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--glass-shadow-elevated), var(--glass-inner-shadow), var(--glass-edge-light);
+  z-index: 50;
+  overflow: hidden;
+  animation: menu-in-up 0.18s var(--ease-out);
+}
+
+/* Compact 模式：图片类型菜单改为向下弹出 */
+.iv-split-layout--compact .image-mode-menu {
+  bottom: auto;
+  top: calc(100% + 6px);
+  animation: menu-in-down 0.18s var(--ease-out);
+}
+.image-mode-opt {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  width: 100%;
+  padding: 10px 12px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s var(--ease-out);
+}
+.image-mode-opt:hover { background: var(--bg-hover); }
+.image-mode-opt.is-selected {
+  background: var(--accent-soft);
+  position: relative;
+}
+.image-mode-opt.is-selected::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 8px; bottom: 8px;
+  width: 3px;
+  border-radius: 0 2px 2px 0;
+  background: var(--accent);
+}
+.image-mode-opt-label {
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--text-primary);
+  text-align: left;
+}
+.image-mode-opt-desc {
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+  text-align: left;
+}
+
+.image-mode-error {
+  color: var(--color-error);
+  font-size: var(--text-xs);
+  margin: var(--space-1) 0 0 0;
+  text-align: center;
+}
+
+/* ═════════════════════════════════════════
+   Upload Actions — Standalone (below mode selector)
+   ═════════════════════════════════════════ */
+.upload-actions-standalone {
+  display: flex;
+  gap: var(--space-2);
+  width: 100%;
+  box-sizing: border-box;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.upload-actions-standalone .btn-primary,
+.upload-actions-standalone .btn-secondary {
+  flex: 1;
+}
+
+/* ═════════════════════════════════════════
    Frame Sampling — Standalone Row
    ═════════════════════════════════════════ */
 .frame-sampling-row {
@@ -144,8 +292,7 @@
   background: var(--glass-bg-hover);
 }
 .frame-sampling-trigger.is-open {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-glow);
+  border-color: var(--glass-border-hover);
 }
 .frame-sampling-trigger.is-open .frame-sampling-chevron { transform: rotate(180deg); }
 .frame-sampling-label { flex: 1; text-align: left; }
@@ -170,7 +317,27 @@
 }
 @keyframes menu-in-up {
   from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes menu-in-down {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Compact 模式：帧采样菜单改为向下弹出，避免被顶部 tab 遮挡 */
+.iv-split-layout--compact .frame-sampling-menu {
+  bottom: auto;
+  top: calc(100% + 6px);
+  animation: menu-in-down 0.18s var(--ease-out);
+}
+
+/* Compact 模式：允许弹窗突破裁剪，并确保层级高于右侧结果面板 */
+.iv-split-layout--compact {
+  overflow: visible;
+}
+.iv-split-layout--compact .iv-left-panel {
+  z-index: 50;
+  overflow: visible;
 }
 .frame-sampling-opt {
   display: flex;
@@ -301,7 +468,7 @@
 .result-expand-btn:active { transform: scale(0.95); }
 .result-expand-btn:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--accent-glow); }
 
-.result-card-body { flex: 1; min-height: 0; border-radius: var(--radius-lg); position: relative; z-index: 1; overflow: hidden; display: flex; flex-direction: column; }
+.result-card-body { flex: 1; min-height: 0; position: relative; z-index: 1; display: flex; flex-direction: column; }
 .result-card--expanded .result-card-body { flex: 3; }
 
 .result-loading {
@@ -1581,7 +1748,8 @@
   flex: 0 0 auto;
   max-height: 45%;
   width: 100%;
-  overflow-y: auto;
+  overflow: visible;
+  z-index: 100;
 }
 .iv-split-layout--compact .iv-right-panel {
   flex: 1;

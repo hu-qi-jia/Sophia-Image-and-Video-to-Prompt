@@ -128,6 +128,7 @@ export function App() {
             currentMediaPreview={state.currentMediaPreview}
             currentMediaAspectRatio={state.currentMediaAspectRatio}
             panelSizeMode={panelSizeMode}
+            imageMode={state.imageMode}
             onUploadClick={actions.handleUploadClick}
             onAnalyze={actions.handleAnalyze}
             onClear={actions.handleClear}
@@ -136,6 +137,7 @@ export function App() {
             onEditResult={(val) => actions.updateIVTab("image", { editedResultText: val })}
             onToggleExpanded={() => actions.updateIVTab("image", { isExpanded: !state.ivTabData.image.isExpanded })}
             onFileDrop={(file) => actions.handleFileDrop(file, "image")}
+            onImageModeChange={actions.setImageMode}
             displayStyleText={state.displayStyleText}
             displayContentText={state.displayContentText}
             displayBoundText={state.displayBoundText}

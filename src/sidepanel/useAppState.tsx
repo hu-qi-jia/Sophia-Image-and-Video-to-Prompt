@@ -138,6 +138,7 @@ export function useAppState() {
       currentMediaPreview: ivTabsHook.currentMediaPreview,
       currentMediaAspectRatio: ivTabsHook.currentMediaAspectRatio,
       panelSizeMode: ui.panelSizeMode,
+      imageMode: ivTabsHook.imageMode,
     },
     refs: {
       imageFileRef: ivTabsHook.imageFileRef,
@@ -178,6 +179,7 @@ export function useAppState() {
       handleCopyEnhancerResult: enhancerHook.handleCopyEnhancerResult,
       handleTabChange: ivTabsHook.handleTabChange,
       setPanelSizeMode: ui.setPanelSizeMode,
+      setImageMode: ivTabsHook.setImageMode,
     },
   };
 }

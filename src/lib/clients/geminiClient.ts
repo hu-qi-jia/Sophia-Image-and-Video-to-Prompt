@@ -10,6 +10,7 @@ import {
   buildImageInstruction,
   buildGeminiVideoInstruction,
   parseGeminiImageResponse,
+  parseImageResponseByMode,
   parseGeminiVideoResponse
 } from "../prompts/promptTemplates";
 import {
@@ -17,7 +18,8 @@ import {
   type DetectedImageInfo,
   type DetectedVideoInfo,
   type ExtractedFrame,
-  type TargetModelId
+  type TargetModelId,
+  type ImageAnalysisMode
 } from "../types";
 
 function dataUrlToInlinePart(dataUrl: string): {
@@ -106,12 +108,14 @@ export async function analyzeVideoFramesWithGemini({
   apiKey,
   targetModel,
   frames,
-  videoInfo
+  videoInfo,
+  signal
 }: {
   apiKey: string;
   targetModel: TargetModelId;
   frames: ExtractedFrame[];
   videoInfo?: DetectedVideoInfo;
+  signal?: AbortSignal;
 }): Promise<ReturnType<typeof parseGeminiVideoResponse>> {
   const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_ANALYSIS_MODEL}:generateContent`;
   const instruction = buildGeminiVideoInstruction(targetModel, videoInfo);
@@ -150,6 +154,7 @@ export async function analyzeVideoFramesWithGemini({
         maxOutputTokens: 65536,
       },
     }),
+    signal,
   });
 
   const payload = (await response.json()) as unknown;
@@ -170,15 +175,19 @@ export async function analyzeImageWithGemini({
   imageUrl,
   imageDataUrl,
   imageInfo,
+  imageMode,
+  signal,
 }: {
   apiKey: string;
   targetModel: TargetModelId;
   imageUrl?: string;
   imageDataUrl?: string;
   imageInfo?: DetectedImageInfo;
+  imageMode?: ImageAnalysisMode;
+  signal?: AbortSignal;
 }): Promise<ReturnType<typeof parseGeminiImageResponse>> {
   const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_ANALYSIS_MODEL}:generateContent`;
-  const instruction = buildImageInstruction(targetModel, imageInfo);
+  const instruction = buildImageInstruction(targetModel, imageInfo, imageMode);
   const imagePart = imageUrl
     ? {
         file_data: {
@@ -215,6 +224,7 @@ export async function analyzeImageWithGemini({
         maxOutputTokens: 65536,
       },
     }),
+    signal,
   });
 
   const payload = (await response.json()) as unknown;
@@ -226,7 +236,7 @@ export async function analyzeImageWithGemini({
   }
 
   const text = readGeminiText(payload);
-  return parseGeminiImageResponse(text);
+  return parseImageResponseByMode(text, imageMode);
 }
 
 export async function enhancePromptWithGemini({

@@ -33,6 +33,8 @@ export const DEFAULT_PROMPT_FORMAT: PromptFormat = "json";
 export type PanelMode = "global" | "manual";
 export type PanelSizeMode = "standard" | "compact" | "collapsed";
 export type PromptEnhancerMode = "video" | "image";
+export type ImageAnalysisMode = "portrait" | "product";
+export const DEFAULT_IMAGE_ANALYSIS_MODE: ImageAnalysisMode = "portrait";
 export type FrameExtractionOptions = {
   mode?: FrameSamplingMode;
 };
@@ -335,6 +337,9 @@ export type RuntimeMessage =
       type: "VIDEO2PROMPT_DRAWER_STATE_RESPONSE";
       mode: PanelMode;
       drawerOpen: boolean;
+    }
+  | {
+      type: "VIDEO2PROMPT_ABORT_ANALYSIS";
     }
   | {
       type: "SOPHIA_SET_SIZE_MODE";

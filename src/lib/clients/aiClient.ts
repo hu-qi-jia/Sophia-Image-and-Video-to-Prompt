@@ -15,7 +15,8 @@ import {
   type ExtractedFrame,
   type PromptEnhancerMode,
   type ProviderType,
-  type TargetModelId
+  type TargetModelId,
+  type ImageAnalysisMode
 } from "../types";
 
 type BaseParams = {
@@ -41,7 +42,7 @@ export async function analyzeVideoFrames({
   signal?: AbortSignal;
 }): Promise<{ videoSummary: string; generatedPrompt: string; rawResult: string; promptResult: unknown }> {
   if (providerType === "gemini") {
-    return analyzeVideoFramesWithGemini({ apiKey, targetModel, frames, videoInfo });
+    return analyzeVideoFramesWithGemini({ apiKey, targetModel, frames, videoInfo, signal });
   }
   return doOpenAIAnalyzeVideoFrames({ apiKey, baseUrl, modelName, targetModel, frames, videoInfo, signal });
 }
@@ -54,17 +55,19 @@ export async function analyzeImage({
   targetModel,
   imageDataUrl,
   imageInfo,
+  imageMode,
   signal
 }: BaseParams & {
   targetModel: TargetModelId;
   imageDataUrl: string;
   imageInfo?: DetectedImageInfo;
+  imageMode?: ImageAnalysisMode;
   signal?: AbortSignal;
 }): Promise<{ imageSummary: string; generatedPrompt: string; rawResult: string; promptResult: unknown }> {
   if (providerType === "gemini") {
-    return analyzeImageWithGemini({ apiKey, targetModel, imageDataUrl, imageInfo });
+    return analyzeImageWithGemini({ apiKey, targetModel, imageDataUrl, imageInfo, imageMode, signal });
   }
-  return doOpenAIAnalyzeImage({ apiKey, baseUrl, modelName, targetModel, imageDataUrl, imageInfo, signal });
+  return doOpenAIAnalyzeImage({ apiKey, baseUrl, modelName, targetModel, imageDataUrl, imageInfo, imageMode, signal });
 }
 
 export async function analyzeImageStream({
@@ -75,21 +78,23 @@ export async function analyzeImageStream({
   targetModel,
   imageDataUrl,
   imageInfo,
+  imageMode,
   signal,
   onProgress
 }: BaseParams & {
   targetModel: TargetModelId;
   imageDataUrl: string;
   imageInfo?: DetectedImageInfo;
+  imageMode?: ImageAnalysisMode;
   signal?: AbortSignal;
   onProgress?: (text: string) => void;
 }): Promise<{ imageSummary: string; generatedPrompt: string; rawResult: string; promptResult: unknown }> {
   if (providerType === "gemini") {
-    const result = await analyzeImageWithGemini({ apiKey, targetModel, imageDataUrl, imageInfo });
+    const result = await analyzeImageWithGemini({ apiKey, targetModel, imageDataUrl, imageInfo, imageMode, signal });
     if (onProgress) onProgress(result.generatedPrompt);
     return result;
   }
-  return doOpenAIAnalyzeImageStream({ apiKey, baseUrl, modelName, targetModel, imageDataUrl, imageInfo, signal, onProgress });
+  return doOpenAIAnalyzeImageStream({ apiKey, baseUrl, modelName, targetModel, imageDataUrl, imageInfo, imageMode, signal, onProgress });
 }
 
 export async function enhancePrompt({

@@ -130,6 +130,8 @@ function broadcastDrawer(open: boolean): void {
 
 // ── Web image analysis ─────────────────────────────────────────────
 
+let activeAnalysisAbort: AbortController | null = null;
+
 async function startWebImageAnalysis({
   tabId,
   imageUrl,
@@ -187,6 +189,14 @@ async function startWebImageAnalysis({
     previewFrameUrl: imageUrl,
   });
 
+  // Abort any previous analysis before starting a new one
+  if (activeAnalysisAbort) {
+    activeAnalysisAbort.abort();
+    activeAnalysisAbort = null;
+  }
+  const abortController = new AbortController();
+  activeAnalysisAbort = abortController;
+
   try {
     const baseState = await setState(resolvedTabId, "analyzing", "正在分析...", targetModel, {
       mediaType: "image",
@@ -195,7 +205,7 @@ async function startWebImageAnalysis({
       previewFrameUrl: imageUrl,
     });
 
-    const imageDataUrl = await fetchImageAsDataUrl(imageUrl);
+    const imageDataUrl = await fetchImageAsDataUrl(imageUrl, abortController.signal);
 
     let lastProgressLen = 0;
     const result = await analyzeImageStream({
@@ -206,6 +216,7 @@ async function startWebImageAnalysis({
       targetModel,
       imageDataUrl,
       imageInfo,
+      signal: abortController.signal,
       onProgress: (text: string) => {
         if (text.length - lastProgressLen < 20) return;
         lastProgressLen = text.length;
@@ -230,6 +241,10 @@ async function startWebImageAnalysis({
 
     return { ok: true, state };
   } catch (error) {
+    if (error instanceof DOMException && error.name === "AbortError") {
+      const state = await setState(resolvedTabId, "idle", "分析已中止。", targetModel);
+      return { ok: false, state };
+    }
     const message = error instanceof Error ? error.message : "无法加载此图片进行分析。";
     const state = await setState(resolvedTabId, "error", message, targetModel, {
       mediaType: "image",
@@ -239,6 +254,10 @@ async function startWebImageAnalysis({
       errorMessage: message,
     });
     return { ok: false, state };
+  } finally {
+    if (activeAnalysisAbort === abortController) {
+      activeAnalysisAbort = null;
+    }
   }
 }
 
@@ -271,6 +290,16 @@ chrome.runtime.onInstalled.addListener(() => {
 
 chrome.tabs.onRemoved.addListener((tabId) => {
   void removeManualDrawerTab(tabId);
+  void clearAnalysisState(tabId);
+});
+
+// When a tab navigates or refreshes, clear stale per-tab state so the
+// panel doesn't restore an old web-image preview on the new page.
+chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
+  if (changeInfo.status === "loading") {
+    void removeManualDrawerTab(tabId);
+    void clearAnalysisState(tabId);
+  }
 });
 
 // ── Context menu ───────────────────────────────────────────────────
@@ -320,6 +349,15 @@ chrome.runtime.onMessage.addListener(
         tabId: message.tabId,
         imageUrl: message.imageUrl,
       }).then(sendResponse);
+      return true;
+    }
+
+    if (message.type === "VIDEO2PROMPT_ABORT_ANALYSIS") {
+      if (activeAnalysisAbort) {
+        activeAnalysisAbort.abort();
+        activeAnalysisAbort = null;
+      }
+      sendResponse({ ok: true });
       return true;
     }
 

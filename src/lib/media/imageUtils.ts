@@ -42,6 +42,12 @@ export async function resizeImageDataUrl(
   maxSide: number = 1536,
   quality: number = 0.7
 ): Promise<string> {
+  // Service worker context — DOM APIs (Image, document.createElement) are unavailable;
+  // use OffscreenCanvas + createImageBitmap instead.
+  if (typeof Image === "undefined" || typeof document === "undefined") {
+    return resizeImageDataUrlOffscreen(dataUrl, maxSide, quality);
+  }
+
   const img = await createImageElement(dataUrl);
   const { width, height } = scaleDimensions(
     img.naturalWidth,
@@ -63,6 +69,49 @@ export async function resizeImageDataUrl(
 
   ctx.drawImage(img, 0, 0, width, height);
   return canvas.toDataURL("image/jpeg", quality);
+}
+
+/**
+ * Resize a data URL image using OffscreenCanvas (service-worker-safe).
+ * Used as fallback when DOM APIs are unavailable (e.g. in extension service workers).
+ */
+async function resizeImageDataUrlOffscreen(
+  dataUrl: string,
+  maxSide: number,
+  quality: number
+): Promise<string> {
+  const response = await fetch(dataUrl);
+  const blob = await response.blob();
+  const bitmap = await createImageBitmap(blob);
+
+  const { width, height } = scaleDimensions(
+    bitmap.width,
+    bitmap.height,
+    maxSide
+  );
+
+  if (width === bitmap.width && height === bitmap.height) {
+    bitmap.close();
+    return dataUrl;
+  }
+
+  const canvas = new OffscreenCanvas(width, height);
+  const ctx = canvas.getContext("2d");
+  if (!ctx) {
+    bitmap.close();
+    return dataUrl;
+  }
+
+  ctx.drawImage(bitmap, 0, 0, width, height);
+  bitmap.close();
+
+  const resultBlob = await canvas.convertToBlob({
+    type: "image/jpeg",
+    quality,
+  });
+  const arrayBuffer = await resultBlob.arrayBuffer();
+  const base64 = base64FromBytes(new Uint8Array(arrayBuffer));
+  return `data:image/jpeg;base64,${base64}`;
 }
 
 export async function readFileAsDataUrl(file: File): Promise<string> {
@@ -95,8 +144,8 @@ function base64FromBytes(bytes: Uint8Array): string {
   return btoa(binary);
 }
 
-export async function fetchImageAsDataUrl(imageUrl: string): Promise<string> {
-  const response = await fetch(imageUrl);
+export async function fetchImageAsDataUrl(imageUrl: string, signal?: AbortSignal): Promise<string> {
+  const response = await fetch(imageUrl, { signal });
 
   if (!response.ok) {
     throw new Error("无法加载此图片进行分析。");

@@ -56,7 +56,9 @@ const REQUIRED_TAGS = [
 // Content TAGs that must be present (SUBJECT 1 is matched by prefix)
 const REQUIRED_CONTENT_PREFIXES = [
   "SUBJECT",
-  "IMPERFECTIONS & PHYSICS",
+  "REAL-PHOTO MARKERS",
+  "SPATIAL RELATIONSHIPS",
+  "ENVIRONMENT",
 ] as const;
 
 // Minimum character count for a TAG's content to be considered substantive
@@ -132,10 +134,10 @@ const STYLE_TAGS = new Set([
   "SHADOW GEOMETRY", "LOOK PIPELINE", "TONAL DISTRIBUTION", "OPTICAL DEPTH",
   "STYLE & TEXTURE", "FRAME", "COMPOSITION",
   "ATMOSPHERE", "SNAPSHOT FEEL", "ERA SIGNALS",
-  "GENERATION CUES", "PROMPT TAGS", "NEGATIVE PROMPT"
+  "GENERATION CUES", "PROMPT TAGS", "NEGATIVE PROMPT", "CONSTRAINTS"
 ]);
 
-const CONTENT_TAG_PREFIXES = ["SUBJECT", "MATERIAL RESPONSE", "SPATIAL LAYERS", "ENVIRONMENT", "IMPERFECTIONS & PHYSICS", "CONSTRAINTS"];
+const CONTENT_TAG_PREFIXES = ["SUBJECT", "REAL-PHOTO MARKERS", "SPATIAL RELATIONSHIPS", "MATERIAL RESPONSE", "SPATIAL LAYERS", "ENVIRONMENT", "IMPERFECTIONS & PHYSICS"];
 
 function isContentTag(tag: string): boolean {
   return CONTENT_TAG_PREFIXES.some(prefix => tag.startsWith(prefix));
@@ -184,6 +186,7 @@ export function parseImageResponse(rawText: string): ImagePromptResponse {
     negativePrompt: extractNegativePromptFromSections(sections),
     styleText,
     contentText,
+    boundText: "",
     warnings,
   };
 }

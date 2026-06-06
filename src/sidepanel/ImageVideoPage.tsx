@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import type { FrameSamplingMode, PanelSizeMode } from "../lib/types";
+import type { FrameSamplingMode, PanelSizeMode, ImageAnalysisMode } from "../lib/types";
 import {
   SpinnerIcon,
   SparklePlaceholder,
@@ -45,14 +45,16 @@ export function ImageVideoPage({
   displayStyleText,
   displayContentText,
   displayBoundText,
+  styleCopyLabel,
+  contentCopyLabel,
   onEditStyle,
   onEditContent,
   onCopyStyle,
   onCopyContent,
   onCopyAll,
-  styleCopyLabel,
-  contentCopyLabel,
   panelSizeMode,
+  imageMode,
+  onImageModeChange,
 }: {
   mode: "image" | "video";
   tabData: IVTabData;
@@ -84,6 +86,8 @@ export function ImageVideoPage({
   onCopyContent: () => void;
   onCopyAll: () => void;
   panelSizeMode?: PanelSizeMode;
+  imageMode?: ImageAnalysisMode | null;
+  onImageModeChange?: (mode: ImageAnalysisMode) => void;
 }) {
   const isImage = mode === "image";
   const mediaLabel = isImage ? "图片" : "视频";
@@ -92,16 +96,25 @@ export function ImageVideoPage({
   const isExpanded = tabData.isExpanded;
   const [samplingDropdownOpen, setSamplingDropdownOpen] = useState(false);
   const samplingDropdownRef = useClickOutside(samplingDropdownOpen, () => setSamplingDropdownOpen(false));
+  const [imageModeDropdownOpen, setImageModeDropdownOpen] = useState(false);
+  const imageModeDropdownRef = useClickOutside(imageModeDropdownOpen, () => setImageModeDropdownOpen(false));
   const [isDragOver, setIsDragOver] = useState(false);
   const [resultTab, setResultTab] = useState<"all" | "style" | "content">("all");
   const dropZoneRef = useRef<HTMLElement>(null);
 
+  const imageModeLabel = imageMode === "portrait" ? "人像" : imageMode === "product" ? "产品" : "请选择";
+
   // Use native DOM events for reliable drag-and-drop (Preact synthetic
   // events may not forward dataTransfer correctly on all browsers).
+  // Always attach when there is no media OR when the user can overwrite
+  // (not currently analyzing).  This lets the user drag a new file onto
+  // an existing preview to replace it.
+  const allowDrop = tabData.mediaSource.kind === "none" || !isAnalyzing;
+
   useEffect(() => {
     const el = dropZoneRef.current;
     if (!el) return;
-    if (tabData.mediaSource.kind !== "none") return;
+    if (!allowDrop) return;
 
     let counter = 0;
     let fetchAbort: AbortController | null = null;
@@ -160,6 +173,9 @@ export function ImageVideoPage({
       counter = 0;
       setIsDragOver(false);
 
+      // Block drop when currently analyzing — image cannot be overwritten
+      if (isAnalyzing) return;
+
       // A) File drop (local files)
       const file = e.dataTransfer?.files?.[0];
       if (file) {
@@ -207,7 +223,7 @@ export function ImageVideoPage({
       el.removeEventListener("drop", onDrop);
       if (fetchAbort) fetchAbort.abort();
     };
-  }, [tabData.mediaSource.kind, allowedTypes, onFileDrop]);
+  }, [allowDrop, allowedTypes, onFileDrop, isAnalyzing]);
 
   const isCompact = panelSizeMode === "compact";
 
@@ -252,23 +268,70 @@ export function ImageVideoPage({
               <div className="upload-preview" style={currentMediaAspectRatio ? { aspectRatio: currentMediaAspectRatio } : undefined}>
                 {currentMediaPreview}
               </div>
-              <div className={`upload-actions${isExpanded && tabData.resultMode === "text" ? " upload-actions--text-only" : ""}`}>
-                <button
-                  className={`${isExpanded && tabData.resultMode === "text" ? "btn-text-link" : "btn-primary btn-dark"}${isAnalyzing ? " btn-primary--busy" : ""}`}
-                  onClick={onAnalyze}
-                  disabled={!canAnalyze}
-                >
-                  {isAnalyzing ? "识别中" : tabData.resultMode === "text" ? "重新生成" : "生成"}
-                </button>
-                <button className={isExpanded && tabData.resultMode === "text" ? "btn-text-link btn-text-link--muted" : "btn-secondary"} onClick={onClear} disabled={isAnalyzing}>清除</button>
-                {isAnalyzing ? (
-                  <button className="btn-secondary" onClick={onAbort}>中止</button>
-                ) : null}
-              </div>
-              {!hasApiKey ? <p className="upload-hint-warn">请先在设置中配置模型信息</p> : null}
             </>
           )}
         </section>
+
+        {isImage && onImageModeChange ? (
+          <div className="image-mode-row">
+            <div className="image-mode-header">
+              <span className="image-mode-title">类型选择</span>
+            </div>
+            <div className="image-mode-dropdown" ref={imageModeDropdownRef}>
+              <button
+                type="button"
+                className={`image-mode-trigger ${imageModeDropdownOpen ? "is-open" : ""} ${!imageMode ? "is-placeholder" : ""}`}
+                onClick={() => setImageModeDropdownOpen((c) => !c)}
+              >
+                <span className="image-mode-label">{imageModeLabel}</span>
+                <svg className="image-mode-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M6 9l6 6 6-6" />
+                </svg>
+              </button>
+              {imageModeDropdownOpen ? (
+                <div className="image-mode-menu">
+                  <button
+                    type="button"
+                    className={`image-mode-opt ${imageMode === "portrait" ? "is-selected" : ""}`}
+                    onMouseDown={(e) => { e.preventDefault(); e.stopPropagation(); onImageModeChange("portrait"); setImageModeDropdownOpen(false); }}
+                  >
+                    <span className="image-mode-opt-label">人像</span>
+                    <span className="image-mode-opt-desc">适用于人物、肖像、自拍等图片</span>
+                  </button>
+                  <button
+                    type="button"
+                    className={`image-mode-opt ${imageMode === "product" ? "is-selected" : ""}`}
+                    onMouseDown={(e) => { e.preventDefault(); e.stopPropagation(); onImageModeChange("product"); setImageModeDropdownOpen(false); }}
+                  >
+                    <span className="image-mode-opt-label">产品</span>
+                    <span className="image-mode-opt-desc">适用于商品、静物、食品等图片</span>
+                  </button>
+                </div>
+              ) : null}
+            </div>
+          </div>
+        ) : null}
+
+        {isImage && tabData.mediaSource.kind !== "none" && !imageMode && tabData.uploadError ? (
+          <p className="image-mode-error">{tabData.uploadError}</p>
+        ) : null}
+
+        {isImage && tabData.mediaSource.kind !== "none" ? (
+          <div className="upload-actions-standalone">
+            <button
+              className={`btn-primary btn-dark${isAnalyzing ? " btn-primary--busy" : ""}`}
+              onClick={onAnalyze}
+              disabled={!canAnalyze}
+            >
+              {isAnalyzing ? "识别中" : tabData.resultMode === "text" ? "重新生成" : "生成"}
+            </button>
+            <button className="btn-secondary" onClick={onClear} disabled={isAnalyzing}>清除</button>
+            {isAnalyzing ? (
+              <button className="btn-secondary" onClick={onAbort}>中止</button>
+            ) : null}
+            {!hasApiKey ? <p className="upload-hint-warn">请先在设置中配置模型信息</p> : null}
+          </div>
+        ) : null}
 
         {!isImage && frameSamplingMode && onFrameSamplingModeChange ? (
           <div className="frame-sampling-row">
@@ -312,6 +375,23 @@ export function ImageVideoPage({
                 </div>
               ) : null}
             </div>
+          </div>
+        ) : null}
+
+        {!isImage && tabData.mediaSource.kind !== "none" ? (
+          <div className="upload-actions-standalone">
+            <button
+              className={`btn-primary btn-dark${isAnalyzing ? " btn-primary--busy" : ""}`}
+              onClick={onAnalyze}
+              disabled={!canAnalyze}
+            >
+              {isAnalyzing ? "识别中" : tabData.resultMode === "text" ? "重新生成" : "生成"}
+            </button>
+            <button className="btn-secondary" onClick={onClear} disabled={isAnalyzing}>清除</button>
+            {isAnalyzing ? (
+              <button className="btn-secondary" onClick={onAbort}>中止</button>
+            ) : null}
+            {!hasApiKey ? <p className="upload-hint-warn">请先在设置中配置模型信息</p> : null}
           </div>
         ) : null}
       </div>
