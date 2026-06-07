@@ -1,0 +1,79 @@
+[ARCHETYPE]
+photograph
+
+[STYLE FINGERPRINT]
+photograph, direct flash nightlife portrait, hard on-camera flash with dim warm ambient background, phone main lens 26-28mm, high contrast with clipped highlights, burgundy fur hat and trim, black leather corset and skirt, fluffy black coat, red booth frame, realistic snapshot aesthetic.
+
+[AESTHETIC HOOK]
+Raw direct-flash street snapshot inside a red phone booth, harsh lighting, unpolished night-life vibe.
+
+[VISUAL PRIORITY]
+Direct flash exposure behavior, subject-to-background brightness gap, red booth frame geometry, burgundy/black color dominance, phone-lens perspective distortion, skin specular highlights.
+
+[LIGHTING]
+Primary: direct on-camera flash, frontal axis, hard quality, ~5500K, high intensity causing specular clipping on skin/leather. Secondary: dim warm practical ambient inside booth, ~2700K, low intensity, negligible subject contribution but defines background tone. Background light creates deep shadows behind subject.
+
+[SHADOW GEOMETRY]
+Tight contact shadows directly behind subject against the red booth wall; sharp, graphic shadow edges characteristic of point-source flash; minimal fill in shadow zones.
+
+[LOOK PIPELINE]
+Phone camera JPEG capture, auto-exposure lift on subject, crushed blacks in background, hard highlight rolloff on flash hits, white balance biased toward cool flash on subject vs warm background, muted saturation in shadows, visible sensor noise in dark areas, no clarity boost, preserve JPEG compression artifacts.
+
+[TONAL DISTRIBUTION]
+Low-key register overall with high-key subject isolation; extreme contrast between flash-lit subject and dark background; lifted black point in deep shadows due to noise; clipped white speculars on forehead, nose, and leather; grey density concentrated in mid-tones of the coat.
+
+[OPTICAL DEPTH]
+26-28mm equivalent focal length (phone main), camera ~1.5m from subject, slight wide-angle perspective expansion on foreground hand/coat, moderate depth of field keeping subject sharp while background falls slightly soft, edge sharpness typical of smartphone optics.
+
+[STYLE & TEXTURE]
+Realistic smartphone snapshot, high ISO sensor noise visible in shadows, matte fabric texture on black coat vs glossy specular reflection on leather corset, fluffy fur texture on hat and trim, natural skin texture with visible pores under harsh light, no airbrushing, candid imperfection retention.
+
+[FRAME]
+4:5 aspect ratio, vertical medium shot, subject centered occupying ~60% of frame height, red phone booth frame anchors left/right edges, camera at eye level (0cm), azimuth 0° (frontal), pitch -5° (slight downward tilt), roll 0°, subject stands close to back wall.
+
+[COMPOSITION]
+Centralized subject framing within red vertical mullions, visual weight balanced by dark coat volume, negative space restricted to upper corners and deep background shadows, crop pressure tight on lower legs, environment acts as a framing device rather than a scene.
+
+[ATMOSPHERE]
+Gritty, nocturnal, high-energy nightlife mood, intimate yet exposed feeling due to direct flash intrusion.
+
+[SNAPSHOT FEEL]
+Candid pose with slight body twist, imperfect framing within booth constraints, harsh flash exposure typical of casual night photography.
+
+[PROMPT TAGS]
+photograph, smartphone photo, direct flash, night portrait, street style, fashion snapshot, high contrast, realistic skin, noisy shadows, red phone booth
+
+[GENERATION CUES]
+direct flash lighting, hard shadows, 5500K key light, 2700K ambient background, high contrast, clipped highlights, muted shadows, sensor noise, JPEG artifacts, natural skin texture, visible pores, no beauty filter, no airbrushing, oily T-zone, 26-28mm lens, eye-level angle, frontal pose, red frame anchors, do not mirror composition, preserve flash speculars
+
+[NEGATIVE PROMPT]
+watermark, signature, text, logo, username, duplicate, morbid, mutilated, extra fingers, poorly drawn hands, poorly drawn face, mutation, deformed anatomy, bad proportions, extra limbs, missing limbs, fused fingers, too many fingers, long neck, clean studio render, HDR overprocessed, perfectly denoised, plastic skin, over-retouched, over-sharpened, clarity boosted, micro-contrast boost, edged-up, crisp digital, oversaturated, hyper-saturated, vivid colors, over-contrasted, crushed blacks, mirrored composition, left-right swapped, reversed layout, flipped scene, soft cinematic light, even studio light, idealized proportions, editorial composition, premium commercial look, average face, plain face, widened face, heavy jaw, aged face, tired eyes, dull makeup, flattened body shape, thickened waist, reduced hip/thigh volume, shortened legs, lost waist-to-hip contrast, square shoulders, straight torso, frontal average stance, flattened S-curve, standard lens, telephoto compression, normal close-up portrait, cropped legs
+
+[CONSTRAINTS - STYLE]
+direct flash only, no soft/cinematic lighting, 5500K flash + 2700K ambient, high contrast, clipped highlights, muted/desaturated shadows, preserve sensor noise, preserve JPEG artifacts, no clarity boost, no structure enhancement, natural skin texture, 26-28mm lens perspective, eye-level viewpoint, frontal azimuth.
+
+[SKIN RENDER]
+Natural skin tier with high-microcontrast under flash, oily/dewy finish on T-zone due to specular highlight, visible skin texture and pores, cool-white flash cast on face contrasting with warm neck shadows, single catchlight in eyes from flash source.
+
+[SUBJECT 1]
+Young woman with long straight light-brown hair wearing a burgundy fur ushanka hat and rhinestone sunglasses. She has a small V-line face, defined jaw, full lips with nude gloss, and a straight nose. Her expression is cool and detached, gazing directly at the camera with slightly parted lips. She wears a strapless black leather corset with burgundy fur trim at the top, a matching black leather mini-skirt, and a voluminous black faux-fur coat draped off her shoulders. Her pose is standing with a slight S-curve, weight on one leg, screen-left hand raised near her head holding the coat, screen-right arm relaxed by her side. She wears a silver chain necklace and dangling earrings. Her body silhouette is slim with visible waist definition and hip curve.
+
+[MATERIAL RESPONSE]
+Glossy black leather reflects hard flash speculars; burgundy and black fur shows soft, dense texture; rhinestones on glasses catch bright highlights; skin appears slightly oily under direct flash.
+
+[SPATIAL LAYERS]
+Foreground: subject's raised screen-left hand and fur coat sleeve. Midground: subject's body and face. Background: red phone booth interior walls, glass panels with reflections, and a yellow payment terminal on the screen-right wall. Subject overlaps the back wall, creating a tight depth compression.
+
+[ENVIRONMENT]
+Interior of a classic red telephone booth at night. Visible elements include red painted metal frames, glass panes showing dark exterior reflections, and a yellow public phone payment interface mounted on the screen-right wall. Dim warm ambient light fills the booth interior.
+
+[IMPERFECTIONS & PHYSICS]
+Visible high-ISO sensor noise in dark background areas, slight JPEG compression blockiness in shadows, harsh flash overexposure on reflective surfaces, natural asymmetry in pose.
+
+[CONSTRAINTS - CONTENT]
+identity preservation (long light-brown hair, V-line face, specific features), makeup retention: preserve nude glossy lips, defined brows, subtle eye makeup, no added heavy contour or blush, burgundy fur hat, rhinestone sunglasses, black leather corset with fur trim, black fur coat, silver necklace, standing S-curve pose, screen-left hand raised, do not relocate red booth frame, do not swap left-right orientation, do not straighten body curve, do not remove sunglasses or hat, do not add visible face, do not symmetrize pose.
+
+[BOUND FEATURES]
+Direct flash specular highlights on subject's leather corset and sunglasses: bright white clipped spots on glossy surfaces.
+Flash-induced skin sheen on subject's T-zone: oily/dewy appearance on forehead and nose due to hard frontal light.
+Warm ambient color cast on background elements: yellow/red tones on booth interior contrasting with cool flash on subject.

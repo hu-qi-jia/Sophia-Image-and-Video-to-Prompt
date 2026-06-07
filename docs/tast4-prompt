@@ -1,172 +1,302 @@
 [ARCHETYPE]
-photograph
+— photograph / candid snapshot
 
-[STYLE FINGERPRINT]
-casual indoor portrait, direct on-camera flash with ambient room fill, 35mm moderate DOF, high-contrast cool-neutral grade with warm accents, cinnabar red vending machine + olive green pants + grey t-shirt + white sneakers + black cap, candid raw snapshot register.
+// ── STYLE MODULE (how the image was made) ────────────────────────────
 
 [AESTHETIC HOOK]
-A raw, candid indoor portrait captured with a smartphone or compact digital camera using direct flash. The aesthetic is defined by the harsh, frontal illumination that freezes the subject against a retro-styled background featuring a Coca-Cola vending machine and checkered wall pattern. The image retains a "lived-in" quality with visible sensor noise, slightly compressed dynamic range, and unpolished skin texture, avoiding any glossy editorial finish. The color palette relies on strong primary blocks—dominant reds from the machine and stool, muted olives and greys from the clothing—creating a graphic, street-style snapshot vibe rather than a staged studio composition.
+This is a candid indoor portrait of a young woman captured in a hallway, resembling a casual smartphone photo with polished social-media beauty processing. The aesthetic is modern and slightly stylized, featuring cool-neutral lighting that renders skin tones naturally while maintaining a crisp, high-definition digital clarity. The overall quality is polished yet retains the authentic feel of an everyday moment rather than a formal studio session. The color palette is dominated by cool neutrals—whites, greys, and blacks—with a subtle cyan-blue cast in the shadows and highlights, characteristic of contemporary mobile photography filters. Contrast is moderate, preserving detail in both the subject and the background environment without dramatic compression or blown-out areas.
 
 [VISUAL PRIORITY]
-1. Direct on-camera flash illumination (hard frontal light)
-2. High-contrast exposure with clipped highlights on skin/props
-3. Cool-neutral white balance with warm red accents
-4. Moderate depth of field (sharp subject, readable background)
-5. Casual, asymmetric seated pose geometry
-6. Visible sensor noise and JPEG compression artifacts
-7. Subject-to-environment scale (subject occupies ~50% frame mass)
-8. Retro prop density (vending machine, checkered wall)
+1. direct overhead ambient ceiling light
+2. cool-neutral white balance (~5000K) with slight cyan tint in shadows
+3. polished beauty filter with skin smoothing and clarity boost
+4. medium-wide angle perspective with mild barrel distortion
+5. shallow-to-moderate depth of field keeping subject sharp and background softly blurred
+6. subject occupying ~70% of frame height from crown to mid-thigh
+7. offset composition with subject positioned viewer-left of center
+8. preserved subject-to-environment ratio showing hallway architecture
+9. natural pose with asymmetric body tilt and hand placement
+10. visible watermark/text overlay in lower-right corner
 
 [LIGHTING]
-Single-source dominant: Direct on-camera flash, approx. 5500K, hard quality, near-axis frontal direction. The flash provides the primary exposure for the subject, creating sharp, tight shadows directly behind the subject's body and head against the wall/vending machine. There is a secondary, negligible ambient layer from room lighting (likely overhead fluorescent or tungsten), which is overwhelmed by the flash but prevents the background from going completely black, keeping the red machine and checkered wall visible.
-Exposure behavior: Subject is brightly lit with some specular clipping on the forehead, nose, and the white sneaker toes. Background is mid-tone readable but lacks deep shadow detail due to flash fall-off.
-Shadow geometry: Hard, compact shadows cast immediately behind the subject's outline. No long directional beams; shadows collapse close to the contact points between subject and background elements.
+- Illumination family: overhead ceiling panel (ambient practical light)
+- Flash evidence: none — no flash halo, no abrupt exposure split, no specular hotspots typical of on-camera flash
+- Primary light source: diffuse overhead room lighting from ceiling fixtures, likely fluorescent or LED panels; direction is top-down, centered above subject; quality is soft-to-moderate with minimal shadow definition; apparent size is large due to multiple ceiling sources; feels accidental/documentary rather than cinematic or commercial
+- Exposure behavior: overall balanced exposure with highlights protected on white clothing and skin, shadows retaining detail in hair and background; brightness rolls smoothly across foreground (subject), midground (hallway walls), and background (window area); no aggressive HDR balancing or tone mapping artifacts
+- Contrast ratio: low-to-moderate — gentle separation between subject and background without crushed blacks or clipped whites; contrast arises primarily from subject’s lighter clothing against darker surroundings, not from directional beam shaping
+- Portrait lighting pattern: ambiguous/mixed — lacks clear butterfly, Rembrandt, loop, or split pattern; shadows under nose are soft and diffuse, suggesting broad overhead fill rather than focused key light; catchlights in eyes appear as small rectangular reflections consistent with ceiling panels
+- Fill and accent lights: ambient fill from surrounding walls and windows provides even illumination; no dedicated rim light or hair light visible; bounce light from white walls adds subtle warm-cyan tint to shadow-side cheek and neck
+- Practical lights: visible ceiling grid lines suggest recessed lighting; window blinds in background indicate daylight contribution but filtered through slats; no visible lamps, screens, or emissive sources
+- Atmospheric interaction: clean air, no haze, smoke, or dust scatter altering light paths; transparency of hair strands shows minimal backlighting effect
+- Specular behavior: skin exhibits natural oil sheen on forehead and nose bridge; fabric on white tank top has semi-gloss reflection along curves; black bag handles show glossy plastic/metal glints; no wet-eye corneal reflections or extreme glossiness
+- Layer interaction summary: the image reads as ambient practical light because: (1) shadows are soft and non-directional, collapsing close to contact areas rather than extending long beams, (2) catchlights are rectangular and diffuse, matching ceiling panel shapes, (3) background retains ambient warmth/cyan tint despite being lit by same source, (4) no flash bloom or halo separates subject from environment, (5) highlight rolloff is smooth without abrupt clipping, (6) overall scene brightness suggests continuous ambient source rather than frozen flash burst
+
+[SHADOW GEOMETRY]
+- Cast shadows: minimal visible cast shadows beneath subject’s feet and hands; where present, they are soft-edged and collapse tightly against contact surfaces, indicating broad overhead diffusion
+- Form shadows: subtle modeling on face and body created by overhead light; shadows fall downward and slightly backward, following gravity vector; no strong lateral shading suggesting side-light
+- Contact shadows: faint darkening where limbs meet torso or bag; edges feathered into midtones rather than sharply defined
+- Shadow stacking: no overlapping patterns or double shadows; single primary shadow layer dominates
+- Edge softness: all shadow boundaries are soft to moderately feathered; no hard transitions except where fabric folds create micro-shadows
+- Graphic/naturalistic/diffused character: naturalistic — shadows behave according to real-world physics under diffuse overhead illumination
 
 [LOOK PIPELINE]
-- Capture/LUT: Digital smartphone or compact camera capture; neutral-to-cool auto-white balance with slight green/magenta contamination in mid-tones typical of mixed indoor lighting. No specific film emulation LUT visible; looks like standard digital processing.
-- Filter/Post-processing: Minimal retouching; likely automatic in-camera sharpening causing slight halos on high-contrast edges (hair against wall). No heavy beauty filters; skin texture and pores are visible. Slight contrast boost inherent to flash photography.
-- Tone curve: High global contrast driven by flash. Highlights are slightly clipped (forehead, cup rim, shoe toes). Shadows are open but lack deep richness, appearing somewhat flat or "muddy" in the folds of the pants. Mid-tones are punchy.
-- Grey-balance/Split toning: Neutral greys in the wall and shirt, slightly cool-shifted in shadows. No deliberate artistic split toning; color cast is a result of flash vs. ambient mix.
-- Color palette: Dominant cinnabar red (vending machine, stool), olive drab (pants), heather grey (shirt), stark white (shoes, cup lid), matte black (cap, strap). Saturation is natural to slightly vivid on the red elements, muted on the greens/greys.
-- Texture-processing: Visible luminance noise in the darker areas of the pants and background. Mild JPEG compression artifacts in the flat color zones of the wall.
+- Capture character: digital-clean smartphone capture with slight sharpening and noise suppression; base rendering feels neutral-cool, leaning toward modern phone sensor profile
+- Filter and post-processing signature: visible beauty filtering — skin appears smoothed with pore suppression, eye brightness enhanced, facial contours subtly refined; clarity boost applied to edges and textures; no vintage filter, matte fade, or cross-processing evident
+- Deliberate softness signature: none — edges remain crisp, no intentional diffusion, mist, motion blur, or focus miss; any perceived softness comes from compression or minor JPEG stress
+- Film emulation or LUT: none — no Kodak Portra, Fujifilm Superia, Cinestill, or VSCO signatures; tonal curve is straight-line with mild S-curve for contrast
+- Tone curve: black point lifted slightly (no crushed blacks), white point compressed (no blown highlights), overall curve gently S-shaped for balanced midtones; micro-contrast boosted locally on skin and fabric
+- Split toning: subtle cyan-blue tint in shadows and dark areas; highlights retain neutral-white; mids remain largely unaffected
+- Master temperature verdict: COOL — approximate 5000K neutral-cool across entire image; verified via grey-test on concrete floor tiles and white wall sections which stay neutral-grey
+- Per-zone color temperature breakdown:
+  - (a) skin/skin-adjacent areas: ~4800K neutral-cool, undertone pinkish-warm but suppressed by filter
+  - (b) bright highlights: ~5200K cool-white, especially on white tank top and ceiling reflections
+  - (c) shadows and dark areas: ~6200K cool-cyan, most pronounced under chin, behind ears, and in hair depths
+  - (d) background/midground: ~5500K cool, hallway walls and window frames carry cyan bias
+  - (e) dominant colored objects: black bag remains true-black; white text on shirt reads neutral-white
+- Green/magenta axis: green-shifted in shadows (~+15 green), neutral on magenta axis; consistent with “Xiaohongshu青蓝” style filters
+- Mixed-light contamination: none — single dominant temperature family throughout; window daylight filtered through blinds merges seamlessly with artificial ceiling light
+- Cyan/blue/green cast warning: explicitly named and quantified — cyan cast is strongest in shadows, weakest in highlights; not exaggerated beyond source
+- Skin color anchor: fair-medium brightness, cool-pink undertone (suppressed by filter), saturation muted but natural; no porcelain/waxy appearance
+- Highlight rolloff: smooth gradual roll-off, no abrupt clips; bloom/halation absent around bright sources
+- Flash-vs-ambient separation: none — image does not read as flash-frozen subject against dim background; continuity of light suggests single ambient source
+- Color palette: cream (neutral-white), ice white (cool-white), dusty pink (muted-pink skin), jet black (true-black), slate grey (wall tones); saturation level desaturated but not flat; palette unified by cool-neutral dominance
+- Texture-processing layer: mild JPEG compression visible in uniform wall areas; no grain, noise, scanlines, or chromatic aberration; sharpening halos faintly visible around hair edges and clothing seams
 
 [TONAL DISTRIBUTION]
-Highlight/Midtone/Shadow occupancy: Highlights ~20% (flash hits), Midtones ~50%, Shadows ~30%.
-Key: Mid-key to High-key on subject, Low-key in background corners.
-Tonal separation: Punchy but not cinematic; separation is driven by light intensity drop-off rather than color grading.
-Contrast shaping: Relies on the stark difference between the flash-lit subject and the dimmer background.
-Grey-scale structure: Continuous but slightly noisy; transitions from highlight to shadow are abrupt due to hard flash falloff.
-Depth effect: Flash creates a flat foreground plane, separating subject from background via brightness rather than optical blur.
+- Highlight/midtone/shadow occupancy: highlights ~25%, mids ~55%, shadows ~20%; distribution favors mids due to ambient lighting
+- Key: mid-key — neither high-key nor low-key; balanced luminance across frame
+- Tonal separation: balanced — clear distinction between subject and background without extreme punch or flatness
+- Contrast shaping: relies on local contrast (skin vs clothing, hair vs wall) rather than global tonal extremes; shadows lifted slightly to retain detail
+- Depth effect of tone: moderate depth — subject pops due to brightness/contrast difference, but background remains legible and spatially coherent
+- Source of tonal feeling: ordinary room lighting + smartphone auto-exposure/HDR balancing; no sunset, studio strobe, or aggressive flash separation
 
 [OPTICAL DEPTH]
-Focal length feel: 35mm equivalent (standard wide-angle). Slight perspective distortion visible in the legs extending toward the camera.
-Depth of field: Moderate (f/2.8 - f/4.0 equivalent). Subject is fully sharp; background elements (vending machine text, wall pattern) are also largely in focus, indicating a deep enough DOF for an environmental portrait.
-Bokeh: None significant; background is rendered with detail, not creamy blur.
-Edge behavior: Sharp center focus, slight softness or noise in extreme corners.
-Subject isolation: Achieved primarily through lighting contrast (bright subject vs. darker background) rather than optical isolation.
-Perspective signature: Intimate, slightly low-angle perspective looking up at the seated subject, exaggerating the leg length and presence of the stool.
+- Focal length feel: 35mm-equivalent wide-angle — mild barrel distortion at frame edges, slight face/body stretch, intimate perspective
+- Depth of field: shallow-to-moderate — subject sharply focused, background softly blurred but still recognizable; falloff is smooth, not abrupt; no tilt-shift or computational smear
+- Bokeh: circular bokeh balls in window blinds and distant lights; character creamy but not overly dreamy; highlight edge quality clean, no swirly or hexagonal artifacts
+- Edge behavior: center sharpness high, edge softness moderate due to lens characteristics; no haloing or diffused borders unless caused by compression
+- Subject isolation: primary mechanism is brightness/contrast contrast (white clothing against grey walls); secondary is framing pressure (subject fills most vertical space)
+- Perspective signature: depth expansion from wide-angle lens — hallway recedes visibly, creating sense of space; no telephoto flattening or extreme compression
+- Face/body distortion: slight elongation of limbs and torso due to proximity and wide lens; face proportions preserved accurately despite minor stretching at corners
 
 [STYLE & TEXTURE]
-Style: Casual street snapshot / Retro lifestyle portrait.
-Capture device: Smartphone (flagship or mid-range) or compact point-and-shoot digital camera.
-Medium texture: Digital sensor output with visible noise grain and slight compression artifacts.
-AI/CGI classification: Photograph. Real-world imperfections (noise, uneven lighting, natural pose asymmetry) confirm real capture.
-Realism character: Photorealistic. Skin shows natural texture, pores, and minor imperfections. Fabric behaves naturally with gravity and folds.
-Beauty processing: None to Light. Skin whitening: None (natural tone preserved). Skin smoothing: None (pores visible). Face slimming: None. Eye enlargement: None. Lip saturation: Natural. Body liquify: None. Overall pattern: Raw capture with no significant beautification filters.
-Snapshot-vs-editorial: Casual snapshot. The framing is slightly loose, pose is relaxed/unposed, and lighting is functional (flash) rather than stylized.
-
-[SKIN & FACE]
-Skin render tier: Natural / Textured. Pores and micro-relief are visible, especially on cheeks and forehead.
-Skin finish: Matte to Satin. Slight oil sheen on T-zone due to flash reflection, but overall matte appearance.
-Skin undertone: Neutral-warm, appearing slightly cool under the flash.
-Face topography: Flash creates hard highlights on forehead, nose bridge, and chin. Shadows define the eye sockets and jawline sharply.
-Catchlights: Single, small, bright specular reflection in the center of each pupil (flash reflection).
-Micro-detail: Visible eyebrows with individual hairs, natural lip texture, no heavy makeup masking skin features.
+- Style: contemporary social-media candid portrait; influenced by East Asian beauty aesthetics (visible in makeup and styling); no specific artist or movement reference needed
+- Capture device: flagship smartphone (likely iPhone or Android premium model) — indicated by sharpness, dynamic range, and UI watermark
+- Medium texture: glossy photo paper simulation? No — actual digital file with slight JPEG stress; no physical medium texture like canvas, film grain, or newsprint
+- Realism character: photorealistic — indistinguishable from real photograph; skin texture density random, fabric physics accurate, light-material interaction correct, atmospheric depth consistent
+- Beauty processing and retouching: moderate — skin smoothing, eye brightening, contour refinement, possible body liquify (waist definition); no heavy airbrushing or dollification
+- Snapshot-vs-editorial judgment: casual social snapshot — imperfect framing, natural pose, environmental context essential; not staged fashion shoot or commercial portrait
 
 [FRAME]
-Output aspect ratio: 2:3.
-Shot type: Three-quarter body / Full body (seated).
-Subject position: Centered horizontally, slightly lower vertically to accommodate the seated pose and stool height.
-Subject scale: Subject occupies approximately 50-60% of the frame height and 40% of the width.
-Subject-to-environment ratio: 50% subject / 50% environment. The environment (machine, wall) is crucial context.
-Anchor map: Subject sits on a red stool (lower-center), leaning against a red vending machine (viewer-right), with a checkered wall pattern behind (viewer-left/center).
-Lens character: 35mm wide-angle, slight barrel distortion at edges.
-Perspective: Slight low angle (camera positioned below subject's eye level), looking up.
-Camera viewpoint geometry:
-(1) Camera height: Waist-level to Chest-level (~10-20cm below subject's eye line).
-(2) Camera azimuth: Frontal (0°), facing subject directly.
-(3) Camera pitch: Slight low angle (~10-15° looking up).
-(4) Camera roll: Level (0°).
-(5) Centerline relationship: Camera aligns with subject's centerline.
-Pose framing relationship: Crop includes full legs (bent), torso, and head. Feet are near the bottom edge but not cut off. Head has adequate headroom.
-Motion rendering: Frozen action (fast shutter from flash).
-Quality tier: Raw / Unpolished.
+- Output aspect ratio: 4:5 (matches source exactly)
+- Shot type: half-body — top crop at crown of head, bottom crop at upper thigh/knee area; visible body range locked precisely as in source
+- Camera angle: eye-level (0°) — camera aligned with subject’s eye line; no upward/downward tilt; horizon/architectural lines horizontal
+- Camera-to-subject distance: personal (1–2m) — intimate enough to see facial details, far enough to include torso and partial legs; no macro or extreme close-up
+- Subject position: offset from center — approximately 30% viewer-left of frame center; asymmetry preserved intentionally
+- Subject scale in frame: occupies ~70% of frame height from crown to visible bottom; bottom crop falls just above knees; no zoomed-in enlargement
+- Subject-to-environment ratio: subject ~60% visual mass, environment ~40%; hallway architecture, window, and equipment fully retained
+- Anchor map: left wall with vending machine/sticker panel; right wall with window/blinds; floor tiles leading into depth; doorframe partially visible behind subject
+- Lens character: 35mm-equivalent wide-angle with mild barrel distortion; no fisheye or extreme curvature
+- Perspective: expansive depth — hallway recedes clearly, vanishing point near upper-center; spatial impression observational/intimate
+- Pose framing relationship: subject leans slightly forward, one leg bent, arms holding bag; cropping captures full gesture without cutting off extremities; framing pressure creates candid accidental feel
+- Special device aesthetic: none — no security cam, dashcam, pinhole, or toy camera effects
+- Motion rendering: frozen action — no motion blur on subject or background; sharp capture indicates stable camera
+- Quality tier: pristine/crisp — no intentional degradation; all elements rendered with maximum clarity possible for smartphone
 
 [COMPOSITION]
-Grid: Centered composition with strong vertical elements (vending machine) balancing the subject.
-Visual weight: Heavy visual weight on the right side due to the large red vending machine; balanced by the subject's body mass in the center/left.
-Focal hierarchy: Primary anchor is the subject's face (brightest point); secondary anchors are the red machine and the drink cup.
-Negative space: Minimal negative space; the frame is filled with subject and background props.
-Balance: Asymmetrical balance (large red block on right vs. subject on left/center).
-Leading lines: Vertical lines of the vending machine and stool legs guide the eye up/down. Diagonal lines of the subject's legs lead into the frame.
-Information density: Dense. Multiple textures and patterns (checkers, text on machine, fabric folds) compete for attention.
-Environment retention: High. The setting defines the mood as much as the subject.
+- Grid: freeform — no strict rule-of-thirds alignment; subject placed asymmetrically for dynamic balance
+- Visual weight: dense region around subject’s upper body and face; sparse regions in lower legs and background corners; eye lingers on face due to brightness/detail contrast
+- Focal hierarchy: primary anchor = face (highest detail/brightness), secondary = torso/clothing (textural interest), tertiary = background elements (contextual)
+- Eye movement path: starts at eyes → moves down to torso → drifts to bag/hands → settles on background window/blinds
+- Negative space: ~40% of frame — primarily background walls and floor; functions to contextualize subject within environment
+- Balance: asymmetrical-balanced — offset subject counterweighted by architectural elements on opposite side
+- Leading lines: floor tiles lead diagonally into background; window blinds create horizontal rhythm; wall seam guides eye vertically
+- Framing devices: doorway edge on left, window frame on right; subject nestled between them
+- Overlap: subject partially occludes left-wall equipment; right arm overlaps window sill slightly
+- Crop pressure: moderate — enough space around subject to avoid claustrophobia, but tight enough to emphasize figure
+- Information density: balanced — subject detailed, background informative but not cluttered
+- Environment retention: essential — hallway, window, and equipment define location identity; removing them would alter image meaning
+- Spatial fidelity check: composition breaks if subject moved closer (would lose environment context) or enlarged (would exceed frame); current scale is irreducible
+
+// ── CONDITIONAL STYLE TAGs ──────────────────────────────────────────
 
 [ATMOSPHERE]
-Emotional tone: Casual, cool, slightly rebellious or nonchalant. The direct flash creates a sense of immediacy and intimacy, like a friend taking a quick photo.
-Spatial feeling: Enclosed, intimate indoor space.
-Temporal quality: Contemporary with a retro aesthetic nod (90s/Y2K vibes due to the Coke machine and fashion).
+- Emotional tone: relaxed, self-assured, mildly playful — conveyed through slight smirk, direct gaze, confident posture
+- Conceptual tension: none — straightforward portrait with no psychological ambiguity
+- Psychological space: viewer as observer/confidant — subject acknowledges camera but maintains casual distance
+- Temporal quality: present-moment snapshot — feels like captured instant, not rehearsed
+- Narrative implication: everyday life moment — possibly leaving work, running errand, or posing spontaneously
+
+// ── OPTIONAL STYLE TAGs ─────────────────────────────────────────────
 
 [SNAPSHOT FEEL]
-Framing imperfections: Slightly casual framing, not perfectly centered grid.
-Candid energy markers: Subject is mid-sip, gaze directed at camera but expression is relaxed/unposed.
-Snapshot camera behavior: Direct flash usage, auto-exposure quirks (clipped highlights), handheld stability.
+- Framing imperfections: subject slightly off-center, hand positioning casual, bag held loosely
+- Composition accidentals: partial view of another person’s hair in lower-right corner (viewer-right edge)
+- Candid energy markers: natural hair flow, unposed body tilt, relaxed grip on bag
+- Snapshot camera behavior: minor focus hunting artifact in background, slight motion blur on fingers (though mostly frozen)
+- Authenticity note: these imperfections ARE the style — enhance realism over polish
 
 [ERA SIGNALS]
-Technology markers: Digital flash photography aesthetic (2010s-2020s smartphone or digicam).
-Fashion markers: Streetwear style (cargo pants, baseball cap, oversized tee) reminiscent of late 2010s/early 2020s trends.
-Cultural framing: Social media lifestyle portrait (Instagram/TikTok aesthetic).
+- Technology markers: smartphone UI watermark (“小红书 ID: inyourdreamzz”) in lower-right; indicates 2020s social media era
+- Fashion markers: oversized white tank top with reversed text (“THE LEFT”), black shorts, minimalist accessories — aligns with 2023–2024 streetwear trends
+- Cultural framing: Xiaohongshu platform aesthetic — curated casualness, beauty-filtered authenticity, urban Korean/Japanese influence
 
 [PROMPT TAGS]
-photograph, portrait photography, candid photo, street photography, snapshot, flash photography, raw photo, lo-fi aesthetic, casual shot, full body portrait, sitting pose, natural skin texture, pore-visible skin, no retouch, direct flash, high contrast, retro background, coca-cola machine, checkered wall.
+photograph, candid photography, beauty portrait, street photography, raw photo, flash photography, masterpiece, highly detailed, sharp focus, professional, candid shot
 
 [GENERATION CUES]
-direct on-camera flash, hard frontal light, 35mm lens, moderate depth of field, high contrast, clipped highlights, visible sensor noise, JPEG artifacts, cool-neutral white balance, cinnabar red, olive green, heather grey, casual seated pose, legs bent, holding drink, looking at camera, natural skin texture, visible pores, no beauty filter, no skin smoothing, no face slimming, no eye enlargement, raw capture, candid expression, slight low angle, centered composition, red stool, vintage vending machine, checkered wall pattern.
+overhead ambient ceiling light, cool-neutral white balance, beauty filter with skin smoothing, 35mm wide-angle perspective, shallow depth of field, offset composition, subject occupies 70% frame height, hallway environment, watermark in corner, natural pose, asymmetric body tilt, handheld bag, reversed text on shirt, bangs with long waves, direct eye contact, slight smirk, fair skin cool undertone, white tank top black shorts, black tote bag, window blinds background, tiled floor, vending machine sticker panel
 
 [NEGATIVE PROMPT]
-watermark, signature, text overlay, logo, username, cropped, worst quality, low quality, jpeg artifacts (excessive), duplicate, morbid, mutilated, extra fingers, poorly drawn hands, poorly drawn face, mutation, deformed, ugly, blurry, bad anatomy, bad proportions, extra limbs, missing limbs, fused fingers, too many fingers, long neck, plastic skin, airbrushed, overly smooth, CGI appearance, unrealistic, oversaturated, doll-like, unnatural skin texture, porcelain skin, waxy skin, cartoon eyes, anime features, beautified, retouched, smoothed, pore-erased, slimmed face, enlarged eyes, sharpened jaw, narrowed nose, stylized features, heavy makeup look, Instagram filter, over-processed, removed blemishes, removed freckles, removed moles, removed wrinkles, removed asymmetry, perfect symmetry, idealized body proportions, model pose, fashion editorial, fashion campaign, beauty advertisement, stock photo, studio lighting, softbox, side key light, rim light, backlight glow, bright daylight, evenly lit, professional photography, perfect illumination, clean shadows, staged pose, symmetrical composition, polished look, magazine quality, advertising aesthetic, standing, walking, running, stiff posture, idealized proportions.
+watermark, signature, text, logo, username, cropped, worst quality, low quality, jpeg artifacts, duplicate, morbid, mutilated, extra fingers, poorly drawn hands, poorly drawn face, mutation, deformed, ugly, blurry, bad anatomy, bad proportions, extra limbs, missing limbs, extra arms, extra legs, fused fingers, too many fingers, long neck, plastic skin, airbrushed, overly smooth, CGI appearance, unrealistic, oversaturated, doll-like, unnatural skin texture, porcelain skin, waxy skin, cartoon eyes, anime eyes, stylized features, heavy makeup look, Instagram filter, over-processed, studio lighting, softbox, side key light, rim light, backlight glow, bright daylight, evenly lit, professional photography, perfect illumination, clean shadows, staged pose, symmetrical composition, polished look, magazine quality, advertising aesthetic, direct flash, paparazzi flash, flash shadow halo, hard frontal flash, blown specular hotspots, flash-frozen subject, harsh strobe look, wrong color temperature, opposite color cast from source, warm shift when source is cool, cool shift when source is warm, neutral grey when source has visible tint, sepia overcast, orange skin when source is cool pink, warm vintage filter when source is modern cool filter, golden hour warmth when source is overcast neutral, exaggerated warm cast, exaggerated cool cast, lost color temperature direction, flattened temperature into single uniform cast, color palette collapse, dominant color temperature inverted, face swap, different person, wrong identity, altered facial features, changed face shape, different eye color, different nose, altered lips, missing mole, missing scar, missing freckle, missing tattoo, missing piercing, wrong eyebrow shape, altered jawline, different cheekbone structure, zoomed in, cropped tighter, subject too large, subject fills too much frame, head-and-shoulders when source is bust or wider, bust shot when source is half-body or wider, enlarged subject, closer crop than original, less body visible than source, compressed framing, zoomed-in face, tight portrait crop, missing visible body parts that exist in source (arms, torso, legs, clothing below chest), altered body shape, unrealistic proportions, changed build, wrong body type, distorted anatomy, body does not match source physique
 
-[CONSTRAINTS - STYLE]
-direct on-camera flash, hard frontal lighting, high contrast, cool-neutral white balance, visible sensor noise, JPEG compression artifacts, 35mm focal length feel, moderate depth of field, raw unpolished aesthetic, no beauty filtering, natural skin texture retention, cinnabar red and olive green color dominance, centered composition with slight low angle.
+// ── CONTENT MODULE (what is in the image) ─═══════════════════════════════════════════════════════════════════════
 
 [SUBJECT 1]
-Young woman in casual streetwear.
-- Identity and appearance: Appears East Asian. Age range: 20s. Skin tone: Light to medium with neutral undertones. Hair: Long, dark black, wavy texture, loose, falling over shoulders. Face geometry: Oval face shape, almond-shaped eyes with double eyelids, medium nose bridge with rounded tip, medium-full lips with defined cupid's bow, soft jawline, straight brows. Distinctive features: Natural skin texture with visible pores, no obvious scars or tattoos visible.
-- Body & build: Slim to average silhouette. Proportion landmarks: Long legs relative to torso (accentuated by pose), narrow shoulders. Body fat distribution: Lean, minimal visible soft tissue. Muscle tone: Subtle.
-- Expression and demeanor cues: Eyebrows relaxed, eyelids open normally, gaze directed straight at camera. Mouth slightly parted around a straw, lips relaxed. Expression reads as casual, cool, and candid.
-- Pose and posture: Stance: Sitting on a red stool. Camera azimuth: Frontal. Head turn: 0° (facing camera). Head pitch: Level. Body twist: Slight twist to viewer-left. Spine curve: Relaxed C-curve (leaning back slightly). Shoulder heights: Approximately equal. Limbs: Legs bent at knees, feet resting on stool rungs or floor (viewer-left foot more prominent). Hands: Right hand holding a drink cup to mouth, left hand resting on left knee/thigh. Weight distribution: Seated weight on buttocks, balanced by feet.
-- Makeup: Natural / Soft glam. Foundation finish: Satin/Natural. Coverage: Sheer to medium. Eye makeup: Subtle eyeliner and mascara, natural brow grooming. Lip color: Nude-pink tint. No heavy contour or blush visible.
-- Clothing & accessories:
-   1. Garment inventory: Grey short-sleeve t-shirt (crew neck, regular fit), Olive green cargo pants (relaxed fit, ankle length), Black baseball cap (worn forwards, white 'R' logo).
-   2. Fabric behavior: Cotton jersey tee (matte, soft drape), Synthetic/cotton blend cargo pants (matte, structured drape, visible creases).
-   3. Construction details: Tee has simple hem. Pants have side pockets and elastic cuffs. Cap has curved brim.
-   4. Color & pattern: Heather grey tee, Olive drab pants, Black cap with white logo.
-   5. Layering: Single layer tops, pants worn over unseen undergarments.
-   6. Footwear: White high-top sneakers (chunky sole, laced).
-   7. Accessories: Black crossbody bag strap (visible over right shoulder), thin bracelet on left wrist. Drink cup (red/yellow gradient with lid and straw) held in right hand.
+Young woman in white tank top and black shorts
+
+- **Identity and appearance**: female, estimated age 20–25, East Asian features, fair skin with cool-pink undertone (suppressed by filter), medium brightness, muted saturation. Face: oval shape, high cheekbones, narrow jawline, soft chin. Brows: thick, arched, filled with dark pigment, outer ends tapered. Eyes: almond-shaped, double eyelids, moderate iris visibility, brown irises (natural), pupils mid-dilated. Nose: straight bridge, small tip, nostrils slightly flared. Lips: full upper lip, softer lower lip, cupid’s bow defined, vermilion border sharp. Cheeks: moderate fullness, nasolabial folds faint. Chin: pointed, mentalis muscle relaxed. Distinctive features: no moles/scars/tattoos/piercings/facial hair visible; slight asymmetry in brow height (left brow ~2mm higher).
+
+- **Hair**: 
+  - Style and cut: long layered cut with blunt curtain bangs; front pieces frame face, back flows past waist.
+  - Length: hip-length overall; bangs reach eyebrows; layers start at collarbone.
+  - Color: jet black base with subtle ash-brown lowlights in sunlit strands; appears naturally dyed, no root regrowth visible.
+  - Volume and density: thick/dense (no scalp visible), volumized at roots, heavier concentration at ends.
+  - Texture: wavy (loose S-curves), strand thickness medium, surface smooth with natural sheen, minimal flyaways.
+  - Parting: deep side part on subject-left (viewer-right), ~3cm deep, scalp visible along part line.
+  - Hairline: rounded with wispy baby hairs at temples; clean edge quality.
+  - Hair-to-face relationship: bangs cover forehead completely, some strands fall across right eye (viewer-left); hair tucked behind both ears; face-framing pieces ~5cm long around cheeks.
+  - Styling and products: appears heat-styled (blowout + curling iron), no visible product residue; natural air-dried finish after styling.
+  - Tied or updo state: loose and down, no ties/clips visible.
+  - Condition: healthy, recently washed and styled.
+
+- **Body & build**: 
+  - Overall silhouette: petite frame, slim body type, curvy proportions (narrow waist, fuller hips/thighs).
+  - Height and proportions: tall relative to frame; leg-to-torso ratio ~1.2:1; shoulder width moderate, hip width wide.
+  - Bust: modest size, teardrop shape, visible depth under fabric; clothing clings softly without pulling.
+  - Waist and midsection: sharply defined waist, straight ribcage, no visible abs.
+  - Hips and lower body: wide hips, round buttocks, thick thighs with gap between inner knees; calves slim, ankles delicate.
+  - Legs: long impression, calf-to-thigh proportion balanced, knee definition soft.
+  - Arms and shoulders: shoulder slope gentle, upper arm slim, forearm slender, wrist delicate.
+  - Skin and body surface: tone even, texture smooth, blemishes invisible, body hair not visible.
+  - Body fat and softness: flesh soft at hips/thighs, firm at waist/arms; bone structure visible at collarbones.
+  - Muscle tone: subtle underlying definition at shoulders/chest, moderate tone at quads, athletic at glutes.
+
+- **Expression and demeanor cues**:
+  - Gaze direction: direct eye contact with camera, slight tilt to viewer-left (subject-right).
+  - Eye openness: both eyes equally open, lids relaxed, sclera fully visible above/below iris.
+  - Eyelid visibility: upper lid crease visible, lower lid resting at iris edge, no epicanthic fold.
+  - Iris and pupil: brown irises with natural texture, pupils mid-dilated, no circle lenses detected.
+  - Colored contacts: none — natural iris pattern intact.
+  - Sclera: white, no bloodshot/yellowish/bluish tint.
+  - Eyelashes: natural length/density, no mascara/false lashes visible.
+  - Eye makeup: subtle winged eyeliner (top lid only), eyeshadow neutral (brown/grey), aegyo sal emphasized.
+  - Catchlights: two per eye — single sharp pinpoint dot at 11 o'clock in both eyes (consistent with ceiling panel).
+  - Mouth and lip region: mouth closed, lips slightly parted, corners neutral (not upturned/downturned), lip tension relaxed.
+  - Teeth visibility: none.
+  - Lip shape: full upper lip, softer lower lip, cupid’s bow prominent, vermilion border sharp.
+  - Lip product: matte nude lipstick, no gloss/tint/liner.
+  - Nose: nostril flare relaxed, nasal bridge straight, tip small.
+  - Cheeks and nasolabial: cheek elevation moderate (Duchenne smile muscles engaged faintly), nasolabial folds shallow, no dimples.
+  - Jaw and chin: jaw tension relaxed, chin neutral, mentalis muscle inactive.
+  - Forehead: smooth, no horizontal/vertical lines.
+  - Overall expression summary: neutral-serene — synthesized from relaxed mouth, direct gaze, raised brows, and soft cheek elevation; justified by absence of tension signals and presence of calm engagement.
+
+- **Pose and posture — joint-by-joint breakdown**:
+  - Head and neck: head facing camera (0°), slight tilt viewer-left (~10°), chin neutral, neck straight, rotation minimal.
+  - Shoulder girdle: viewer-left shoulder ~1cm lower than viewer-right, rolled forward slightly (~5°), shoulder-to-camera angle angled 15°.
+  - Spine: C-curve lateral lean toward viewer-right, thoracic curve gentle, lumbar anterior tilt ~10°, torso rotation ~15° vs hips.
+  - Hips and pelvis: pelvic tilt neutral, hip height level, hip-to-camera angle angled 20°.
+  - Arms: viewer-left arm hanging at side, elbow bent ~160°, forearm pronated (palm inward); viewer-right arm bent at 90°, hand gripping bag handle, palm facing body.
+  - Hands: left wrist neutral, fingers relaxed curl; right wrist flexed, thumb wrapped around bag strap, index finger extended slightly, other digits curled.
+  - Legs: viewer-left leg straight, knee locked; viewer-right leg bent at 110° flexion, foot hovering 5cm above floor, ankle plantarflexed.
+  - Weight distribution: 60% on viewer-left foot, 40% on viewer-right knee/hovering foot; stability precarious but controlled.
+  - Body tension map: tense shoulders (rolled forward), relaxed jaw/hands/spine = mixed tension; high tension at shoulders, low elsewhere.
+  - Whole-body geometry: standing pose with asymmetric stance — spine arched, hips twisted, legs uneven; overall body line diagonal from crown to right knee.
+  - Coherent posture narrative: head tilts viewer-left cascading into cervical curve, causing left shoulder drop and spine C-curve toward viewer-right, shifting weight onto right hip and bending right knee while left leg bears majority load; arms compensate with left arm relaxed and right arm actively holding bag; kinetic chain creates dynamic imbalance mimicking casual walk pause.
+
+- **Makeup**: full glam — foundation flawless, contour sculpted, highlighter on cheekbones/nose bridge, blush on apples, eyeliner/winged liner, mascara volumizing, lip matte nude; brow grooming precise; visible everywhere.
+
+- **Clothing & accessories**:
+  - Garment identity: white sleeveless tank top with bold black block letters reading “THE LEFT” (reversed orientation), black high-waisted shorts with elastic waistband.
+  - Color: primary white (tank), black (shorts); text black on white.
+  - Fit and silhouette: tank top regular fit, slightly loose at torso; shorts slim-fit, sit high on waist.
+  - Fabric and texture: tank top cotton blend (matte, slight sheen on curves); shorts synthetic blend (semi-gloss, clingy).
+  - Drape and folds: tank top drapes fluidly over bust, gathers at sides; shorts stack minimally at thighs.
+  - Details and closures: tank top scoop neckline, raw hem; shorts no pockets/zippers visible.
+  - Layering: single layer — no undershirts or jackets.
+  - Accessories: none visible (no jewelry, glasses, hats, scarves).
+  - Footwear: not visible in frame.
+  - Condition and wear: new-looking, no wrinkles/stains/distressing.
+
+[SPATIAL RELATIONSHIPS]
+- Pairwise layout: only one subject present → skip.
+- Depth ordering: N/A.
+- Height relationships: N/A.
+- Body orientation relationships: N/A.
+- Physical contact: N/A.
+- Interaction dynamic: N/A.
+- Group geometry: N/A.
+- Subject-to-camera proximity: primary subject closest to camera; no others.
 
 [MATERIAL RESPONSE]
-Fabric behavior: Cotton tee absorbs light (matte), cargo pants show structured folds with hard shadow definition from flash. Sneakers have a matte rubber/plastic finish with slight specular highlights on the toe caps.
-Metal/plastic surface properties: Vending machine has a glossy, painted metal surface reflecting the flash strongly. Stool is painted metal with semi-gloss finish.
-Skin behavior: Natural skin reflects flash with specular highlights on oily zones (T-zone), matte on cheeks.
-Cross-material color interaction: Red light from the machine subtly warms the subject's right side (viewer-left).
+- Fabric behavior: tank top absorbs light diffusely (matte), shorts reflect specular highlights along curves; both respond physically to body movement.
+- Metal/plastic/glass surface properties: bag hardware appears brushed metal (non-reflective); bag body glossy leather/plastic (specular glints); window glass transparent with blind slats creating linear reflections.
+- Skin behavior: matte finish with localized dewy patches on forehead/nose; no satin/oily全域.
+- Cross-material color interaction: white tank reflects ambient cyan tint onto adjacent skin; black shorts absorb light, creating contrast boundary with skin.
 
 [SPATIAL LAYERS]
-Foreground: Subject's extended foot (viewer-left), drink cup.
-Midground: Subject's body, red stool, lower part of vending machine.
-Background: Checkered wall pattern, upper part of vending machine, wall fixtures.
-Occlusion chain: Subject occludes the wall and machine behind them. Stool legs occlude the floor area beneath. Drink cup occludes part of the subject's face/hand.
-Layer ordering: Camera -> Cup/Hand -> Subject -> Stool -> Wall/Machine.
-Subject-to-environment positional mapping: Subject sits centrally on the red stool, positioned slightly to the viewer-left of the large red vending machine. The checkered wall is directly behind the subject's left side (viewer-left). The subject is in physical contact with the stool (seat) and the drink cup (hand).
+- Foreground: subject’s lower legs and bag occupy bottom 20% of frame; partial hair strand intrudes from viewer-right edge.
+- Midground: subject’s torso/face dominate central 60%; hallway walls flank sides.
+- Background: window with blinds (upper-right), vending machine/sticker panel (upper-left), tiled floor receding into distance.
+- Occlusion chain: subject partially blocks left-wall equipment; right arm overlaps window sill; hair obscures right eye slightly.
+- Layer ordering: subject > midground walls > background window/floor.
 
 [ENVIRONMENT]
-Indoor setting, likely a retro-themed cafe or photo studio corner.
-Background fixtures: Large red Coca-Cola vending machine (frame-right third, midground, viewer-3 o'clock, behind subject's right shoulder, occupies ~30% frame mass). Black and white checkered wall pattern (frame-left and center background, viewer-9 to 12 o'clock, behind subject). Red metal stool (frame-center lower, foreground/midground, under subject). Wall-mounted electrical box/sign (upper-left background).
-Time of day/season: Indeterminate (indoor artificial light), but styling suggests contemporary casual.
+- Environment type and category: indoor hallway — likely office building, school corridor, or transit station; semi-private, functional space.
+- Architectural and structural elements:
+  - Walls: painted drywall, off-white color, smooth texture, pristine condition; no decorations except stickers/posters on left wall.
+  - Ceiling: standard height, exposed grid with recessed fluorescent/LED panels; no visible pipes/beams.
+  - Floor: large-format ceramic tiles, light grey, grouted lines forming grid pattern; clean/worn mix.
+  - Doors and windows: window with horizontal blinds (black aluminium frames, slats closed); doorframe partially visible behind subject (glass panel, metallic frame).
+  - Furniture: none visible except implied seating (no chairs/tables).
+- Objects and props:
+  - Vending machine/sticker panel: red-white design, covered in circular/rectangular stickers (various sizes/colors), mounted on left wall at ~1.5m height.
+  - Window blinds: black horizontal slats, fully lowered, reflecting exterior light.
+  - Watermark: “小红书 ID: inyourdreamzz” in white font with red icon, overlaid in lower-right corner (~5% frame area).
+  - Text signage: “THE LEFT” printed on tank top in reverse orientation (appears mirrored to viewer).
+  - Patterned surfaces: tile grid pattern repeats uniformly; blinds create parallel horizontal lines.
+- Spatial depth and layout:
+  - Room dimensions impression: narrow corridor (~2m wide), depth extends ~10m visible; cozy but not cramped.
+  - Environmental zones: foreground (subject + bag), midground (walls/windows), background (far wall/door).
+  - Occlusion by environment: subject occludes left-wall equipment; window blinds partially obscure exterior view.
+  - Perspective lines: floor tiles converge toward vanishing point near upper-center; window blinds create horizontal recession.
+- Atmospheric and contextual cues:
+  - Time of day evidence: daylight visible through blinds suggests daytime (approx. 10am–4pm); no clock/timestamp visible.
+  - Season or climate cues: lightweight clothing implies mild temperature (spring/summer); no outdoor indicators.
+  - Weather evidence: none visible (indoors).
+  - Occupancy and usage signs: empty space suggests low traffic; worn floor tiles indicate frequent use.
+  - Color palette of environment: dominant off-white/grey walls, black window/frame accents, red-white sticker panel; harmonious with subject’s white/black attire.
+  - Unique environmental identifiers: distinctive sticker-covered vending machine panel; specific blind slat spacing; tile grout pattern.
 
 [IMPERFECTIONS & PHYSICS]
-Resolution artifacts: Mild JPEG compression blocking in the flat grey wall areas and dark pant folds.
-Noise: Visible luminance noise in the shadow areas of the pants and background.
-Optical flaws: Slight chromatic aberration on high-contrast edges (white shoes against dark floor/shadows). Harsh flash shadows creating loss of detail in deep folds.
-Processing artifacts: Slight over-sharpening halos around the subject's hair against the wall.
-Physical damage: None visible on subject or props; props show signs of wear (scuffs on machine/stool) adding to realism.
+- Resolution artifacts: slight JPEG ringing around high-contrast edges (hair vs wall, text on shirt).
+- Noise: minimal luminance/chroma noise, concentrated in shadow areas (under chin, hair depths).
+- Compression artifacts: banding in uniform wall gradients; blocky compression in distant background.
+- Optical flaws: mild barrel distortion at frame edges; no chromatic aberration or vignetting.
+- Processing artifacts: minor sharpening halos around hair strands and clothing seams; no HDR ghosting.
+- Physical damage: none — image file appears clean, no scratches/dust/stains.
 
-[CONSTRAINTS - CONTENT]
-young East Asian woman, long dark wavy hair, oval face, natural makeup, grey t-shirt, olive cargo pants, white sneakers, black cap with 'R' logo, sitting on red stool, holding drink cup, frontal pose, looking at camera, relaxed expression, checkered wall background, red Coca-Cola vending machine on right, no standing pose, no studio lighting, no symmetrical perfection, preserve asymmetry of seated legs, retain visible pores and skin texture, do not smooth skin, do not enlarge eyes, do not slim face, do not add rim light, do not change background to plain wall, keep red machine prominent.
-
-[BOUND FEATURES]
-- Hard flash specular on subject's forehead/nose: Bright, clipped white highlights centered on T-zone due to direct flash.
-- Shadow halo behind subject: Compact, dark shadow cast directly behind head and shoulders onto the checkered wall and red machine.
-- Flash reflection in eyes: Small, central white catchlight in both pupils indicating on-axis light source.
-- Red color bleed on subject's side: Subtle red ambient reflection on the subject's right arm/pants from the adjacent vending machine.
-- Fabric fold shadows: Deep, hard shadows within the folds of the olive cargo pants caused by the directional flash.
+[CONSTRAINTS]
+output aspect ratio must match source exactly: 4:5.
+preserve subject-to-environment scale: do not zoom in, do not enlarge subject beyond source framing, preserve hallway architecture visibility.
+preserve subject offset: keep subject positioned ~30% viewer-left of center, maintain same headroom/side space/environmental anchor relationships.
+face identity preservation: do not alter facial geometry, feature proportions, eye spacing, nose shape, lip shape, jaw structure; preserve all distinctive landmarks — moles, freckles, scars, tattoos, piercings, facial hair pattern, eyebrow shape, asymmetries — exactly as they appear.
+body physique fidelity: preserve body shape, proportions, and visible physical features exactly as described; do not alter, normalize, or idealize any body part away from what is actually present.
+lighting consistency: maintain cool-neutral ambient overhead lighting; forbid converting to direct flash, side lighting, cinematic key light, or evenly diffused illumination.
+color temperature preservation: maintain cool-neutral master temperature (~5000K); forbid warm shifts, cyan exaggeration, or palette collapse into single uniform cast.
+style fidelity: preserve beauty-filtered polished look without amplifying smoothing or clarity boost; forbid adding fake dreamy haze or sharpening into hyper-clarity.
+pose geometry: preserve asymmetric body tilt, uneven shoulder height, bent-knee stance, hand-on-bag grip; forbid straightening torso, evening shoulders, or normalizing legs into generic seated pose.
+environment retention: keep hallway walls, window blinds, vending machine panel, and floor tiles fully visible; forbid removing or simplifying background elements.
+watermark preservation: include “小红书 ID: inyourdreamzz” text overlay in lower-right corner as it appears in source.
+anti-idealization: do not beautify ordinary features; preserve natural attractiveness if present; maintain filtered look without increasing intensity.

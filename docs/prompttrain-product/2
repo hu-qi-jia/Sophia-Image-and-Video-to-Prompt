@@ -1,0 +1,107 @@
+[ARCHETYPE]
+photograph — studio product shot, beverage packaging photography, group product still life
+
+[AESTHETIC HOOK]
+A polished commercial product photograph with a warm, editorial sensibility — four slim metallic vessels presented as a color range study against a seamless warm gradient. The aesthetic blends premium product catalog precision with a slightly cinematic warmth in the background tone. Quality tier is polished and professional. The image reads as a brand colorway lineup shot, with controlled directional lighting sculpting each cylinder's curved metallic surface and a minimal, distraction-free environment.
+
+[LIGHTING]
+Dominant family: Studio strobe / continuous with a warm directional key light from the upper viewer-left.
+
+The lighting setup is a controlled studio arrangement with a primary key light positioned at approximately the upper viewer-left at roughly 30-45° elevation, producing a warm-toned directional illumination. The light quality is semi-hard — creating defined but not razor-sharp shadow transitions. A broad specular highlight band runs vertically down the left side of each cylindrical bottle where the key light strikes the curved surface. The exposure is optimized for the metallic surfaces: highlights are bright but retain detail (not clipped to pure white), and shadow zones retain color and tonal information (not crushed to pure black). The tonal range across each bottle is approximately 4-6 stops. A soft fill light or ambient bounce appears to be present, preventing the shadow side from going completely black. No harsh cast shadows on the background; contact shadows beneath the bottles are soft and short, indicating diffused fill or a large soft source.
+
+**Specular behavior and reflection mapping on the product:**
+- Highlight placement on the product: A primary broad, elongated specular highlight runs vertically along the left side of each bottle (viewer-left), approximately at the 10-11 o'clock position when viewed face-on. This highlight is warm-toned, picking up the warm key light color. A secondary, much softer highlight appears as a thin rim along the viewer-right edge of some bottles (1-2 o'clock position), suggesting a weak rim or fill source. The caps show concentrated circular highlights on their flat tops, centered slightly toward the viewer-left.
+- Reflection of the environment on the product: The bottles reflect abstract warm light and dark shadow shapes from the surrounding studio environment. On the silver bottle especially, the reflection shows a warm bright zone (the key light source area) transitioning to dark shadow (the studio surroundings). The reflections are slightly diffused by the brushed surface texture, appearing as soft gradients rather than sharp mirror images.
+- Tonal range on the product surface: The metallic anodized surfaces show strong tonal variation. The silver bottle has the widest range — bright warm-white highlights (~8/10 brightness) to deep charcoal shadow (~3/10 brightness). The navy and green bottles show slightly compressed range due to their darker base colors, but still exhibit clear highlight-to-shadow transitions. The bronze bottle shows warm amber highlights to deep brown shadows. Contrast ratio across the silver bottle surface is approximately 5-7 stops.
+- Sub-surface behavior: No sub-surface behavior — fully opaque aluminum. No light penetration, no internal glow, no transparency.
+
+[OPTICAL DEPTH]
+Lens rendering suggests a medium focal length in the 50-85mm range, consistent with product photography. Depth of field is moderate-to-deep — all four bottles are in sharp focus from front to back with no noticeable focus falloff between them. Edge behavior on the bottles is crisp and well-defined against the smooth gradient background. Product isolation is achieved through brightness and color contrast against the warm background, plus the sharp edge definition of the metallic cylinders. There is no visible bokeh or shallow DOF blur. Perspective is straightforward with minimal distortion — the cylindrical shapes read as true cylinders without barrel or pincushion distortion, suggesting a moderate working distance that preserves accurate proportions.
+
+[STYLE & TEXTURE]
+Style: Commercial product photography with a warm editorial color palette — a "colorway range" presentation typical of premium beverage brand catalogs or lookbooks. Clean, controlled, brand-focused. Capture device: appears to be a medium format or high-end DSLR/mirrorless camera with a studio lighting setup. Medium texture: smooth digital capture with natural grain structure consistent with professional product photography. Realism character: photorealistic — indistinguishable from a real studio product photograph. Tone curve and color: moderate contrast with a warm white balance pulling the overall image toward golden/amber tones; the background gradient is the primary source of this warmth while the product colors remain relatively accurate. Saturation is natural-to-moderately-saturated — the metallic colors are rich but not artificially boosted. Post-processing and retouching: light-to-moderate retouching — clean background gradient, consistent exposure, minor contrast adjustment. No heavy compositing. Catalog-vs-editorial judgment: positioned between clean catalog and styled editorial — the controlled lighting and neutral arrangement lean catalog, but the warm background gradient and the artistic composition of presenting four colorways together give it an editorial/lookbook quality.
+
+[FRAME]
+- Output aspect ratio: 1:1
+- Shot type: Group product shot — full product visible for all four bottles, arranged in a horizontal row
+- Camera angle: Vertical elevation: +15° to +20° (slight high angle, camera just above product mid-height looking slightly down). Horizontal rotation: approximately 0° (near front-facing, perhaps 5-10° slight 3/4 turn — the bottles face the camera with their printed text visible and readable, with minimal rotation)
+- Camera height: approximately 1.1× product height (camera positioned just slightly above the tallest point of the bottles)
+- Camera-to-product distance: approximately 2.5-3× product height (medium distance, full product visible with environment margin)
+- Product position: The row of four bottles is positioned in the upper-center to center of the frame. The ledge surface extends across the lower third of the frame.
+- Product scale in frame: The four bottles together (bounding box around the entire group) occupy approximately 40-45% of frame area. Each individual bottle is approximately 15-18% of frame height and 8-10% of frame width. The bottle group spans approximately 50-55% of frame width.
+- Product-to-environment ratio: Product 42%, Environment 58% — balanced composition with generous background space
+- Visual feel label: balanced
+- Margins: Top margin ~30% of frame height above the bottle caps, bottom margin ~25-30% below the bottle bases to the lower frame edge, viewer-left margin ~20-22%, viewer-right margin ~20-22%
+- Element scale ratios: The surface ledge extends approximately 2.5-3× the total width of the bottle group. The background fills all space not occupied by the bottles and surface.
+- Visual organization: Horizontally organized group composition with a linear arrangement. The bottle row creates a horizontal anchor across the upper-center. Focal hierarchy: the four bottles are co-primary subjects, with the silver/bronze bottles receiving slightly more visual attention due to their lighter, more reflective surfaces catching more highlight. Negative space functions as intentional breathing room, contributing to the premium editorial feel. Balance is symmetrical — the group is centered horizontally.
+- Lens character and perspective: Moderate telephoto feel (50-85mm equivalent), minimal perspective distortion, vertical lines on the bottles remain parallel (consistent with the slight high angle not being extreme enough to cause convergence). The framing feels intentional and editorial rather than clinical or casual.
+
+[PROMPT TAGS]
+photograph, product photography, commercial photography, studio product shot, beverage packaging photography, group product still life, metallic bottle photography, colorway range presentation, anodized aluminum, warm gradient background, controlled studio lighting, sharp focus, professional product photo, color-accurate, editorial product
+
+[GENERATION CUES]
+controlled studio lighting with warm key from upper viewer-left, seamless warm beige-to-amber gradient background, four slim anodized aluminum bottles in navy/silver/bronze/dark green, brushed metal surface with semi-glossy reflectivity, cylindrical bottles with tapered shoulders and matching anodized screw caps, knurled cap edge ridges, vertical printed text "HELLO WATER / Purified Sprinkle Water / H2O+ / 250 ML", bottles arranged in tight horizontal row on thin ledge surface, slight high angle approximately +18° vertical / 5° horizontal / camera height 1.1× bottle height / camera distance 2.8× bottle height, balanced composition with product 42% / environment 58%, warm golden tone in background, moderate contrast, natural saturation, crisp focus across all bottles, contact shadows grounding bottles, premium commercial beverage catalog quality
+
+[NEGATIVE PROMPT]
+cropped, worst quality, low quality, jpeg artifacts, duplicate, blurry, deformed, distorted, disfigured, bad proportions, out of frame, watermark, signature, text overlay, username, logo stamp, wrong material interpretation, plastic-looking metal, metallic plastic, aluminum rendered as plastic, wrong color anodization, missing brushed metal texture, glossy surface rendered as matte, matte surface rendered as glossy, missing specular highlight, missing environment reflection on metal, uniform surface brightness suggesting flat material, metallic surface without tonal range, warped bottle shape, distorted cylindrical proportions, stretched product, squashed product, changed bottle proportions, floating bottles without grounding, misaligned caps, wrong bottle colors, extra bottles, fewer than four bottles, wrong bottle arrangement, changed bottle order, garbled text, misspelled brand name, fake brand name, invented text on bottles, wrong font, illegible text, changed text content, blurred text where source is sharp, wrong number of bottles, inconsistent bottle sizes between the four, product zoomed in to fill frame, product enlarged beyond source framing, small product converted to large dominant shot, balanced composition converted to product-dominant, frame margins reduced, visible background seam, dirty gradient, uneven lighting, harsh shadows, color cast, oversaturated colors, plastic-looking bottles, CGI appearance, 3D render look, flat lighting, harsh flash, dust, scratches, fingerprints on bottles, wrong background color, missing warm gradient, clinical lighting, over-styled props, wrong cap color matching, bottles without caps, transparent bottles when source is opaque, added labels or stickers not in source
+
+[PRODUCT]
+Four metallic water bottles arranged in a tight row, sitting on a thin flat ledge or shelf against a warm gradient background.
+
+- **Type & Identity**: Beverage containers — aluminum water bottles, approximately 18-20cm tall and ~5cm in diameter, slim cylindrical form. Branded as "HELLO WATER — Purified Sprinkle Water, H2O+, 250 ML". The product class is premium reusable/eco-friendly aluminum water bottles sold as a color variant range (four SKUs displayed together). Real-world size category: standard single-serving reusable bottle, roughly palm-to-shoulder height.
+
+- **Material & Surface**:
+  - **Base material**: Aluminum — solid aluminum body and cap. Lightweight, rigid metal, opaque, non-magnetic-typical for beverage cans. The cylindrical bodies appear seamless or have minimal visible seam lines, suggesting drawn or extruded aluminum construction.
+  - **Optical transparency**: Fully opaque — no light passes through the metal body. No internal contents visible. No transparency behavior.
+  - **Form**: Rigid, hollow containers (the bottles are empty or contents are not visible through the metal).
+  - **Surface treatment**: Anodized aluminum finish — each bottle has a distinct anodized color (dark navy blue, silver/natural, bronze/copper, dark forest green). The surface shows a fine brushed metal character with subtle horizontal/circumferential brushing lines visible particularly on the lighter silver and bronze bottles. The finish is satin-to-semi-glossy — not mirror-polished, not fully matte. The caps have a slightly more glossy anodized finish with visible knurled/ridged edge texture for grip.
+  - **Surface reflectivity behavior**: Semi-mirror to semi-glossy reflectivity. The bottles show broad, soft specular highlights running vertically down the left side of each cylinder where the key light hits, transitioning to deep shadow on the right side. The tonal range across each bottle is approximately 4-6 stops — bright highlight zones showing warm-tinted reflections of the environment, mid-tones in the colored body, and dark shadow zones that read nearly black at the bottle edges. Reflections of the environment are abstract — warm light and dark shapes — rather than sharp recognizable objects. The brushed texture breaks up what would otherwise be a clean mirror reflection into a slightly diffused, striated highlight band. There is no wet or oily appearance.
+  - **Material combinations and transitions**: Single-material bottles (aluminum body + aluminum cap). The transition between body and cap is a clean horizontal line at the threaded neck. Each cap matches its bottle's anodized color exactly.
+
+- **Color**: Four distinct colorways displayed left to right: (1) dark navy blue (deep midnight blue with cool undertone), (2) silver/natural brushed aluminum (warm-tinted neutral gray, picking up ambient warm light), (3) bronze/copper (warm metallic brown with orange-red undertone, antique brass feel), (4) dark forest green (deep cool green with slight teal undertone). Color accuracy confidence: high.
+
+- **Shape & Geometry**: Cylindrical bodies with slight shoulder taper toward the neck. Each bottle has: a flat circular base, straight cylindrical body (height:width ratio approximately 3.5-4:1), a short tapered shoulder leading to a narrower neck, and a cylindrical screw cap approximately 2cm tall. The caps have flat tops and ridged/knurled outer edges for grip. All four bottles share identical geometry — only color varies. The silhouette is a classic slim reusable bottle profile: tall and slender with a defined shoulder transition.
+
+- **Brand Marks & Labeling**: All four bottles carry identical vertical text running from upper body to mid-body, reading: "HELLO WATER" in larger sans-serif capital letters, followed below by "Purified Sprinkle Water" in smaller sans-serif text. Near the bottom of each bottle: "H2O+" in larger letters with a plus symbol, and "250 ML" in very small text at the base. All text is printed directly on the bottle surface in a color that contrasts with the bottle color (appears dark/black on all bottles). Text runs vertically along the bottle's height. The text appears to be screen-printed or pad-printed directly onto the anodized surface. The brand "HELLO WATER" appears to be the actual brand name visible on the product.
+
+- **Product State**: Pristine, new condition. No visible scratches, dents, fingerprints, dust, or wear. Bottles appear unused and clean.
+
+[PRODUCT DETAILS]
+- **Surface Texture**: Fine brushed metal texture visible particularly on the silver and bronze bottles — subtle circumferential brushing lines creating a satin sheen. The navy and green bottles show a slightly finer, more uniform anodized grain. The caps show distinct knurled/ridged texturing around the circumference of the cap edge (vertical ridges for grip). The brushing/grain is uniform across each bottle body with no concentration in specific zones. No visible mold lines, seam lines, or manufacturing marks on the body.
+
+- **Components & Parts**: Each bottle consists of: (1) a flat circular base/bottom, (2) a tall cylindrical body, (3) a tapered shoulder transitioning to a narrower neck, (4) a threaded neck (not prominently visible), (5) a cylindrical screw cap (~2cm tall) with flat top and knurled edge ridges. The caps are seated closed on all four bottles. No labels, stickers, or secondary packaging visible. No screens, buttons, or electronic components.
+
+- **Engravings & Print**: Vertical printed text on each bottle body: "HELLO WATER" (large sans-serif capitals), "Purified Sprinkle Water" (smaller sans-serif, title case), "H2O+" (large with plus sign), "250 ML" (very small at base). Text color is dark/black, contrasting against all four bottle colors. Text appears sharp and cleanly printed with no visible bleeding or pixelation. Font style is modern sans-serif throughout.
+
+- **Functional Details**: Screw caps (closed/seated) with knurled grip ridges around the circumference. Threaded neck connection between cap and body. No additional functional elements — these are simple sealed water bottles with no dispensers, nozzles, buttons, or openings visible.
+
+- **Content Visibility**: No contents visible — the bottles are fully opaque aluminum. Whether filled or empty cannot be determined from the image.
+
+- **Decorative Elements**: The primary decorative element is the color itself — four anodized metallic colorways. No patterns, prints, appliqués, or embellishments beyond the printed brand text. The knurled cap texture serves both functional and decorative purposes.
+
+[SET DRESSING]
+- **Surface / Platform**: A thin, flat ledge or shelf surface — appears to be a light-colored (off-white/cream) flat board or platform edge visible at the bottom of the bottle row. The bottles sit on this surface with visible contact shadows beneath them. The surface extends slightly to the viewer-right edge of the frame and terminates in a sharp edge, revealing a drop-off. The surface color is a warm off-white/cream that blends with the warm background palette.
+
+- **Background**: Seamless warm gradient backdrop transitioning from a warmer, brighter golden-beige in the upper portion to a slightly deeper, more saturated tan/amber in the lower portion. The gradient is smooth with no visible seam, texture, or horizon line. The background is uniform and uncluttered — no props, no secondary products, no environmental details. The background color creates a warm, complementary contrast with the cool navy and green bottles.
+
+- **Props and Supporting Elements**: No props visible. The only supporting element is the thin ledge surface the bottles rest on.
+
+- **Styling Details**: Minimal styling. Bottles are arranged in a neat row with consistent spacing. No garnishes, no scattered elements, no decorative styling flourishes. The composition is clean and product-focused.
+
+- **Spatial Anchors**: (1) The horizontal ledge edge running beneath the bottles — bottles sit directly on this surface line, (2) the sharp edge of the platform/ledge at the viewer-right side where the surface terminates, (3) the gradient background is featureless, (4) the bottle row is horizontally centered in the frame with approximately equal margin above and below. The bottles are grounded on the surface with visible contact shadows directly beneath each base.
+
+[CONSTRAINTS]
+- Output aspect ratio must match source exactly: 1:1
+- Product identity lock: preserve exactly four aluminum "HELLO WATER" bottles in navy, silver, bronze, and dark green colorways with identical shape, size, and printed text as described
+- Product geometry lock: preserve the slim cylindrical bottle shape (height:width ~3.5-4:1), tapered shoulder, and proportional cap size; do not change the bottle proportions
+- Brand mark lock: preserve "HELLO WATER", "Purified Sprinkle Water", "H2O+", and "250 ML" text exactly as printed on the bottles; do not invent or substitute text
+- Material lock: preserve anodized aluminum base with brushed/satin metallic surface treatment; do not change to plastic, glass, or other materials; preserve the four anodized colorways exactly
+- Camera position lock: preserve the camera angle — slight high angle (~+15° to +25° vertical elevation) with approximately 0° horizontal rotation (near front-facing with minimal 3/4 rotation)
+- Product scale lock: preserve product arrangement and framing — the four bottles occupy approximately 45-55% of frame width as a group, with the bottle row positioned in the upper-center portion of the frame; do not enlarge the bottles or zoom in closer than the source
+- Preserve the warm gradient background and the thin ledge surface
+- Do not add props, packaging, or additional elements not visible in source
+- Do not change the four bottle colors
+- Do not symmetrize or rearrange the bottle order
+- Do not add labels, stickers, or secondary packaging
+- Preserve the contact shadows grounding the bottles on the surface
+- Contrast/saturation: do not boost beyond source levels; the image has moderate contrast and natural saturation

@@ -1,0 +1,140 @@
+[ARCHETYPE]
+photograph / tech product / premium headphone editorial advertising shot
+
+[AESTHETIC HOOK]
+A premium consumer electronics editorial product shot with a dark moody atmosphere, high contrast between matte black surfaces and warm metallic accents, and a graphic advertising layout. The aesthetic blends luxury Scandinavian product design (clean, minimal, material-forward) with a bold commercial campaign composition using a green accent band and large typographic overlays. Quality tier: polished and professional, with controlled studio lighting on the product against a designed graphic backdrop. Realism character: photorealistic product rendering with intentional graphic design overlay elements.
+
+[LIGHTING]
+Dominant family: Studio strobe / continuous with softbox diffusion — controlled, directional, deliberately shaped.
+
+The primary light source appears to come from the upper-right at approximately the 2 o'clock position at moderate elevation (~45°), providing the main illumination on the aluminum ear cup disc and the top of the headband. The light is semi-soft with a moderately large apparent source, creating broad circular highlights on the metallic disc rather than pin-point speculars. A secondary fill from the viewer-left at lower intensity softens shadows on the matte body. The lighting is optimized for the product surface, revealing the concentric circle machining pattern on the disc through subtle highlight modulation. Shadows are soft and not blocked up, retaining detail in the dark body and leather cushions.
+
+- **Highlight placement on the product**: 
+  1. A broad, soft circular highlight at approximately 11-12 o'clock on the foreground ear cup's aluminum disc — moderate intensity, warm white
+  2. A narrow elongated highlight along the top curve of the headband — sharp, bright, cool white
+  3. A soft diffuse highlight on the upper portion of the right (background) ear cup — low intensity
+  4. Subtle edge highlights along the matte black body shell where it meets the disc — thin, cool-toned
+
+- **Reflection of the environment on the product**: The aluminum disc shows a very subtle, darkened reflection of the surrounding studio environment — mostly abstract dark tones with a soft light area, consistent with a softbox. No clear window or room reflection visible. The matte black body shows no clear reflections.
+
+- **Tonal range on the product surface**: Moderate-to-high contrast on the metallic disc — bright warm silver highlights transitioning to deep charcoal shadows, approximately 4-6 stops range. The matte body has low tonal range, approximately 2-3 stops between its brightest and darkest areas. The leather cushions show soft tonal gradation, approximately 2-3 stops.
+
+- **Sub-surface behavior**: No sub-surface behavior — the product is fully opaque (no glass, liquid, or translucent components). Leather shows very minor light absorption on cushion edges.
+
+[OPTICAL DEPTH]
+Lens rendering: The image has a moderate focal length feel consistent with approximately 85-100mm (slight telephoto compression typical of product photography), creating a natural perspective with minimal distortion. Depth of field is moderate — the foreground ear cup and B&O logo are in sharp focus, while the background ear cup shows a very slight softness indicating a modest focus falloff. Edge behavior is crisp on the product, with clean definition between the headphones and the background. Product isolation is strong, achieved primarily through brightness contrast (the well-lit product against the dark background) and scale (the headphones dominate the frame).
+
+- **Perspective convergence**: Two vanishing points, with subtle convergence. The headband arc shows slight perspective foreshortening — the right ear cup appears slightly smaller and more angled than the left, indicating a mild two-point perspective. The angle is gentle, consistent with a telephoto lens at moderate distance. The vertical lines of the headband sliders converge very slightly toward a vanishing point above the frame.
+
+[STYLE & TEXTURE]
+- **Style**: Premium consumer electronics editorial advertising — Bang & Olufsen / Scandinavian luxury tech aesthetic with bold graphic campaign layout.
+- **Capture device**: Medium format digital back or high-end mirrorless (Phase One IQ / Hasselblad H6D / Sony A7R V class) — consistent with the high resolution, controlled rendering, and commercial product quality.
+- **Medium texture**: Clean digital, screen-accurate. No visible paper grain, no print texture. The graphic overlays are flat vector/digital type.
+- **Realism character**: Photorealistic. The product rendering is fully photographic with no obvious AI tells. The graphic design elements are intentional, not artifacts.
+- **Tone curve and color**: Moderate contrast with rich blacks (not crushed, not lifted). White balance is neutral to slightly cool. Color palette is restrained: black, charcoal, warm silver aluminum, and one bold accent (green). Saturation is natural on the product, vivid on the green graphic band.
+- **Post-processing and retouching**: Light-to-moderate retouching — clean product isolation, no heavy compositing. The graphic overlays are layered on top of the product photograph.
+- **Catalog-vs-editorial judgment**: Editorial advertising shot — stylized graphic campaign layout with product photography and typographic overlays. Not a clean catalog shot on pure white, not a casual snapshot, not a raw lifestyle image.
+
+[FRAME]
+- **Output aspect ratio**: 4:5 (portrait, matching source)
+- **Shot type**: Full product — entire headphone assembly visible with some margin. Crop boundaries: top of headband at ~15% from top, bottom of ear cups at ~10% from bottom, viewer-left ear cup at ~20% from left edge, viewer-right ear cup at ~65% from left edge.
+- **Camera angle**: Vertical elevation: approximately +10° (slight high angle, looking very mildly down at the product). Horizontal rotation: approximately +30° (three-quarter view, the foreground ear cup's aluminum disc faces toward camera at a 3/4 angle revealing its face).
+- **Camera height**: approximately 1.2× product height (slightly above the top of the headband, consistent with the slight high angle).
+- **Camera-to-product distance**: approximately 1.5× the product's longest visible dimension (close, intimate framing).
+- **Lens character and perspective**: 85-100mm equivalent telephoto feel. Minimal distortion. Framing feels editorial and premium, with controlled, deliberate product isolation.
+- **Quality tier**: Pristine, crisp, professional commercial quality.
+
+[PROMPT TAGS]
+photograph, product photography, commercial photography, tech product photography, editorial advertising, premium consumer electronics, studio product shot, hero shot, professional, sharp focus, high resolution, color-accurate, photorealistic, Scandinavian luxury tech aesthetic, dark moody background, graphic layout, green accent
+
+[GENERATION CUES]
+studio lighting from upper-right at moderate elevation, soft diffused source, 85-100mm telephoto product lens, shallow-to-moderate DOF with foreground ear cup sharp, matte black plastic body, brushed aluminum concentric circle ear cup disc, leather padded ear cushions, metal headband slider, B&O logo on disc, over-ear headphone form, 3/4 view at +10° vertical / +30° horizontal rotation, product fills 45% of frame in balanced composition, dark charcoal-black background with solid bright green vertical band on viewer-right side, floating presentation (no ground plane), premium editorial advertising layout with Russian text overlays, B&O Play / Bang & Olufsen luxury tech positioning, 4:5 portrait output
+
+[NEGATIVE PROMPT]
+cropped, worst quality, low quality, jpeg artifacts, duplicate, blurry, deformed, distorted, disfigured, bad proportions, out of frame, watermark, signature, text overlay, username, logo stamp, wrong material interpretation, plastic-looking leather, metallic plastic, leather that looks like vinyl, matte surface rendered as glossy, glossy surface rendered as matte, missing concentric circle pattern on ear cup, concentric circle pattern removed, wrong metal alloy, missing brushed aluminum texture, missing matte black body finish, warped headphone shape, distorted ear cup, stretched headband, changed product proportions, wrong product size, in-ear headphones instead of over-ear, on-ear headphones instead of over-ear, missing B&O logo, invented logo, garbled text, wrong brand name, missing telescoping slider mechanism, visible cable, visible buttons not in source, added ground plane or table surface, added shadows under product when source is floating, changed green band position or color, removed green band, bright white background instead of dark, clinical catalog lighting replacing dramatic editorial lighting, flat ambient light replacing studio lighting, CGI appearance, 3D render look, plastic-looking product, cheap-looking materials, low-end consumer headphone look, over-ear cups too small, ear cups too large, squared-off ear cups instead of circular, visible seams or mold lines, fingerprints, dust, scratches on product, oversaturated, unrealistic colors, washed out, studio strobe visible, softbox visible in frame
+
+[PRODUCT]
+Over-ear wireless headphones, Bang & Olufsen Beoplay H95 model appearance (identifiable by the distinctive circular aluminum disc with "B&O" logo and concentric pattern on the ear cup, plus the overall premium over-ear silhouette with metal slider mechanism).
+
+- **Type & Identity**: Consumer electronics / audio equipment / personal audio. Premium wireless over-ear headphones with active noise cancellation. Approximate real-world dimensions: ~20cm wide when worn, ~21cm tall. This is a high-end audio product in the luxury/premium tier (~$800+ retail positioning based on the branding presentation).
+
+- **Material & Surface**:
+  - **Base material — Ear cushions**: Leather (appears to be full-grain or top-grain lambskin leather, soft padded). Optical transparency: fully opaque. Form: soft, flexible, padded.
+  - **Base material — Ear cup body**: Plastic (high-grade ABS or polycarbonate, matte black). Optical transparency: opaque. Form: rigid, hollow shell.
+  - **Base material — Headband frame**: Metal (aluminum, satin/anodized finish). Optical transparency: opaque. Form: rigid, structural.
+  - **Base material — Headband padding underside**: Leather-wrapped foam. Optical transparency: opaque. Form: flexible, padded.
+  - **Surface treatment — Ear cup outer disc**: Brushed aluminum with a distinctive concentric circular machined pattern (lathe-turned finish). The circular pattern creates subtle radial highlight transitions.
+  - **Surface treatment — Ear cup body shell**: Matte black powder-coat or soft-touch matte plastic finish. Very low reflectivity.
+  - **Surface treatment — Headband slider mechanism**: Polished/anodized aluminum, slightly more reflective than the ear cup disc.
+  - **Surface treatment — Memory foam ear cushions**: Soft leather (likely lambskin or similar premium hide) with subtle natural grain visible.
+  - **Surface reflectivity behavior**: The aluminum ear cup disc shows broad, soft circular highlights with low-to-moderate intensity — the concentric pattern breaks up reflections into subtle radial bands. The matte black body shell has very low reflectivity, showing only gentle diffuse highlights along edges. The metal headband slider shows narrow elongated specular highlights along its curved edges. The leather ear cushions show soft, broad diffuse highlights with no sharp specular. The product reads as predominantly matte with selective metallic accents.
+
+- **Color**: Predominantly matte black body and cushions (deep charcoal-black), with warm silver/aluminum metallic accents on the ear cup discs and headband mechanism. Color palette: black, dark charcoal, warm silver-gray aluminum. Color accuracy confidence: high.
+
+- **Shape & Geometry**: Rounded, organic-over-ear form. Circular ear cups (~9-10cm diameter) with deep, oval-shaped interior cavity for ear accommodation. The ear cups are slightly ovalized (taller than wide). The headband is a curved arc that connects the two cups via telescoping metal sliders. Height-to-width ratio of the headphones as positioned: approximately 1:1.1 (slightly wider than tall). Distinctive silhouette: large circular ear cups dominate, slim curved headband on top.
+
+- **Brand Marks & Labeling**: "B&O" logo prominently centered on the visible (foreground/closer) ear cup's aluminum disc at approximately the 7-8 o'clock position of the disc face. Logo appears as a stylized "B&O" monogram in a darker tone against the brushed aluminum. No other brand marks visible on the headphones themselves. The image contains Russian text overlays (not part of product): "НАУШНИКИ" (headphones, large vertical text at viewer-left), "BLUETOOTH" (vertical text), "48 тыс Гц расширенный диапазон" (48 kHz extended range), "IPX7 от пота, пыли и влаги" (IPX7 sweat/dust/moisture), "35 часов воспроизведения музыки" (35 hours playback), "современная система шумоподавления" (modern noise cancellation), and "B&O PLAY" or similar brand text on the right-side green strip. These overlays are part of the ad layout, not the product.
+
+- **Product State**: New, pristine, factory condition. No visible wear, dust, fingerprints, or scratches.
+
+[PRODUCT DETAILS]
+- **Surface Texture**: The aluminum ear cup disc shows fine concentric circular machining marks (lathe-turned finish) — visible as subtle radial striations within each ring of the pattern. The matte black ear cup body shows a uniform micro-texture consistent with soft-touch powder coating. The leather ear cushions show natural subtle grain and slight creasing at the seam where the leather wraps around the foam. The headband padding shows similar leather texture with a visible center seam.
+
+- **Components & Parts**: 
+  - Left ear cup (foreground/closer to viewer): shown in 3/4 view, aluminum disc facing camera
+  - Right ear cup (background/farther): shown at an oblique angle, less detail visible
+  - Telescoping headband sliders: visible metal arms connecting the ear cups to the headband arc, showing the extension mechanism
+  - Headband arc: curved upper band with leather-padded underside
+  - Ear cushion (visible on right/background cup): oval-shaped, deep, with soft padded rim
+  - Interior of the left/foreground ear cup: not fully visible, partially obscured by angle
+  - Hinge/yoke mechanism: visible where the slider meets the ear cup
+
+- **Engravings & Print**: "B&O" logo engraved or printed on the ear cup disc. No other visible engravings, serial numbers, or regulatory text on the product itself. The image has printed advertising text overlays in Russian and a green vertical band with brand text ("B&O PLAY" or similar) — these are graphic design elements, not part of the product.
+
+- **Functional Details**: Telescoping metal slider mechanism for headband size adjustment (visible in extended/expanded position). No visible buttons, ports, or controls in this view. The headphones appear to be in a static product display pose.
+
+- **Decorative Elements**: The concentric circular pattern on the ear cup disc is the primary decorative element — a signature design feature of the B&O H95 model. The pattern consists of fine closely-spaced concentric rings covering the entire disc face.
+
+[SET DRESSING]
+- **Surface / Platform**: No visible physical surface. The headphones appear to float against a solid background. No ground plane, no contact shadow, no surface reflection. Surface tilt: not applicable (no surface visible). The product is presented as floating in a graphic/editorial composition.
+
+- **Background**: Composite graphic background. Main area (viewer-left, center): solid dark charcoal-black or near-black (#1a1a1a approximate). Right side (~25-30% of frame width): a solid bright green vertical band (mint/emerald green, approximately #4FCC8F). A thin black vertical strip at the far right edge. The background is a flat graphic design composition, not a photographed environment. The product is isolated against this graphic backdrop.
+
+- **Props and Supporting Elements**: No physical props. The composition includes graphic design elements: large white sans-serif text "НАУШНИКИ" (vertical, viewer-left edge), "BLUETOOTH" (vertical, lower-left), feature callouts in white text (upper-left and lower-right), and green-band brand text on the right strip. These are flat graphic overlays, not physical props.
+
+- **Spatial Anchors**: 
+  - Green vertical band edge: runs from top to bottom of frame at approximately 70% from the viewer's left edge
+  - Headphones centered horizontally at approximately frame center (slight rightward offset)
+  - Headband top at approximately 15% from frame top
+  - Bottom of ear cups at approximately 10% from frame bottom
+  - "НАУШНИКИ" text along the viewer-left edge (rotated 90° counterclockwise)
+
+[COMPOSITION]
+- **Product position**: Headphones positioned slightly right of frame center, with the foreground ear cup at approximately frame center. Slight asymmetry — the product tilts very subtly with the right ear cup appearing lower than the left.
+
+- **Product scale in frame**: Product occupies approximately 45% of frame area (balanced). Bounding box of the full headphone assembly: approximately 55% of frame width × 85% of frame height. Frame margins: top margin ~8%, bottom margin ~10%, viewer-left margin ~15%, viewer-right margin ~30% (partially consumed by the green band).
+
+- **Product-to-environment ratio**: Product 45%, Environment/graphic layout 55%. Visual feel: balanced.
+
+- **Element scale ratios**: 
+  - Ear cup diameter: ~1× the width of the "НАУШНИКИ" text height
+  - Green band width: ~30% of the total product width
+  - The right ear cup (background) appears approximately 85% the size of the left ear cup (foreground) due to perspective foreshortening
+
+- **Visual organization**: Centered subject with strong graphic framing. The green vertical band on the right and the large vertical "НАУШНИКИ" text on the left create a frame-within-frame effect. Focal hierarchy: primary — the aluminum disc with B&O logo on the foreground ear cup (highest contrast and detail). Secondary — the overall headphone form. Tertiary — the text overlays. The composition is a classic premium product editorial layout with text and color band as intentional design elements.
+
+[CONSTRAINTS]
+1. Output aspect ratio must match source exactly: 4:5
+2. Product identity lock: preserve Bang & Olufsen Beoplay H95 over-ear headphones — do not substitute a different headphone model, do not change to in-ear or on-ear form factor
+3. Product geometry lock: preserve circular ear cup shape, oval interior cavity, curved headband arc, telescoping slider mechanism, height:width ratio of ~1:1.1
+4. Brand mark lock: preserve "B&O" logo on the ear cup disc — do not invent, remove, or substitute with another brand
+5. Material lock: preserve matte black plastic body + brushed aluminum ear cup disc with concentric circular pattern + leather ear cushions + metal headband slider. Do not render as glossy plastic, do not remove the concentric circle machining, do not change leather to fabric
+6. Camera position lock: preserve the 3/4 view of the headphones with the foreground ear cup angled toward camera at approximately +10° vertical elevation / +30° horizontal rotation. Do not convert to flat front view or full side profile
+7. Product scale lock: preserve the headphones occupying ~45% of frame area in a balanced composition. Do not zoom in to product-dominant or pull out to environment-dominant
+8. Surface tilt lock: no surface present in source — product floats against graphic background. Do not add a ground plane, table, or shelf
+9. Do not complete cropped elements (ear cup interiors are partially hidden — do not fabricate full interior views)
+10. Do not add features not present in source (no visible cables, no visible buttons in this view — do not add)
+11. Do not change the green vertical band position or width
+12. Do not remove the concentric circle pattern on the ear cup disc — it is a signature design element
+13. Preserve physical plausibility of the floating presentation (no grounding shadow needed as source shows none)
+14. Do not beautify or change the graphic ad layout composition
